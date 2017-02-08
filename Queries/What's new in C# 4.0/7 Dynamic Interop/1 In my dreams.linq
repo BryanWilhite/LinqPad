@@ -1,0 +1,10 @@
+<Query Kind="Statements">
+  <Reference>&lt;RuntimeDirectory&gt;System.Dynamic.dll</Reference>
+  <Reference>&lt;ProgramFiles&gt; (x86)\IronPython 2.6\IronPython.dll</Reference>
+  <Reference>&lt;ProgramFiles&gt; (x86)\IronPython 2.6\Microsoft.Scripting.Core.dll</Reference>
+  <Reference>&lt;ProgramFiles&gt; (x86)\IronPython 2.6\Microsoft.Scripting.dll</Reference>
+  <Namespace>System.Dynamic</Namespace>
+</Query>
+
+string expr = "3 * 4";
+Console.WriteLine (eval (expr));

@@ -1,0 +1,29 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:eil="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
+    xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    Tag="Blend Interactions - MouseDragElementBehavior">
+    <Grid>
+        <es:RegularPolygon Fill="#FFF4F4F5" InnerRadius="1" PointCount="5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Margin="203,12,68,92" Height="152" Width="145">
+            <i:Interaction.Behaviors>
+                <eil:MouseDragElementBehavior/>
+            </i:Interaction.Behaviors>
+        </es:RegularPolygon>
+        <Rectangle Fill="#CF64BE57" Height="137" Margin="84,64,193,0" Stroke="Black" VerticalAlignment="Top" Width="139">
+            <i:Interaction.Behaviors>
+                <eil:MouseDragElementBehavior/>
+            </i:Interaction.Behaviors>
+        </Rectangle>
+        <es:Arc ArcThickness="20" ArcThicknessUnit="Pixel" EndAngle="360" Fill="#A95759BE" Stretch="None" Stroke="Black" StartAngle="0" UseLayoutRounding="False" Margin="12,12,267,108" Height="137" Width="137">
+            <i:Interaction.Behaviors>
+                <eil:MouseDragElementBehavior/>
+            </i:Interaction.Behaviors>
+        </es:Arc>
+        <TextBlock Height="47" HorizontalAlignment="Left" Margin="160,198,0,0" Text="Drag the Shapes…" VerticalAlignment="Top" Width="244" FontSize="24" Opacity="1" Foreground="#A96546CB" FontWeight="ExtraBlack" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,8 @@
+{
+    "dictionaryDefinitions": [
+        { "name": "rasx", "path": "./cspell-dictionaries/rasx.txt"}
+    ],
+    "dictionaries": [
+        "rasx"
+    ]
+}

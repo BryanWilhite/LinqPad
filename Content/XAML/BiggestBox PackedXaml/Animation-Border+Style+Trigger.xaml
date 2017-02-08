@@ -1,0 +1,59 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Animation: Border Style Triggers">
+<UserControl.Resources>
+    <!-- ref: http://www.wpf-tutorial.com/styles/trigger-animations-enteractions-exitactions/ -->
+    <!--
+        Changing `BorderAnimationStyle` to an implicit style causes AnimationException:
+        
+        Cannot animate the 'Height' property on a 'System.Windows.Controls.Border' using a 'System.Windows.Media.Animation.DoubleAnimation'.
+    -->
+    <Style x:Key="BorderAnimationStyle" TargetType="{x:Type Border}">
+        <Setter Property="Opacity" Value="0.25" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.400" To="3" Storyboard.TargetProperty="BorderThickness" />
+                            <DoubleAnimation Duration="0:0:0.300" To="275" Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.300" To="275" Storyboard.TargetProperty="Width" />
+                            <DoubleAnimation Duration="0:0:0.300" To="1" Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.250" To="0" Storyboard.TargetProperty="BorderThickness" />
+                            <DoubleAnimation Duration="0:0:0.150" To="240" Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.150" To="240" Storyboard.TargetProperty="Width" />
+                            <DoubleAnimation Duration="0:0:0.300" To="0.25" Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</UserControl.Resources>
+<Grid>
+    <Border
+        Background="LightGreen" BorderBrush="Green"
+        Style="{StaticResource BorderAnimationStyle}"
+        Width="240" Height="240"
+        />
+    <TextBlock
+        IsHitTestVisible="False"
+        Text="This text is not hit-test visible."
+        TextAlignment="Center"
+        />
+    <!--
+        Making the TextBlock element hit-test visible
+        will prevent the Style Trigger from firing.
+    -->
+</Grid>
+</UserControl>

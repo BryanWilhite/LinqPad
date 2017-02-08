@@ -1,0 +1,92 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:eil="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:rxconverters="clr-namespace:Songhay.ValueConverters;assembly=Songhay.Mvvm"
+    mc:Ignorable="d"
+    Tag="Blend Interactions - Kenny Young, FluidMoveBehavior and WrapPanel">
+    <UserControl.Resources>
+        <rxconverters:SecondsToDurationConverter x:Key="SecondsToDurationConverter"/>
+
+        <Style TargetType="Rectangle">
+            <Setter Property="Height" Value="64" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Stroke" Value="Black" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Width" Value="64" />
+        </Style>
+
+        <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="CadetBlue" />
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="128" Width="0.5*" />
+            <ColumnDefinition Width="16" />
+            <ColumnDefinition MinWidth="128" Width="0.4*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="0"
+            Style="{StaticResource TitleTextStyle}"
+            Text="Kenny Young, FluidMoveBehavior and WrapPanel"
+            />
+        <WrapPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+            Background="#FF333333">
+            <i:Interaction.Behaviors>
+                <eil:FluidMoveBehavior Duration="{Binding Value, Converter={StaticResource SecondsToDurationConverter}, ElementName=BehaviorSpeed}" AppliesTo="Children">
+                    <eil:FluidMoveBehavior.EaseY>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+                    </eil:FluidMoveBehavior.EaseY>
+                    <eil:FluidMoveBehavior.EaseX>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+                    </eil:FluidMoveBehavior.EaseX>
+                </eil:FluidMoveBehavior>
+            </i:Interaction.Behaviors>
+            <Rectangle Fill="Red" />
+            <Rectangle Fill="Orange" />
+            <Rectangle Fill="Yellow" />
+            <Rectangle Fill="Green" />
+            <Rectangle Fill="Blue" />
+            <Rectangle Fill="Indigo" />
+            <Rectangle Fill="Violet" />
+            <Rectangle Fill="Black" />
+            <Rectangle Fill="White" />
+        </WrapPanel>
+        <GridSplitter Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="2"
+            Background="#FF333333"
+            HorizontalAlignment="Center" VerticalAlignment="Stretch"
+            Margin="0"
+            Width="16" Height="Auto"
+            />
+        <TextBlock Grid.Column="2" Grid.Row="1"
+            Margin="8"
+            TextWrapping="Wrap">
+            <Run>
+                Move the GridSplitter to see the fluid motion of the Rectangle objects.
+            </Run>
+            <LineBreak />
+            <LineBreak />
+            <Run>
+                Adjust the Slider to control the speed of the fluid motion.
+            </Run>
+        </TextBlock>
+        <Slider x:Name="BehaviorSpeed" Grid.Column="2" Grid.Row="2"
+            HorizontalAlignment="Right" VerticalAlignment="Top"
+            Margin="8"
+            Maximum="2"
+            Value="0.5"
+            Width="75" Height="37"
+            />
+    </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Animation: Effect Property">
+<UserControl.Resources>
+    <!--
+        “Note: [the BitmapEffect] API is now obsolete. The non-obsolete alternative is Effect.”
+        [http://msdn.microsoft.com/en-us/library/vstudio/system.windows.media.effects.bitmapeffect(v=vs.110).aspx]
+    -->
+</UserControl.Resources>
+<StackPanel>
+    <TextBox FontSize="32pt" Margin="16" Text="foo">
+        <TextBox.Effect>
+            <BlurEffect x:Name="MyEffect" Radius="4" />
+        </TextBox.Effect>
+        <TextBox.Triggers>
+            <EventTrigger RoutedEvent="TextBox.GotFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="MyEffect"
+                            Storyboard.TargetProperty="Radius"
+                            From="0" To="14" Duration="0:0:0.5"
+                            />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </TextBox.Triggers>
+    </TextBox>
+</StackPanel>
+</UserControl>

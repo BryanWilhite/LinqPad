@@ -1,0 +1,41 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Styles - Simple Example">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="TextAgainStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Chartreuse" />
+            <Setter Property="TextDecorations" Value="Underline" />
+        </Style>
+        <!--
+            In WPF you can add this attribute to "TextAgainStyle"
+
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+
+            Silverlight does not support styles based on implicit styles.
+
+            http://msdn.microsoft.com/en-us/library/system.windows.style%28v=vs.95%29.aspx
+        -->
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock
+            Text="Hello world!"
+        />
+        <TextBlock
+            Style="{StaticResource TextAgainStyle}"
+            Text="Hello world again!"
+        />
+        <TextBlock
+            Style="{x:Null}"
+            Text="Hello?"
+        />
+    </StackPanel>
+</UserControl>

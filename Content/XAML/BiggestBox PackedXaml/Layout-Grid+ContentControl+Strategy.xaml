@@ -1,0 +1,41 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Layout - Grid-ContentControl Strategy">
+    <Grid ShowGridLines="True">
+        <Grid.Resources>
+            <Style TargetType="ContentControl">
+                <Setter Property="Background" Value="LightGray" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <StackPanel
+                                Background="{TemplateBinding Background}"
+                                Orientation="Horizontal" VerticalAlignment="Center">
+                                <ContentPresenter Margin="{TemplateBinding Padding}" />
+                                <Rectangle Height="32" Width="32" Fill="{TemplateBinding Foreground}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ContentControl Grid.Column="0"
+            Content="Hello world!" Foreground="DarkGray" />
+        <ContentControl Grid.Column="1"
+            Content="Hello world!" Foreground="DarkGreen" Padding="8,0,8,0" />
+        <ContentControl Grid.Column="2" Foreground="DarkRed">
+            <ContentControl.Content>
+                <TextBlock Text="Hello world!" FontWeight="Bold" />
+            </ContentControl.Content>
+        </ContentControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,48 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Layout - StackPanel data form">
+    <UserControl.Resources>
+        <Style x:Key="StackDataForm" TargetType="StackPanel">
+            <Style.Triggers>
+                <Trigger Property="Visibility" Value="Visible">
+                    <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=LastName}" />
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="StackPanel.Orientation" Value="Horizontal" />
+            <Setter Property="FrameworkElement.Margin" Value="16" />
+        </Style>
+        <Style x:Key="StackLabels" TargetType="StackPanel">
+            <Setter Property="FrameworkElement.Width" Value="128" />
+        </Style>
+        <Style x:Key="StackFields" TargetType="StackPanel">
+            <Setter Property="FrameworkElement.Width" Value="256" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Style="{StaticResource StackDataForm}">
+        <StackPanel Style="{StaticResource StackLabels}">
+            <Label>CustomerID</Label>
+            <Label Content="_Last Name" Target="{Binding ElementName=LastName,Mode=OneWay}" />
+            <Label Content="First _Name" Target="{Binding ElementName=FirstName,Mode=OneWay}" />
+            <Label Content="_City" Target="{Binding ElementName=City,Mode=OneWay}" />
+        </StackPanel>
+        <StackPanel Style="{StaticResource StackFields}">
+            <TextBox IsReadOnly="True" />
+            <TextBox Name="LastName" />
+            <TextBox Name="FirstName" />
+            <TextBox Name="City" />
+            <TextBlock Foreground="DarkGray"><Run>Hold down the</Run><Run FontWeight="Bold">&#160;Alt&#160;</Run><Run>key.</Run></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

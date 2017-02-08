@@ -1,0 +1,48 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Layout - Popup with Listbox on Canvas">
+    <Canvas>
+        <ToggleButton x:Name="MyButton" Canvas.Left="96" Canvas.Top="96"
+            Content="Show Popup"
+            Width="240" Height="64"
+            />
+        <Popup x:Name="MyPopup"
+            HorizontalOffset="{Binding Path=(Canvas.Left), ElementName=MyButton}"
+            IsOpen="{Binding Path=IsChecked, ElementName=MyButton}"
+            VerticalOffset="160">
+            <ListBox x:Name="MyList" Width="{Binding Path=Width, ElementName=MyButton}">
+                <ListBox.Triggers>
+                    <EventTrigger RoutedEvent="ListBox.SelectionChanged">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames
+                                    Storyboard.TargetName="MyButton"
+                                    Storyboard.TargetProperty="IsChecked"
+                                    Duration="0">
+                                    <DiscreteBooleanKeyFrame Value="False" />
+                                </BooleanAnimationUsingKeyFrames>
+                                <StringAnimationUsingKeyFrames
+                                    Storyboard.TargetName="MyButton"
+                                    Storyboard.TargetProperty="Content"
+                                    Duration="0">
+                                    <DiscreteStringKeyFrame
+                                        Value="{Binding Path=SelectedItem.Content, ElementName=MyList, StringFormat='Show Popup: {0} selected'}"
+                                        />
+                                </StringAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ListBox.Triggers>
+                <ListBoxItem Content="One" />
+                <ListBoxItem Content="Two" />
+                <Separator />
+                <ListBoxItem Content="Three" />
+                <ListBoxItem Content="Four" />
+            </ListBox>
+        </Popup>
+    </Canvas>
+</UserControl>

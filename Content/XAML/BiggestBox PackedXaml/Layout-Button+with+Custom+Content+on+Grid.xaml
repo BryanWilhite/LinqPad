@@ -1,0 +1,76 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Layout: Button with Custom Content on Grid">
+<UserControl.Resources>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="Margin" Value="8" />
+    </Style>
+    <Style x:Key="ExplicitButtonSizeStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="64" />
+        <Setter Property="Width" Value="96" />
+    </Style>
+    <Style x:Key="ParentButtonSizeStyle" TargetType="{x:Type FrameworkElement}">
+        <Setter Property="Height" Value="{Binding Path=Height, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+        <Setter Property="Width" Value="{Binding Path=Width, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+    </Style>
+</UserControl.Resources>
+<!--
+    Here we see that custom Button content does not stretch to fill the area of the Button.
+    When the button is declared with explicit Height and Width values,
+    the ParentButtonSizeStyle can be used to make the content fill the area of the Button.
+-->
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <Label Content="Button Default:" />
+        <Button Content="Button" />
+    </StackPanel>
+    <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <Label Content="Button with Border Content:" />
+        <Button Style="{StaticResource ExplicitButtonSizeStyle}">
+            <Border Background="Red">
+                <TextBlock Text="Button" />
+            </Border>
+        </Button>
+    </StackPanel>
+    <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <Label Content="Button with Border Content and ParentButtonSizeStyle:" />
+        <Button Style="{StaticResource ExplicitButtonSizeStyle}">
+            <Border Background="Red" Style="{StaticResource ParentButtonSizeStyle}">
+                <TextBlock Text="Button" />
+            </Border>
+        </Button>
+    </StackPanel>
+    <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <Label Content="Button with Grid Content:" />
+        <Button Style="{StaticResource ExplicitButtonSizeStyle}">
+            <Grid Background="Red">
+                <TextBlock Text="Button" />
+            </Grid>
+        </Button>
+    </StackPanel>
+    <StackPanel Grid.Row="4" Orientation="Horizontal">
+        <Label Content="Button with Grid Content and ParentButtonSizeStyle:" />
+        <Button Style="{StaticResource ExplicitButtonSizeStyle}">
+            <Grid Background="Red" Style="{StaticResource ParentButtonSizeStyle}">
+                <TextBlock Text="Button" />
+            </Grid>
+        </Button>
+    </StackPanel>
+</Grid>
+</UserControl>

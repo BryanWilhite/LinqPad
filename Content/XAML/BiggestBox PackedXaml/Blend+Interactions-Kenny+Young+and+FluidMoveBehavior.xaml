@@ -1,0 +1,104 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:eil="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:rxmodels="clr-namespace:Songhay.Models;assembly=SonghayCore"
+    mc:Ignorable="d"
+    Tag="Blend Interactions - Kenny Young and FluidMoveBehavior">
+    <UserControl.Resources>
+        <Style x:Key="NumeralTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="CadetBlue" />
+        </Style>
+
+        <x:Array x:Key="SystemVariables" Type="rxmodels:SystemVariable">
+            <rxmodels:SystemVariable VariableName="zero" VariableValue="0"
+                VariableDescription="Zeroth, the Indian ordinal."
+                />
+            <rxmodels:SystemVariable VariableName="one" VariableValue="1"
+                VariableDescription="The number one, unity."
+                />
+            <rxmodels:SystemVariable VariableName="two" VariableValue="2"
+                VariableDescription="The brother two."
+                />
+            <rxmodels:SystemVariable VariableName="three" VariableValue="3"
+                VariableDescription="The third, family."
+                />
+            <rxmodels:SystemVariable VariableName="four" VariableValue="4"
+                VariableDescription="The one about to be five."
+                />
+        </x:Array>
+
+        <DataTemplate x:Key="ItemTemplate">
+            <StackPanel
+                HorizontalAlignment="Center"
+                Width="64">
+                <TextBlock
+                    Text="{Binding VariableName}"
+                    />
+                <TextBlock
+                    Style="{StaticResource NumeralTextStyle}"
+                    Text="{Binding VariableValue}">
+                    <i:Interaction.Behaviors>
+                        <eil:FluidMoveSetTagBehavior Tag="DataContext"/>
+                    </i:Interaction.Behaviors>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+            Style="{StaticResource TitleTextStyle}"
+            Text="Kenny Young and FluidMoveBehavior"
+            />
+        <StackPanel Grid.Row="1"
+            Orientation="Horizontal"
+            VerticalAlignment="Top">
+            <ListBox x:Name="SystemVariableLists"
+                ItemsSource="{StaticResource SystemVariables}"
+                ItemTemplate="{StaticResource ItemTemplate}"
+                />
+            <StackPanel
+                DataContext="{Binding SelectedItem, ElementName=SystemVariableLists}"
+                Margin="64,0,0,0">
+                <i:Interaction.Behaviors>
+                    <eil:FluidMoveBehavior
+                        AppliesTo="Self"
+                        Duration="00:00:01"
+                        FloatAbove="False"
+                        InitialTag="DataContext">
+                        <eil:FluidMoveBehavior.EaseY>
+                            <CubicEase EasingMode="EaseIn"/>
+                        </eil:FluidMoveBehavior.EaseY>
+                        <eil:FluidMoveBehavior.EaseX>
+                            <CubicEase EasingMode="EaseIn"/>
+                        </eil:FluidMoveBehavior.EaseX>
+                    </eil:FluidMoveBehavior>
+                </i:Interaction.Behaviors>
+                <TextBlock
+                    FontSize="172"
+                    Style="{StaticResource NumeralTextStyle}"
+                    Text="{Binding VariableValue}"
+                    />
+                <TextBlock
+                    Text="{Binding VariableDescription}"
+                    />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

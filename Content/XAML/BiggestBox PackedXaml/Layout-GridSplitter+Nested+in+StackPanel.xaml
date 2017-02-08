@@ -1,0 +1,49 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="Layout - GridSplitter nested in StackPanel">
+    <UserControl.Resources>
+
+        <Style x:Key="StackPanelRoot" TargetType="StackPanel">
+            <Setter Property="Height" Value="300" />
+            <Setter Property="Width" Value="512" />
+            <Setter Property="Background" Value="SeaShell" />
+        </Style>
+
+        <Style x:Key="StackPanelFooter" TargetType="StackPanel">
+            <Setter Property="Height" Value="15" />
+            <Setter Property="Background" Value="Gray" />
+        </Style>
+
+        <Style x:Key="GridRoot" TargetType="Grid">
+            <Setter Property="Height" Value="285" />
+        </Style>
+
+        <Style TargetType="GridSplitter">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="8" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+
+    </UserControl.Resources>
+    <StackPanel Style="{StaticResource StackPanelRoot}">
+        <Grid Style="{StaticResource GridRoot}">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="64" MaxHeight="192" />
+                <!-- Let the top row control split extents with Min/Max height. -->
+                <RowDefinition Height="Auto" />
+                <!-- This prevents unexpected vertical spacing around GridSplitter. -->
+                <RowDefinition Height="1.5*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="Yellow" />
+            <GridSplitter Grid.Row="1"
+                ShowsPreview="True" HorizontalAlignment="Stretch" />
+            <!-- suggestion: use a horizontal/vertical GridSplitter with only three row/column definitions. -->
+            <StackPanel Grid.Row="2" Background="Blue" />
+        </Grid>
+        <StackPanel Style="{StaticResource StackPanelFooter}" />
+    </StackPanel>
+</UserControl>
