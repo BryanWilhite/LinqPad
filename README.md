@@ -19,7 +19,7 @@ From a brutish, managerial point of view, this repository provides tangible proo
 
 My LinqPad `\Plugins` folder is shown below:
 
-![My LinqPad Plugins Folder](https://farm3.staticflickr.com/2843/32638645972_ce615f35af_z_d.jpg "My LinqPad Plugins Folder")
+![My LinqPad Plugins Folder](./Content/Images/My%20LinqPad%20Plugins%20Folder.png "My LinqPad Plugins Folder")
 
 This shows the files needed (from Microsoft) to get my WPF samples working.
 
