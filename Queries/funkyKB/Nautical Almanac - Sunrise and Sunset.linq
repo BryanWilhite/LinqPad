@@ -1,5 +1,5 @@
 <Query Kind="Statements">
-  <Reference Relative="..\..\LINQPad Plugins\NauticalAlmanac.dll">D:\~dataRoot\LINQpad\LINQPad Plugins\NauticalAlmanac.dll</Reference>
+  <Reference Relative="..\..\Content\dlls\NauticalAlmanac\NauticalAlmanac.dll">NauticalAlmanac.dll</Reference>
   <Namespace>NauticalAlmanac</Namespace>
 </Query>
 
