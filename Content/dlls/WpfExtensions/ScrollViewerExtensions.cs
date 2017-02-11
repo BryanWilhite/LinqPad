@@ -1,39 +1,20 @@
-<Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\Accessibility.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\PresentationCore.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\PresentationUI.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\ReachFramework.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Configuration.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Deployment.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\System.Printing.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\UIAutomationProvider.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\UIAutomationTypes.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\wpf\WindowsBase.dll</Reference>
-  <NuGetReference>MoreLinq</NuGetReference>
-  <NuGetReference>SonghayCore</NuGetReference>
-  <Namespace>MoreLinq</Namespace>
-  <Namespace>Songhay.Extensions</Namespace>
-  <Namespace>System.Drawing.Text</Namespace>
-  <Namespace>System.Windows</Namespace>
-  <Namespace>System.Windows.Controls</Namespace>
-  <Namespace>System.Windows.Documents</Namespace>
-  <Namespace>System.Windows.Markup</Namespace>
-  <Namespace>System.Windows.Media</Namespace>
-</Query>
-
-void Main()
-{
-    var glyphs = Util.CurrentQuery.LoadBiggestBoxSvgGlyphs("boycott");
-    (new ScrollViewer()).LoadBiggestBoxSvg(glyphs);
-}
+using MoreLinq;
+using Songhay.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Drawing.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Xml.Linq;
 
 public static class ScrollViewerExtensions
 {
-    public static void LoadBiggestBoxSvg(this ScrollViewer scrollViewer, IEnumerable<XElement> glyphs)
+    public static ScrollViewer WithBiggestBoxSvg(this ScrollViewer scrollViewer, IEnumerable<XElement> glyphs)
     {
-        if (scrollViewer == null) return;
+        if (scrollViewer == null) return null;
 
         scrollViewer.Background = new SolidColorBrush(Colors.Azure);
         scrollViewer.Padding = new Thickness(4);
@@ -96,6 +77,6 @@ public static class ScrollViewerExtensions
         });
     
         scrollViewer.UpdateLayout();
-        scrollViewer.Dump();
+        return scrollViewer;
     }
 }

@@ -1,4 +1,6 @@
-<Query Kind="Statements" />
+<Query Kind="Statements">
+  <Namespace>System.Runtime.InteropServices</Namespace>
+</Query>
 
 Path.GetDirectoryName(Util.CurrentQueryPath).Dump("Query Folder");
 
@@ -17,3 +19,5 @@ Environment.GetEnvironmentVariable("OneDrive").Dump("OneDrive");
 Environment.GetEnvironmentVariable("USERPROFILE").Dump("USERPROFILE");
 
 Environment.GetEnvironmentVariables().Dump("Environment.GetEnvironmentVariables()");
+
+RuntimeEnvironment.GetRuntimeDirectory().Dump("RuntimeEnvironment.GetRuntimeDirectory()");
