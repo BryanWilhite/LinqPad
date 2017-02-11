@@ -3,7 +3,7 @@
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
   <Reference Relative="..\..\..\Plugins\Songhay.Portable.Resources.dll">Songhay.Portable.Resources.dll</Reference>
-  <Reference Relative="..\..\..\Plugins\System.Windows.Interactivity.dll">System.Windows.Interactivity.dll</Reference>
+  <Reference Relative="..\..\..\Content\dlls\System.Windows.Interactivity\System.Windows.Interactivity.dll">System.Windows.Interactivity.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
   <Namespace>System.Drawing.Text</Namespace>

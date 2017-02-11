@@ -1,19 +1,19 @@
 <Query Kind="Program">
-  <Reference>D:\~dataRoot\LINQpad\LINQPad Plugins\Microsoft.Expression.Interactions.dll</Reference>
+  <Reference Relative="..\..\..\Plugins\Microsoft.Expression.Interactions.dll">Microsoft.Expression.Interactions.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
-  <Reference>D:\~dataRoot\LINQpad\LINQPad Plugins\System.Windows.Interactivity.dll</Reference>
+  <Reference Relative="..\..\..\Content\dlls\System.Windows.Interactivity\System.Windows.Interactivity.dll">System.Windows.Interactivity.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
   <NuGetReference>MoreLinq</NuGetReference>
   <NuGetReference>Newtonsoft.Json</NuGetReference>
   <Namespace>MoreLinq</Namespace>
+  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>System.Drawing.Text</Namespace>
   <Namespace>System.Net</Namespace>
   <Namespace>System.Windows.Controls</Namespace>
   <Namespace>System.Windows.Markup</Namespace>
   <Namespace>System.Windows.Media</Namespace>
-  <Namespace>Newtonsoft.Json.Linq</Namespace>
 </Query>
 
 string GetVisionRoot()
