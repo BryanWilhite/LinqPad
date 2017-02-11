@@ -15,12 +15,4 @@ From a brutish, managerial point of view, this repository provides tangible proo
 * My [interview with Microsoft](https://github.com/BryanWilhite/LinqPad/blob/master/Queries/funkyKB/Interview%20-%20Microsoft.linq).
 * My interview with JPL ([part 1](https://github.com/BryanWilhite/LinqPad/blob/master/Queries/funkyKB/Interview%20-%20JPL%20(part%201).linq) and [part 2](https://github.com/BryanWilhite/LinqPad/blob/master/Queries/funkyKB/Interview%20-%20JPL%20(part%202).linq)).
 
-## Getting WPF Queries Working
-
-My LinqPad `\Plugins` folder is shown below:
-
-![My LinqPad Plugins Folder](./Content/Images/My%20LinqPad%20Plugins%20Folder.png "My LinqPad Plugins Folder")
-
-This shows the files needed (from Microsoft) to get my WPF samples working.
-
 [@BryanWilhite](https://twitter.com/bryanwilhite)
