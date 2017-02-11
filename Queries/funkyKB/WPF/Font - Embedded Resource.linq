@@ -1,5 +1,5 @@
 <Query Kind="Statements">
-  <Reference Relative="..\..\..\Plugins\Microsoft.Expression.Interactions.dll">Microsoft.Expression.Interactions.dll</Reference>
+  <Reference Relative="..\..\..\Content\dlls\Microsoft.Expression\Microsoft.Expression.Interactions.dll">Microsoft.Expression.Interactions.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
   <Reference Relative="..\..\..\Plugins\Songhay.Portable.Resources.dll">Songhay.Portable.Resources.dll</Reference>
