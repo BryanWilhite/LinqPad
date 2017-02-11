@@ -6,7 +6,7 @@
     xmlns:eil="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:rxmodels="clr-namespace:Songhay.Models;assembly=SonghayCore"
+    xmlns:rxmodels="clr-namespace:Songhay.Models;assembly=Songhay"
     mc:Ignorable="d"
     Tag="Blend Interactions - Kenny Young and FluidMoveBehavior">
     <UserControl.Resources>
