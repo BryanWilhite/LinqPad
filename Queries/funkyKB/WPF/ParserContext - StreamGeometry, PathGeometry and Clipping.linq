@@ -16,7 +16,7 @@ context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml")
 
 var g = new EllipseGeometry{ RadiusX = 64, RadiusY = 32 };
 var p = PathGeometry.CreateFromGeometry(g);
-var xaml = @"
+var xaml = $@"
 <StackPanel Background=""Yellow"" Width=""320"">
     <StackPanel.Resources>
         <Style x:Key=""MarginStyle"" TargetType=""{{x:Type FrameworkElement}}"">
@@ -25,10 +25,10 @@ var xaml = @"
     </StackPanel.Resources>
     <TextBlock TextWrapping=""Wrap"">
         <Run FontWeight=""Bold"">StreamGeometry:</Run>
-        <Run>{0}</Run>
+        <Run>{p}</Run>
     </TextBlock>
     <Path
-        Data=""{0}""
+        Data=""{p}""
         Fill=""Black""
         Stretch=""Uniform""
         Style=""{{StaticResource MarginStyle}}""
@@ -39,7 +39,7 @@ var xaml = @"
         Style=""{{StaticResource MarginStyle}}""
         Width=""128"" Height=""64"">
         <Rectangle.Clip>
-            <PathGeometry Figures=""{0}"">
+            <PathGeometry Figures=""{p}"">
                 <PathGeometry.Transform>
                     <TranslateTransform X=""64"" Y=""32"" />
                 </PathGeometry.Transform>
@@ -49,6 +49,5 @@ var xaml = @"
 </StackPanel>
 ";
 
-xaml = string.Format(xaml, p.ToString());
 var panel = (StackPanel)XamlReader.Parse(xaml, context);
 panel.Dump();

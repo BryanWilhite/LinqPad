@@ -9,7 +9,7 @@ void Main()
         return;
     }
 
-    var xDoc = XDocument.Parse(string.Format("<div>{0}</div>", xhtml).ToString());
+    var xDoc = XDocument.Parse($"<div>{xhtml}</div>");
     xDoc.Dump();
 
     var descendantsOfText = xDoc

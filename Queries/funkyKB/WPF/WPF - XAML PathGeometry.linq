@@ -19,10 +19,10 @@ void Main()
     var p = PathGeometry.CreateFromGeometry(g);
     var data = p.ToString();
  
-    var xaml = @"
+    var xaml = $@"
 <Canvas Background=""Yellow"" Width=""128"" Height=""64"">
     <Path
-        Data=""{0}""
+        Data=""{data}""
         Fill=""Black""
         Stretch=""Uniform""
         Width=""128"" Height=""64""
@@ -30,7 +30,6 @@ void Main()
 </Canvas>
 ";
     //data.Dump();
-    xaml = string.Format(xaml, data);
     var element = (Canvas)XamlReader.Parse(xaml, context);
     element.Dump();
 }
