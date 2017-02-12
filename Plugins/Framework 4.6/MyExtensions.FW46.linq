@@ -44,7 +44,7 @@ public static class QueryExtensions
         var linqPadMeta = query.GetLinqPadMeta();
         var secretsSet = linqPadMeta["LinqPadMeta"]["secrets"][context].ToObject<Dictionary<string, string>>();
         if (!secretsSet.Keys.Contains(secretName))
-            throw new Exception(string.Format("key {0} is not found; are you on the right device?", secretName));
+            throw new Exception($"key {secretName} is not found; are you on the right device?");
 
         var root = secretsSet[secretName];
         return root;
@@ -54,9 +54,10 @@ public static class QueryExtensions
     {
         var linqPadMeta = query.GetLinqPadMeta();
         var foldersSet = linqPadMeta["LinqPadMeta"]["folders"].ToObject<Dictionary<string, string>>();
-        var folderSetKey = string.Format("{0}:{1}", Environment.GetEnvironmentVariable("COMPUTERNAME"), folderName);
+        var computerName = Environment.GetEnvironmentVariable("COMPUTERNAME");
+        var folderSetKey = $"{computerName}:{folderName}";
         if (!foldersSet.Keys.Contains(folderSetKey))
-            throw new Exception(string.Format("key {0} is not found; are you on the right device?", folderSetKey));
+            throw new Exception($"key {folderSetKey} is not found; are you on the right device?");
 
         var root = foldersSet[folderSetKey];
         return root;
