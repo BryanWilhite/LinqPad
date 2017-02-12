@@ -13,7 +13,7 @@
 
 int width = 65, height = 64;
 
-var origin = string.Format("http://placekitten.com/{0}/{1}", width, height);
+var origin = $"http://placekitten.com/{width}/{height}";
 var uri = new Uri(origin, UriKind.Absolute);
 
 var bin = Enumerable.Empty<byte>().ToArray();

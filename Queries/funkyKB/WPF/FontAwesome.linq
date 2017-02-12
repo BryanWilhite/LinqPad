@@ -20,26 +20,14 @@
   <Namespace>Newtonsoft.Json.Linq</Namespace>
 </Query>
 
-string GetVisionRoot()
-{
-    var linqPadQueryInfo = new DirectoryInfo(Path.GetDirectoryName(Util.CurrentQueryPath));
-    var linqPadMetaPath = Path.Combine(linqPadQueryInfo.Parent.Parent.FullName, "LinqPadMeta.json");
-    var linqPadMeta = JObject.Parse(File.ReadAllText(linqPadMetaPath));
-    var foldersSet = linqPadMeta["LinqPadMeta"]["folders"].ToObject<Dictionary<string, string>>();
-    var folderSetKey = string.Format("{0}:{1}", Environment.GetEnvironmentVariable("COMPUTERNAME"), "visionRoot");
-    if (!foldersSet.Keys.Contains(folderSetKey)) throw new Exception(string.Format("key {0} is not found; are you on the right device?", folderSetKey));
-
-    var visionRoot = foldersSet[folderSetKey];
-    return visionRoot;
-}
-
 void Main()
 {
     var osData = new InstalledFontCollection();
     var fontFamily = osData.Families.FirstOrDefault(i => i.Name == "FontAwesome");
     if (fontFamily == null) throw new SystemException("The expected System Font is not here.");
 
-    var path = Path.Combine(GetVisionRoot(), @"webfonts\font-awesome-4.2.0\fonts\fontawesome-webfont.svg");
+    var path = Path.Combine(Util.CurrentQuery.GetLinqPadMetaFolder("visionRoot"),
+        @"webfonts\font-awesome-4.2.0\fonts\fontawesome-webfont.svg");
     //You cannot stop .NET from condensing entities so load as string:
     var xml = File.ReadAllText(path).Replace("unicode=\"&#", "unicode=\"&amp;#");
     var svgFont = XDocument.Parse(xml);

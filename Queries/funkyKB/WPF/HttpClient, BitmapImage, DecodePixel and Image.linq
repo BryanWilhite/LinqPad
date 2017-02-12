@@ -13,7 +13,7 @@
 
 int width = 513, height = 512;
 
-var origin = string.Format("http://placekitten.com/{0}/{1}", width, height);
+var origin = $"http://placekitten.com/{width}/{height}";
 var uri = new Uri(origin, UriKind.Absolute);
 
 var bin = Enumerable.Empty<byte>().ToArray();
@@ -38,9 +38,8 @@ using (var stream = new MemoryStream(bin))
 
 var image = new Image{ Width = bitmap.DecodePixelWidth, Height = bitmap.DecodePixelHeight };
 image.Source = bitmap;
-image.Dump(string.Format("DecodePixelWidth: {0}, DecodePixelHeight: {1}",
-    bitmap.DecodePixelWidth, bitmap.DecodePixelHeight));
-    
+image.Dump($"DecodePixelWidth: {bitmap.DecodePixelWidth}, DecodePixelHeight: {bitmap.DecodePixelHeight}");
+
 /*
     “To save significant application memory, set the DecodePixelWidth or  
      DecodePixelHeight of the BitmapImage value of the image source to the desired 
