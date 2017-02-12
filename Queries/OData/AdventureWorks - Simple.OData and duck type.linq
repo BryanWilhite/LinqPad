@@ -5,13 +5,10 @@
     <Driver>AstoriaAuto</Driver>
     <Server>http://services.odata.org/AdventureWorksV3/AdventureWorks.svc</Server>
   </Connection>
-  <Reference Relative="..\..\LINQPad Plugins\Songhay.dll">D:\~dataRoot\LINQpad\LINQPad Plugins\Songhay.dll</Reference>
-  <Reference Relative="..\..\LINQPad Plugins\SonghayCore.dll">D:\~dataRoot\LINQpad\LINQPad Plugins\SonghayCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <NuGetReference>Simple.OData.Client</NuGetReference>
   <Namespace>Simple.OData.Client</Namespace>
   <Namespace>Simple.OData.Client.Extensions</Namespace>
-  <Namespace>Songhay.Extensions</Namespace>
   <Namespace>System.Linq</Namespace>
 </Query>
 
