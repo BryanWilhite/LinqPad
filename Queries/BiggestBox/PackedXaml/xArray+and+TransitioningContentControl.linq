@@ -3,6 +3,7 @@
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
+  <NuGetReference>ModernUI.WPF</NuGetReference>
   <Namespace>System.Windows.Controls</Namespace>
 </Query>
 
