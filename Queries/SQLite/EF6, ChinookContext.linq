@@ -1,11 +1,15 @@
 <Query Kind="Program">
   <NuGetReference>MoreLinq</NuGetReference>
   <NuGetReference>System.Data.SQLite</NuGetReference>
+  <NuGetReference>System.Data.SQLite.EF6</NuGetReference>
   <Namespace>MoreLinq</Namespace>
   <Namespace>System.Data.Common</Namespace>
   <Namespace>System.Data.Entity</Namespace>
   <Namespace>System.Data.Entity.ModelConfiguration.Conventions</Namespace>
   <Namespace>System.Data.SQLite</Namespace>
+  <AppConfig>
+    <Path Relative="sqlite.app.config">sqlite.app.config</Path>
+  </AppConfig>
 </Query>
 
 //http://www.bricelam.net/2012/10/entity-framework-on-sqlite.html
