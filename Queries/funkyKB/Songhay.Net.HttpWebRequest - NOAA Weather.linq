@@ -130,7 +130,7 @@ static class RestApiMetadataExtensions
             metadata.UriTemplates[key]),
             UriKind.Absolute);
 
-        uri.Dump(string.Format("{0} URI", key));
+        uri.Dump($"{key} URI");
 
         return uri;
     }
@@ -150,7 +150,7 @@ static class RestApiMetadataExtensions
             .BindByPosition(metadata.ApiBase, datasetId, stationId, ids, startDate, endDate)
             .WithoutEscaping("%26", "&"); //CONVENTION: NOAA expects literal ampersands!
 
-        uri.Dump(string.Format("{0} URI", key));
+        uri.Dump($"{key} URI");
 
         return uri;
     }
@@ -163,7 +163,7 @@ static class RestApiMetadataExtensions
         var key = "DataTypesByCategory";
         var uri = metadata.ToUriTemplate(key).BindByPosition(metadata.ApiBase, categoryId);
 
-        uri.Dump(string.Format("{0} URI", key));
+        uri.Dump($"{key} URI");
 
         return uri;
     }
@@ -179,7 +179,7 @@ static class RestApiMetadataExtensions
             .BindByPosition(metadata.ApiBase, ids)
             .WithoutEscaping("%26", "&"); //CONVENTION: NOAA expects literal ampersands!
 
-        uri.Dump(string.Format("{0} URI", key));
+        uri.Dump($"{key} URI");
 
         return uri;
     }
@@ -192,7 +192,7 @@ static class RestApiMetadataExtensions
         var key = "StationsByLocationId";
         var uri = metadata.ToUriTemplate(key).BindByPosition(metadata.ApiBase, locationId, extent);
 
-        uri.Dump(string.Format("{0} URI", key));
+        uri.Dump($"{key} URI");
 
         return uri;
     }
