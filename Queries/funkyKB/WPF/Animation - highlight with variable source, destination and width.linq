@@ -67,7 +67,7 @@ void Main()
                 tangle.Opacity = .4;
             }
 
-            button.Content = string.Format("center: ({0},{1})", canvasCenter.X, canvasCenter.Y);
+            button.Content = $"center: ({canvasCenter.X},{canvasCenter.Y})";
 
             button.Click += (s1, args1) =>
             {

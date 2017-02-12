@@ -37,29 +37,13 @@ void Main()
         https://www.ncdc.noaa.gov/cdo-web/webservices/
     */
 
-    #region json:
+    var apiMetadataJsonFile = Path.Combine(
+        Util.CurrentQuery.GetLinqPadDirectoryInfo().FullName,
+        @"Content\json\noaaApiMeta.json");
 
-    var apiMetadataJson = @"
-    {
-        ""ApiBase"": ""https://www.ncdc.noaa.gov/cdo-web/api/v2/"",
-        ""ApiKey"": """ + Util.CurrentQuery.GetLinqPadMetaSecret("noaa", "apiKey") + """,
-        ""UriTemplates"": {
-            ""Data"": ""data?datasetid={datasetId}&stationid={stationId}&datatypeid={datatypeIds}&startdate={startDate}&enddate={endDate}"",
-            ""DatasetsByDataTypes"": ""datasets?datatypeid={datatypeIds}"",
-            ""DataCategories"": ""datacategories"",
-            ""DataTypes"": ""datatypes"",
-            ""DataTypesByCategory"": ""datatypes?datacategoryid={categoryId}&limit=60"",
-            ""LocationCategories"": ""locationcategories"",
-            ""Locations"": ""locations"",
-            ""Stations"": ""stations"",
-            ""StationsByLocationId"": ""stations?locationid={locationId}&extent={extent}&limit=50""
-        }
-    }
-    ";
-
-    #endregion
-
+    var apiMetadataJson = File.ReadAllText(apiMetadataJsonFile);
     var apiMetadata = JsonConvert.DeserializeObject<RestApiMetadata>(apiMetadataJson);
+    apiMetadata.ApiKey = Util.CurrentQuery.GetLinqPadMetaSecret("noaa", "apiKey");
     apiMetadata.Dump("API Meta");
 
     var uri = apiMetadata.ToUriForLocationsUnitedStates();

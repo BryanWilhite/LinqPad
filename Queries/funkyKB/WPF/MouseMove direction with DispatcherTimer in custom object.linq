@@ -73,13 +73,14 @@ public static class EnumExtensions
 {
     public static bool HasFlag(this Enum @enum, Enum enumTest)
     {
+        var typeName = @enum.GetType();
+        var typeNameTest = enumTest.GetType();
+
         // see: http://stackoverflow.com/questions/4108828/generic-extension-method-to-see-if-an-enum-contains-a-flag
         if(@enum == null) return false;
-        if (!Enum.IsDefined(@enum.GetType(), enumTest))
+        if (!Enum.IsDefined(typeName, enumTest))
         {
-            var message = string.Format(
-                "Enumeration type mismatch. The flag is of type '{0}', was expecting '{1}'.",
-                enumTest.GetType(), @enum.GetType());
+            var message = $"Enumeration type mismatch. The flag is of type '{typeNameTest}', was expecting '{typeName}'.";
             throw new ArgumentException(message);
         }
 

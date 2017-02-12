@@ -1,0 +1,15 @@
+{
+    "ApiBase": "https://www.ncdc.noaa.gov/cdo-web/api/v2/",
+    "ApiKey": "",
+    "UriTemplates":{
+            "Data": "data?datasetid={datasetId}&stationid={stationId}&datatypeid={datatypeIds}&startdate={startDate}&enddate={endDate}",
+            "DatasetsByDataTypes": "datasets?datatypeid={datatypeIds}",
+            "DataCategories": "datacategories",
+            "DataTypes": "datatypes",
+            "DataTypesByCategory": "datatypes?datacategoryid={categoryId}&limit=60",
+            "LocationCategories": "locationcategories",
+            "Locations": "locations",
+            "Stations": "stations",
+            "StationsByLocationId": "stations?locationid={locationId}&extent={extent}&limit=50"
+    }
+}
