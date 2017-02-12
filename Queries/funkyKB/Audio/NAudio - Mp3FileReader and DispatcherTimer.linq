@@ -24,7 +24,7 @@ async void Main()
     playbackTiming.Interval = TimeSpan.FromSeconds(1);
     playbackTiming.Tick += (s, args) =>
     {
-        var message = string.Format("{0}/{1}", mp3.CurrentTime.TotalSeconds, mp3.TotalTime.TotalSeconds);
+        var message = $"{mp3.CurrentTime.TotalSeconds}/{mp3.TotalTime.TotalSeconds}";
         message.Dump();
     };
     

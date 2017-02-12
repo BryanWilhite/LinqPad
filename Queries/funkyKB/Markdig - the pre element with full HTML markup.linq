@@ -20,7 +20,7 @@ void Main()
     var raw = Markdown.ToHtml(md);
     raw.Dump("raw HTML from first markdig pass");
 
-    var rawElement = XElement.Parse(string.Format("<raw>{0}</raw>", raw));
+    var rawElement = XElement.Parse($"<raw>{raw}</raw>");
     var preElement = rawElement.Element("pre");
     MarkdownUtility.ConvertPreBlockToHtml(preElement);
 

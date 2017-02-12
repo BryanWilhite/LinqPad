@@ -64,7 +64,7 @@ xDoc.Root.Element("xhtml").Value = placeholder;
 
 var json = JsonConvert.SerializeXNode(xDoc.Root, Newtonsoft.Json.Formatting.Indented);
 var json_final =json
-    .Replace(string.Format(@"""{0}""",placeholder), escaped_xhtml);   
+    .Replace($@"""{placeholder}"""), escaped_xhtml);   
 json_final.Dump("json with escaped xhtml");
 
 var jDoc = JObject.Parse(json_final);

@@ -7,7 +7,7 @@
 void Main()
 {
     var rootPropertyName = "root";
-    var jO = JObject.Parse(string.Format(@"{{ ""{0}"": [] }}", rootPropertyName));
+    var jO = JObject.Parse($@"{{ ""{rootPropertyName}"": [] }}");
     jO.ToString().Dump();
     
     var jA = (JArray)jO[rootPropertyName];
