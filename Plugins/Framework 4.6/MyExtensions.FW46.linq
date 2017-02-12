@@ -79,7 +79,7 @@ public static class QueryExtensions
     public static string LoadHtml(this Query query, string fileName)
     {
         var info = query.GetLinqPadDirectoryInfo();
-        var path = Path.Combine(info.FullName, $@"Content\Html\{fileName}");
+        var path = Path.Combine(info.FullName, $@"Content\HTML\{fileName}");
         return File.ReadAllText(path);
     }
 
