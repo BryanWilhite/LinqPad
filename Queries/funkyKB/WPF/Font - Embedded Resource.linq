@@ -1,7 +1,7 @@
 <Query Kind="Statements">
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
-  <Reference Relative="..\..\..\Plugins\Songhay.Portable.Resources.dll">Songhay.Portable.Resources.dll</Reference>
+  <Reference Relative="..\..\..\Content\DLLs\WpfResources\Songhay.Portable.Resources.dll">Songhay.Portable.Resources.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
   <NuGetReference>Microsoft.Expression.Blend.SDK.WPF</NuGetReference>
