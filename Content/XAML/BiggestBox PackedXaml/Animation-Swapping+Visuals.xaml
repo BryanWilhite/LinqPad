@@ -6,7 +6,7 @@
     mc:Ignorable="d"
     xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:vc="clr-namespace:Songhay.ValueConverters;assembly=Songhay.Mvvm"
+    xmlns:vc="clr-namespace:Songhay.ValueConverters;assembly=WpfValueConverters"
     Tag="Animation: Swapping Visuals">
     <UserControl.Resources>
         <vc:InverseBooleanConverter x:Key="InverseBooleanConverter" />

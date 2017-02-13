@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:eil="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:rxconverters="clr-namespace:Songhay.ValueConverters;assembly=Songhay.Mvvm"
+    xmlns:rxconverters="clr-namespace:Songhay.ValueConverters;assembly=WpfValueConverters"
     mc:Ignorable="d"
     Tag="Blend Interactions - Kenny Young, FluidMoveBehavior and WrapPanel">
     <UserControl.Resources>

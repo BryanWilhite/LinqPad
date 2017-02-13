@@ -7,7 +7,7 @@
     xmlns:eic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:input="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
-    xmlns:rxValueConverters="clr-namespace:Songhay.ValueConverters;assembly=Songhay.Mvvm"
+    xmlns:rxValueConverters="clr-namespace:Songhay.ValueConverters;assembly=WpfValueConverters"
     Tag="Blend Interactions - GoToStateAction and VisualStateManager">
     <UserControl.Resources>
         <rxValueConverters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
