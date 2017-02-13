@@ -1,10 +1,9 @@
 <Query Kind="Program">
-  <Reference Relative="..\..\..\Content\dlls\Microsoft.Expression\Microsoft.Expression.Interactions.dll">D:\~dropBox\Dropbox\LinqPad\Content\dlls\Microsoft.Expression\Microsoft.Expression.Interactions.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
-  <Reference Relative="..\..\..\Content\dlls\System.Windows.Interactivity\System.Windows.Interactivity.dll">D:\~dropBox\Dropbox\LinqPad\Content\dlls\System.Windows.Interactivity\System.Windows.Interactivity.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
+  <NuGetReference>Microsoft.Expression.Blend.SDK.WPF</NuGetReference>
   <NuGetReference>MoreLinq</NuGetReference>
   <NuGetReference>Newtonsoft.Json</NuGetReference>
   <Namespace>MoreLinq</Namespace>
