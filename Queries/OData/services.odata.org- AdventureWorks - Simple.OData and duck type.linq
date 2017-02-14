@@ -1,14 +1,11 @@
 <Query Kind="Program">
-  <Connection>
-    <ID>cd884946-dbf0-42d1-ac90-d3a615f50162</ID>
-    <Driver>AstoriaAuto</Driver>
-    <Server>http://services.odata.org/AdventureWorksV3/AdventureWorks.svc</Server>
-  </Connection>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
+  <NuGetReference>Microsoft.Bcl.Async</NuGetReference>
   <NuGetReference>Simple.OData.Client</NuGetReference>
   <Namespace>Simple.OData.Client</Namespace>
   <Namespace>Simple.OData.Client.Extensions</Namespace>
   <Namespace>System.Linq</Namespace>
+  <Namespace>System.Threading.Tasks</Namespace>
 </Query>
 
 class Settings : ODataClientSettings
@@ -28,8 +25,9 @@ class CompanySale : vCompanySales
 {
 }
 
-async void Main()
+async Task Main()
 {
+    V3Adapter.Reference();
     var client = new ODataClient(new Settings());
 
     IEnumerable<CompanySale> sales = await client
