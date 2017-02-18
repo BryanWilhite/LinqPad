@@ -1,5 +1,7 @@
 <Query Kind="Statements" />
 
+//read Jon Skeet: http://stackoverflow.com/a/42269519/22944
+
 var xml = @"
 <div>
 <p>
