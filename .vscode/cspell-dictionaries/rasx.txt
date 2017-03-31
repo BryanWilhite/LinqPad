@@ -1,5 +1,6 @@
 autofac
 consolas
+kinte
 linq
 mscorlib
 noaa
