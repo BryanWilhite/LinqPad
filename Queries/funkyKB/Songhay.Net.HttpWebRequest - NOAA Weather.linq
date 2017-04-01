@@ -1,26 +1,8 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.ServiceModel.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.ServiceModel.Internals.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.Serialization.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Configuration.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\SMDiagnostics.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.IdentityModel.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.DirectoryServices.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\Microsoft.Transactions.Bridge.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Web.Services.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.EnterpriseServices.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.IdentityModel.Selectors.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Web.ApplicationServices.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Messaging.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.DurableInstancing.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.ServiceProcess.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.ServiceModel.Activation.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Security.dll</Reference>
   <NuGetReference>Newtonsoft.Json</NuGetReference>
   <NuGetReference>Songhay.Net.HttpWebRequest</NuGetReference>
   <NuGetReference>SonghayCore</NuGetReference>
+  <NuGetReference>System.ServiceModel.Primitives</NuGetReference>
   <Namespace>Newtonsoft.Json</Namespace>
   <Namespace>Songhay</Namespace>
   <Namespace>Songhay.Extensions</Namespace>
