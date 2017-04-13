@@ -6,39 +6,37 @@ public static class FuncExtensions
     {
         return a => thisPredicate(a) && predicate(a);
     }
- 
+
     public static Func<T, bool> AndNot<T>(this Func<T, bool> thisPredicate, Func<T, bool> predicate)
     {
         return a => thisPredicate(a) && !predicate(a);
     }
- 
+
     public static Func<T, bool> Or<T>(this Func<T, bool> thisPredicate, Func<T, bool> predicate)
     {
         return a => thisPredicate(a) || predicate(a);
     }
-    
+
     public static Func<T, bool> OrNot<T>(this Func<T, bool> thisPredicate, Func<T, bool> predicate)
     {
         return a => thisPredicate(a) || !predicate(a);
     }
 }
 
-public static class FuncSeed
+public static class FuncCombinator
 {
-    public static Func<T, bool> True<T>() { return f => true;  }
-    
-    public static Func<T, bool> False<T>() { return f => false; }
+    public static Func<T, bool> Combine<T>(bool @bool = true) { return f => @bool; }
 }
 
 void Main()
 {
-    var data = new[]{2,4,6,8,11,43,65};
-    var greaterThanFourAndLessThanForty = FuncSeed.True<int>()
+    var data = new[] { 2, 4, 6, 8, 11, 43, 65 };
+    var greaterThanFourAndLessThanForty = FuncCombinator.Combine<int>()
         .And<int>(i => i > 4)
         .And<int>(i => i < 40);
     data.Where(greaterThanFourAndLessThanForty).Dump("Greater Than Four and Less Than Forty");
-    
-    var notGreaterThanFourAndLessThanForty = FuncSeed.True<int>()
+
+    var notGreaterThanFourAndLessThanForty = FuncCombinator.Combine<int>()
         .AndNot(greaterThanFourAndLessThanForty);
     data.Where(notGreaterThanFourAndLessThanForty).Dump("Not Greater Than Four and Less Than Forty");
 }
