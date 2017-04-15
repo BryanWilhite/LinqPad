@@ -24,4 +24,22 @@ new[]
     setThree.Average()
 }
 .Average()
-.Dump("average of averages");
+.Dump("average of averages (from equal subsets)");
+
+setOne = set.Take(5);
+setTwo = set.Skip(5).Take(3);
+setThree = set.Skip(8).Take(4);
+
+setOne.Dump("set one");
+setTwo.Dump("set two");
+setThree.Dump("set three");
+
+new[]
+{
+    setOne.Average(),
+    setTwo.Average(),
+    setThree.Average()
+}
+.Average()
+.Dump("average of averages (from unequal subsets)");
+
