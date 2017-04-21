@@ -5,7 +5,8 @@
 </Query>
 
 /*
-    http://stackoverflow.com/questions/38005957/jtoken-is-not-a-reference-of-jobject/38016360#38016360
+    For background, see “JToken is not a reference of JObject?”
+    [http://stackoverflow.com/questions/38005957/jtoken-is-not-a-reference-of-jobject/38016360#38016360]
 */
 
 var json = @"
@@ -24,6 +25,10 @@ var jValue = (JValue)jToken;
 jToken = "5"; // this is the same as jToken = new JValue("5")
 jValue.Value = "600"; // this holds the reference as expected
 
-jO.ToString().Dump("jO");
+jO.ToString().Dump("jO with indirect reference set");
 
 jToken.Dump("jToken");
+
+jO["item"]["foo"] = "700";
+
+jO.ToString().Dump("jO with direct set");
