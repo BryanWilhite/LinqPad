@@ -1,5 +1,10 @@
 <Query Kind="Statements" />
 
+/*
+    “Why is an average of an average usually incorrect?”
+    [https://math.stackexchange.com/questions/95909/why-is-an-average-of-an-average-usually-incorrect]
+*/
+
 var generator = new Random(DateTime.Now.Millisecond);
 var set = Enumerable.Range(1, 12)
     .Select(i => generator.Next(1, 100))
