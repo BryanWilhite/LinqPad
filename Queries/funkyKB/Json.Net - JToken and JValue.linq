@@ -19,15 +19,15 @@ var json = @"
 ";
 
 var jO = JObject.Parse(json);
-var jToken = jO["item"]["foo"];
-var jValue = (JValue)jToken;
+var jT = jO["item"]["foo"];
+var jV = (JValue)jT;
 
-jToken = "5"; // this is the same as jToken = new JValue("5")
-jValue.Value = "600"; // this holds the reference as expected
+jT = "5"; // this is the same as jT = new JValue("5")
+jV.Value = "600"; // this holds the reference as expected
 
 jO.ToString().Dump("jO with indirect reference set");
 
-jToken.Dump("jToken");
+jT.Dump("jT");
 
 jO["item"]["foo"] = "700";
 
