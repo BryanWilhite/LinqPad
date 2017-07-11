@@ -29,26 +29,26 @@
 
 void Main()
 {
-    var baseAddress = "http://localhost:9000/"; 
+    var baseAddress = "http://localhost:9000/";
 
-    var client = new HttpClient(); 
+    var client = new HttpClient();
     try
     {
-        using (WebApp.Start<Startup>(url: baseAddress)) 
+        using (WebApp.Start<Startup>(url: baseAddress))
         {
             HttpResponseMessage response;
-            
+
             Action<string> callOwin = path =>
             {
-                response = client.GetAsync(baseAddress + path).Result; 
-                response.Dump(); 
-                response.Content.ReadAsStringAsync().Result.Dump(); 
+                response = client.GetAsync(baseAddress + path).Result;
+                response.Dump();
+                response.Content.ReadAsStringAsync().Result.Dump();
             };
 
-            callOwin("api/$metadata"); 
-            callOwin("api/Product?$count=true"); 
-            callOwin("api/Product(2)"); 
-            callOwin("api/Product?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1"); 
+            callOwin("api/$metadata");
+            callOwin("api/Product?$count=true");
+            callOwin("api/Product(2)");
+            callOwin("api/Product?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
         }
     }
     finally
@@ -77,7 +77,7 @@ public class ProductRepository
 {
     public IQueryable<IProduct> LoadProducts()
     {
-        var data = new []
+        var data = new[]
         {
             new Product{ Id = 1, Category = "Bakery", Name = "Spinach/Rice Tortillas", Price = 6.99M },
             new Product{ Id = 2, Category = "Bakery", Name = "Organic Corn Tortillas", Price = 1.99M },
@@ -89,7 +89,7 @@ public class ProductRepository
             new Product{ Id = 8, Category = "Grocery", Name = "Organic Kale", Price = 2.99M },
             new Product{ Id = 9, Category = "Grocery", Name = "Organic Red Potatoes", Price = 2.49M },
         };
-        
+
         return data.AsQueryable();
     }
 }
@@ -118,9 +118,9 @@ public class ProductController : ODataController
     ProductRepository _repository;
 }
 
-public class ControllerResolver : DefaultHttpControllerTypeResolver 
+public class ControllerResolver : DefaultHttpControllerTypeResolver
 {
-    public override ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver) 
+    public override ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver)
     {
         var types = Assembly.GetExecutingAssembly().GetExportedTypes();
         var controllerType = typeof(System.Web.Http.Controllers.IHttpController);
@@ -142,11 +142,21 @@ public class Startup
 
         var builder = new ODataConventionModelBuilder();
         builder
-            .EntitySet<Product>("Product")
+            .EntitySet<Product>(nameof(Product))
             .EntityType.DerivesFrom<IProduct>();
+
+        /*
+            The following is an optimizing, breaking change in OData 6.x.
+            For detail, see https://stackoverflow.com/a/39533417/22944.
+        */
+        builder
+            .EntityType<Product>()
+            .Count()
+            .Filter(QueryOptionSetting.Allowed);
+
         var model = builder.GetEdmModel();
 
-        config.MapODataServiceRoute("odata", "api", model);
+        config.MapODataServiceRoute(routeName: "odata", routePrefix: "api", model: model);
 
         appBuilder.UseWebApi(config);
 
