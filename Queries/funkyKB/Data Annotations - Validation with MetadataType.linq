@@ -1,5 +1,5 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.ComponentModel.DataAnnotations.dll</Reference>
+  <NuGetReference>System.ComponentModel.Annotations</NuGetReference>
   <Namespace>System.ComponentModel</Namespace>
   <Namespace>System.ComponentModel.DataAnnotations</Namespace>
 </Query>
