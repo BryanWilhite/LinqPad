@@ -48,7 +48,8 @@ void Main()
 
             callOwin("api/$metadata");
             callOwin("api/Client(101)/Accounts");
-            //callOwin("api/Client(101)/Accounts(4)");
+            callOwin("api/Client(101)/Accounts?$filter=AccountId+eq+4");
+            //OData does not support "api/Client(101)/Accounts(4)"?
         }
     }
     finally
@@ -164,6 +165,11 @@ public class Startup
 
         var builder = new ODataConventionModelBuilder();
         builder.EntitySet<Account>(nameof(Account));
+        builder
+            .EntityType<Account>()
+            .Count()
+            .Filter(QueryOptionSetting.Allowed);
+
         builder.EntitySet<Client>(nameof(Client));
 
         var model = builder.GetEdmModel();
