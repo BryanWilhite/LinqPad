@@ -1,5 +1,5 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
+  <NuGetReference>System.Net.Http</NuGetReference>
   <NuGetReference>EntityFramework</NuGetReference>
   <NuGetReference>Microsoft.AspNet.OData</NuGetReference>
   <NuGetReference>Microsoft.AspNet.WebApi.Client</NuGetReference>

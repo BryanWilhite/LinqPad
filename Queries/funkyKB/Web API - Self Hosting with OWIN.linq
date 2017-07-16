@@ -1,5 +1,5 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
+  <NuGetReference>System.Net.Http</NuGetReference>
   <NuGetReference>Microsoft.AspNet.WebApi.OwinSelfHost</NuGetReference>
   <Namespace>Microsoft.Owin.Hosting</Namespace>
   <Namespace>Newtonsoft.Json</Namespace>
