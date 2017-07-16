@@ -49,7 +49,8 @@ void Main()
             callOwin("odata/$metadata");
             callOwin("odata/Clients(101)/Accounts");
             callOwin("odata/Clients(101)/Accounts?$filter=AccountId+eq+4");
-            //OData does not support "api/Clients(101)/Accounts(4)"?
+            callOwin("odata/Clients(101)/Accounts(4)"); //supported by ODataRoute
+            callOwin("odata/Clients(101)/Accounts(1004)"); //should return NotFound
         }
     }
     finally
@@ -136,6 +137,17 @@ public class ClientsController : ODataController
     public IHttpActionResult GetAccounts([FromODataUri] int key)
     {
         return this.Ok(this._repository.GetAccountsByClient(key));
+    }
+
+    [EnableQuery]
+    [ODataRoute("Clients({clientId})/Accounts({accountId})")]
+    public IHttpActionResult GetAccount(int clientId, int accountId)
+    {
+        var result = this._repository
+            .GetAccountsByClient(clientId)
+            ?.SingleOrDefault(i => i.AccountId == accountId);
+        if(result == null) return this.NotFound();
+        return this.Ok(result);
     }
 
     Repository _repository;
