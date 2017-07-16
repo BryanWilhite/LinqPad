@@ -46,8 +46,8 @@ void Main()
                 response.Content.ReadAsStringAsync().Result.Dump();
             };
 
-            callOwin("api/$metadata");
-            callOwin("api/Client(102)/Account");
+            callOwin("odata/$metadata");
+            callOwin("odata/Clients(102)/Account");
         }
     }
     finally
@@ -60,6 +60,7 @@ public class Client
 {
     public int ClientId { get; set; }
     public string Name { get; set; }
+    [Contained]
     public Account Account { get; set; }
 }
 
@@ -119,9 +120,9 @@ public class Repository
     static IEnumerable<Client> clients;
 }
 
-public class ClientController : ODataController
+public class ClientsController : ODataController
 {
-    public ClientController()
+    public ClientsController()
     {
         this._repository = new Repository();
         this._repository.Dump("controller and repository loaded");
@@ -160,12 +161,11 @@ public class Startup
         config.Services.Replace(typeof(IHttpControllerTypeResolver), new ControllerResolver());
 
         var builder = new ODataConventionModelBuilder();
-        builder.EntitySet<Account>(nameof(Account));
-        builder.EntitySet<Client>(nameof(Client));
+        builder.EntitySet<Client>(nameof(ClientsController).Replace("Controller", string.Empty));
 
         var model = builder.GetEdmModel();
 
-        config.MapODataServiceRoute(routeName: "odata", routePrefix: "api", model: model);
+        config.MapODataServiceRoute(routeName: "ODataRoute", routePrefix: "odata", model: model);
 
         appBuilder.UseWebApi(config);
 

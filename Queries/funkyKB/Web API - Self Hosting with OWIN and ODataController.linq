@@ -1,9 +1,4 @@
 <Query Kind="Program">
-  <Connection>
-    <ID>cd884946-dbf0-42d1-ac90-d3a615f50162</ID>
-    <Driver>AstoriaAuto</Driver>
-    <Server>http://services.odata.org/AdventureWorksV3/AdventureWorks.svc</Server>
-  </Connection>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <NuGetReference>EntityFramework</NuGetReference>
   <NuGetReference>Microsoft.AspNet.OData</NuGetReference>
@@ -45,10 +40,11 @@ void Main()
                 response.Content.ReadAsStringAsync().Result.Dump();
             };
 
-            callOwin("api/$metadata");
-            callOwin("api/Product?$count=true");
-            callOwin("api/Product(2)");
-            callOwin("api/Product?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
+            callOwin("odata/$metadata"); //gets “Service Metadata Document”
+            callOwin("odata/Products?$count=true"); //maps to ProductsController.Get() or ProductController.GetProduct()
+            callOwin("odata/Products?$count=true&$skip=3");
+            callOwin("odata/Products(2)"); //maps to ProductsController.Get(key) or ProductController.GetProduct(key)
+            callOwin("odata/Products?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
         }
     }
     finally
@@ -94,9 +90,9 @@ public class ProductRepository
     }
 }
 
-public class ProductController : ODataController
+public class ProductsController : ODataController
 {
-    public ProductController()
+    public ProductsController()
     {
         this._repository = new ProductRepository();
         this._repository.Dump("controller and repository loaded");
@@ -109,7 +105,7 @@ public class ProductController : ODataController
     }
 
     [EnableQuery]
-    public SingleResult<IProduct> Get([FromODataUri] int key)
+    public SingleResult<IProduct> Get([FromODataUri] int key) //parameter must be named “key”
     {
         IQueryable<IProduct> result = this._repository.LoadProducts().Where(p => p.Id == key);
         return SingleResult.Create(result);
@@ -142,7 +138,7 @@ public class Startup
 
         var builder = new ODataConventionModelBuilder();
         builder
-            .EntitySet<Product>(nameof(Product))
+            .EntitySet<Product>(nameof(ProductsController).Replace("Controller", string.Empty))
             .EntityType.DerivesFrom<IProduct>();
 
         /*
@@ -156,10 +152,24 @@ public class Startup
 
         var model = builder.GetEdmModel();
 
-        config.MapODataServiceRoute(routeName: "odata", routePrefix: "api", model: model);
+        /*
+            Activate OData routing conventions:
+            For detail, see [https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions]
+        */
+        config.MapODataServiceRoute(routeName: "ODataRoute", routePrefix: "odata", model: model);
 
         appBuilder.UseWebApi(config);
 
         config.EnsureInitialized();
     }
 }
+
+/*
+    Note that this is an OData >=v4 arrangement.
+    In OData v4:
+
+    * [Queryable] is replaced with [EnableQuery]
+    * config.MapODataRoute() is replaced with config.MapODataServiceRoute()
+
+    For detail, see https://www.strathweb.com/2014/02/getting-started-odata-v4-asp-net-web-api/
+*/
