@@ -99,16 +99,16 @@ public class ProductsController : ODataController
     }
 
     [EnableQuery(PageSize = 3, AllowedQueryOptions = AllowedQueryOptions.All)]
-    public IQueryable<IProduct> Get()
+    public IHttpActionResult Get()
     {
-        return this._repository.LoadProducts();
+        return this.Ok(this._repository.LoadProducts());
     }
 
     [EnableQuery]
-    public SingleResult<IProduct> Get([FromODataUri] int key) //parameter must be named “key”
+    public IHttpActionResult Get([FromODataUri] int key) //parameter must be named “key”
     {
         IQueryable<IProduct> result = this._repository.LoadProducts().Where(p => p.Id == key);
-        return SingleResult.Create(result);
+        return this.Ok(SingleResult.Create(result));
     }
 
     ProductRepository _repository;

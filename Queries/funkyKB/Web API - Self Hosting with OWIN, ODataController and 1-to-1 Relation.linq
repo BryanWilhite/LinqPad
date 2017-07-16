@@ -129,10 +129,10 @@ public class ClientsController : ODataController
     }
 
     [EnableQuery]
-    public SingleResult<Account> GetAccount([FromODataUri] int key)
+    public IHttpActionResult GetAccount([FromODataUri] int key)
     {
         IQueryable<Account> result = this._repository.GetAccountByClient(key);
-        return SingleResult.Create(result);
+        return this.Ok(SingleResult.Create(result));
     }
 
     Repository _repository;

@@ -133,9 +133,9 @@ public class ClientsController : ODataController
     }
 
     [EnableQuery(PageSize = 3, AllowedQueryOptions = AllowedQueryOptions.All)]
-    public IQueryable<Account> GetAccounts([FromODataUri] int key)
+    public IHttpActionResult GetAccounts([FromODataUri] int key)
     {
-        return this._repository.GetAccountsByClient(key);
+        return this.Ok(this._repository.GetAccountsByClient(key));
     }
 
     Repository _repository;
