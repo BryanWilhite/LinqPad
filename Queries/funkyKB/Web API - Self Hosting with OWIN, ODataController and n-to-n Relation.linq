@@ -21,6 +21,7 @@
   <Namespace>System.Web.OData.Query</Namespace>
   <Namespace>System.Web.OData.Routing</Namespace>
   <Namespace>System.ComponentModel.DataAnnotations.Schema</Namespace>
+  <Namespace>System.Web.Http.Description</Namespace>
 </Query>
 
 void Main()
@@ -42,10 +43,8 @@ void Main()
             };
 
             callOwin("odata/$metadata");
-            callOwin("odata/Clients(101)/Accounts");
-            callOwin("odata/Clients(101)/Accounts?$filter=AccountId+eq+4");
-            callOwin("odata/Clients(101)/Accounts(4)"); //supported by ODataRoute
-            callOwin("odata/Clients(101)/Accounts(1004)"); //should return NotFound
+            callOwin("odata/Clients/Edm.GetBoundFunctionValue");
+            callOwin("odata/Clients/Edm.GetAccount(clientId=100,accountId=7)");
         }
     }
     finally
@@ -58,7 +57,12 @@ public class Client
 {
     public int ClientId { get; set; }
     public string Name { get; set; }
-    public IEnumerable<Account> Accounts { get; set; }
+}
+
+public class ClientAccount
+{
+    public int ClientId { get; set; }
+    public int AccountId { get; set; }
 }
 
 public class Account
@@ -71,53 +75,55 @@ public class Repository
 {
     static Repository()
     {
+        accounts = new[]
+        {
+            new Account { AccountId = 1, AccountName = "Account One" },
+            new Account { AccountId = 2, AccountName = "Account Two" },
+            new Account { AccountId = 3, AccountName = "Account Three" },
+            new Account { AccountId = 4, AccountName = "Account Four" },
+            new Account { AccountId = 5, AccountName = "Account Five" },
+            new Account { AccountId = 6, AccountName = "Account Six" },
+            new Account { AccountId = 7, AccountName = "Account Seven" },
+        };
+
+        clientAccounts = new[]
+        {
+            new ClientAccount { AccountId = 2, ClientId = 100 },
+            new ClientAccount { AccountId = 4, ClientId = 100 },
+            new ClientAccount { AccountId = 7, ClientId = 100 },
+            new ClientAccount { AccountId = 2, ClientId = 101 },
+            new ClientAccount { AccountId = 5, ClientId = 101 },
+            new ClientAccount { AccountId = 7, ClientId = 102 },
+        };
+
         clients = new[]
         {
-            new Client
-            {
-                ClientId = 100,
-                Name = "Ms. One",
-                Accounts = new []
-                {
-                    new Account { AccountId = 1, AccountName = "Account One" },
-                    new Account { AccountId = 2, AccountName = "Account Two" },
-                }
-            },
-            new Client
-            {
-                ClientId = 101,
-                Name = "Mr. Two",
-                Accounts = new []
-                {
-                    new Account { AccountId = 3, AccountName = "Account Three" },
-                    new Account { AccountId = 4, AccountName = "Account Four" },
-                    new Account { AccountId = 5, AccountName = "Account Five" },
-                }
-            },
-            new Client
-            {
-                ClientId = 102,
-                Name = "Mrs. Three",
-                Accounts = new []
-                {
-                    new Account { AccountId = 6, AccountName = "Account Six" },
-                    new Account { AccountId = 7, AccountName = "Account Seven" },
-                }
-            },
+            new Client { ClientId = 100, Name = "Ms. One" },
+            new Client { ClientId = 101, Name = "Mr. Two", },
+            new Client { ClientId = 102, Name = "Mrs. Three" },
         };
+    }
+    
+    public Account GetAccount()
+    {
+        return accounts.ElementAt(3);
     }
 
     public IQueryable<Account> GetAccountsByClient(int clientId)
     {
-        var data = clients
-            .Where(i => i.ClientId ==  clientId)
-            .SelectMany(i => i.Accounts)
+        var accountIds = clientAccounts
+            .Where(i => i.ClientId == clientId)
+            .Select(i => i.AccountId)
             .ToArray();
+        var data = accounts
+            .Where(i => accountIds.Contains(i.AccountId));
 
         return data.AsQueryable();
     }
 
     static IEnumerable<Client> clients;
+    static IEnumerable<ClientAccount> clientAccounts;
+    static IEnumerable<Account> accounts;
 }
 
 public class ClientsController : ODataController
@@ -128,14 +134,6 @@ public class ClientsController : ODataController
         this._repository.Dump("controller and repository loaded");
     }
 
-    [EnableQuery(PageSize = 3, AllowedQueryOptions = AllowedQueryOptions.All)]
-    public IHttpActionResult GetAccounts([FromODataUri] int key)
-    {
-        return this.Ok(this._repository.GetAccountsByClient(key));
-    }
-
-    [EnableQuery]
-    [ODataRoute("Clients({clientId})/Accounts({accountId})")]
     public IHttpActionResult GetAccount(int clientId, int accountId)
     {
         var result = this._repository
@@ -143,6 +141,11 @@ public class ClientsController : ODataController
             ?.SingleOrDefault(i => i.AccountId == accountId);
         if(result == null) return this.NotFound();
         return this.Ok(result);
+    }
+
+    public IHttpActionResult GetBoundFunctionValue()
+    {
+        return this.Ok(this._repository.GetAccount());
     }
 
     Repository _repository;
@@ -170,14 +173,26 @@ public class Startup
         config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
         config.Services.Replace(typeof(IHttpControllerTypeResolver), new ControllerResolver());
 
-        var builder = new ODataConventionModelBuilder();
+        var builder = new ODataConventionModelBuilder { Namespace = "Edm" };
 
-        builder.EntitySet<Client>(nameof(ClientsController).Replace("Controller", string.Empty));
+        var entitySetName = nameof(ClientsController).Replace("Controller", string.Empty);
+
+        builder.EntitySet<Client>(entitySetName);
 
         builder
             .EntityType<Account>()
             .Count()
             .Filter(QueryOptionSetting.Allowed);
+
+        var f1 = builder.EntityType<Client>().Collection
+            .Function("GetAccount")
+            .ReturnsFromEntitySet<Account>($"{entitySetName}_1");
+        f1.Parameter<int>("clientId");
+        f1.Parameter<int>("accountId");
+
+        builder.EntityType<Client>().Collection
+            .Function("GetBoundFunctionValue")
+            .ReturnsFromEntitySet<Account>($"{entitySetName}_2"); //see https://stackoverflow.com/a/34881602/22944
 
         var model = builder.GetEdmModel();
 

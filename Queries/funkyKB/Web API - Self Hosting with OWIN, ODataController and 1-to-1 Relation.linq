@@ -1,9 +1,4 @@
 <Query Kind="Program">
-  <Connection>
-    <ID>cd884946-dbf0-42d1-ac90-d3a615f50162</ID>
-    <Driver>AstoriaAuto</Driver>
-    <Server>http://services.odata.org/AdventureWorksV3/AdventureWorks.svc</Server>
-  </Connection>
   <NuGetReference>System.Net.Http</NuGetReference>
   <NuGetReference>EntityFramework</NuGetReference>
   <NuGetReference>Microsoft.AspNet.OData</NuGetReference>
