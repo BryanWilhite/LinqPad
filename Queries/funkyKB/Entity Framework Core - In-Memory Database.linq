@@ -6,6 +6,7 @@
 /*
     https://docs.microsoft.com/en-us/ef/core/providers/in-memory/
     https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/in-memory/
+    https://github.com/aspnet/EntityFramework
 */
 void Main()
 {
@@ -78,7 +79,7 @@ public class Product
 }
 
 public static class ModelBuilderExtensions
-{
+{ //EntityTypeConfiguration is not a part of EF Core.
     public static ModelBuilder WithProductEntity(this ModelBuilder builder)
     {
         if(builder == null) return null;
@@ -86,7 +87,7 @@ public static class ModelBuilderExtensions
         var entityBuilder = builder.Entity<Product>();
 
         entityBuilder
-            .HasKey(i => i.Id); //not really needed for conventonal Id property
+            .HasKey(i => i.Id); //not really needed for conventional Id property
 
         entityBuilder
             .Property(i => i.Name)
