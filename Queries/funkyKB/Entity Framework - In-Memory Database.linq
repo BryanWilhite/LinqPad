@@ -36,6 +36,13 @@ public class MyInMemoryContext : DbContext
     { }
 
     public DbSet<Product> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder
+            .WithProductEntity();
+    }
 }
 
 public static class MyInMemoryContextExtensions
@@ -68,4 +75,24 @@ public class Product
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string Category { get; set; }
+}
+
+public static class ModelBuilderExtensions
+{
+    public static ModelBuilder WithProductEntity(this ModelBuilder builder)
+    {
+        if(builder == null) return null;
+
+        var entityBuilder = builder.Entity<Product>();
+
+        entityBuilder
+            .HasKey(i => i.Id); //not really needed for conventonal Id property
+
+        entityBuilder
+            .Property(i => i.Name)
+            .HasMaxLength(255)
+            .IsRequired();
+
+        return builder;
+    }
 }
