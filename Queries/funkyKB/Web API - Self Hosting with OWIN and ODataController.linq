@@ -20,6 +20,7 @@
   <Namespace>System.Web.OData.Extensions</Namespace>
   <Namespace>System.Web.OData.Query</Namespace>
   <Namespace>System.Web.OData.Routing</Namespace>
+  <Namespace>System.Web.Http.Controllers</Namespace>
 </Query>
 
 void Main()
@@ -40,11 +41,11 @@ void Main()
                 response.Content.ReadAsStringAsync().Result.Dump();
             };
 
-            callOwin("odata/$metadata"); //gets “Service Metadata Document”
-            callOwin("odata/Products?$count=true"); //maps to ProductsController.Get() or ProductController.GetProduct()
-            callOwin("odata/Products?$count=true&$skip=3");
-            callOwin("odata/Products(2)"); //maps to ProductsController.Get(key) or ProductController.GetProduct(key)
-            callOwin("odata/Products?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
+            callOwin("odata/Special01/$metadata"); //gets “Service Metadata Document”
+            callOwin("odata/Special02/Products?$count=true"); //maps to ProductsController.Get() or ProductController.GetProduct()
+            callOwin("odata/Special03/Products?$count=true&$skip=3");
+            callOwin("odata/Special04/Products(2)"); //maps to ProductsController.Get(key) or ProductController.GetProduct(key)
+            callOwin("odata/Special05/Products?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
         }
     }
     finally
@@ -111,6 +112,13 @@ public class ProductsController : ODataController
         return this.Ok(SingleResult.Create(result));
     }
 
+    protected override void Initialize(HttpControllerContext controllerContext)
+    {
+        base.Initialize(controllerContext);
+        this._repository.Dump("controller initialized");
+        controllerContext.RouteData.Values["specialId"].Dump("routePrefix templated value");
+    }
+
     ProductRepository _repository;
 }
 
@@ -136,10 +144,7 @@ public class Startup
         config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
         config.Services.Replace(typeof(IHttpControllerTypeResolver), new ControllerResolver());
 
-        var builder = new ODataConventionModelBuilder();
-        builder
-            .EntitySet<Product>(nameof(ProductsController).Replace("Controller", string.Empty))
-            .EntityType.DerivesFrom<IProduct>();
+        var builder = (new ODataConventionModelBuilder()).WithProductEntity();
 
         /*
             The following is an optimizing, breaking change in OData 6.x.
@@ -156,11 +161,28 @@ public class Startup
             Activate OData routing conventions:
             For detail, see [https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions]
         */
-        config.MapODataServiceRoute(routeName: "ODataRoute", routePrefix: "odata", model: model);
+        config.MapODataServiceRoute(
+            routeName: "ODataRoute",
+            routePrefix: "odata/{specialId}",
+            model: model
+        );
 
         appBuilder.UseWebApi(config);
 
         config.EnsureInitialized();
+    }
+}
+
+static class ODataConventionModelBuilderExtensions
+{
+    public static ODataConventionModelBuilder WithProductEntity(this ODataConventionModelBuilder builder)
+    {
+        if (builder == null) return null;
+
+        builder.EntitySet<Product>(typeof(Product).Name)
+            .EntityType.DerivesFrom<IProduct>();
+
+        return builder;
     }
 }
 
