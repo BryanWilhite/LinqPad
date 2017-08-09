@@ -21,6 +21,9 @@
   <Namespace>System.Web.OData.Query</Namespace>
   <Namespace>System.Web.OData.Routing</Namespace>
   <Namespace>System.Web.Http.Controllers</Namespace>
+  <Namespace>Newtonsoft.Json.Linq</Namespace>
+  <Namespace>System.Threading.Tasks</Namespace>
+  <Namespace>System.Net</Namespace>
 </Query>
 
 void Main()
@@ -34,6 +37,8 @@ void Main()
         {
             HttpResponseMessage response;
 
+            #region GET:
+
             Action<string> getOwin = path =>
             {
                 var request = new HttpRequestMessage
@@ -43,15 +48,97 @@ void Main()
                 };
 
                 response = client.SendAsync(request).Result;
-                response.Dump();
+                response.Dump("GET:");
                 response.Content.ReadAsStringAsync().Result.Dump();
             };
+
+            #endregion
 
             getOwin("odata/Special01/$metadata"); //gets “Service Metadata Document”
             getOwin("odata/Special02/Product?$count=true"); //maps to ProductController.Get()
             getOwin("odata/Special03/Product?$count=true&$skip=3");
             getOwin("odata/Special04/Product(2)"); //maps to ProductController.Get(key)
             getOwin("odata/Special05/Product?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
+
+            #region POST:
+
+            Action<string, string> postOwin = (path, content) =>
+            {
+                var request = new HttpRequestMessage
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri(baseAddress + path)
+                };
+
+                response = client.SendAsync(request).Result;
+                response.Dump("POST:");
+                response.Content.ReadAsStringAsync().Result.Dump();
+            };
+
+            var postData = JObject
+                .FromObject(
+                    new Product
+                    {
+                        Category = "Canned",
+                        Name = "Tuna in Water",
+                        Price = 4.99M
+                    }
+                ).ToString();
+
+            #endregion
+
+            postOwin("odata/Special04/Product", postData);
+
+            #region PUT:
+
+            Action<string, string> putOwin = (path, content) =>
+            {
+                var request = new HttpRequestMessage
+                {
+                    Content = new StringContent(content, Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Put,
+                    RequestUri = new Uri(baseAddress + path)
+                };
+
+                response = client.SendAsync(request).Result;
+                response.Dump("PUT:");
+                response.Content.ReadAsStringAsync().Result.Dump();
+            };
+
+            var putData = JObject
+                .FromObject(
+                    new Product
+                    {
+                        Id = 3,
+                        Category = "Bakery",
+                        Name = "Flower Flour Thins (Gluten Free)",
+                        Price = 9.99M
+                    }
+                ).ToString();
+
+            #endregion
+
+            putOwin("odata/Special04/Product(3)", putData);
+
+            #region DELETE:
+
+            Action<string> deleteOwin = path =>
+            {
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(baseAddress + path)
+                };
+
+                response = client.SendAsync(request).Result;
+                response.Dump("DELETE:");
+                response.Content.ReadAsStringAsync().Result.Dump();
+            };
+
+            #endregion
+
+            deleteOwin("odata/Special04/Product(8)");
         }
     }
     finally
@@ -60,15 +147,7 @@ void Main()
     }
 }
 
-public interface IProduct
-{
-    int Id { get; set; }
-    string Name { get; set; }
-    decimal Price { get; set; }
-    string Category { get; set; }
-}
-
-public class Product : IProduct
+public class Product
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -78,7 +157,7 @@ public class Product : IProduct
 
 public class ProductRepository
 {
-    public IQueryable<IProduct> LoadProducts()
+    public IQueryable<Product> LoadProducts()
     {
         var data = new[]
         {
@@ -117,8 +196,37 @@ public class ProductController : ODataController
     public IHttpActionResult Get([FromODataUri] int key) //parameter must be named “key”
     {
         var data = this._repository.LoadProducts().SingleOrDefault(p => p.Id == key);
-        if(data == null) return this.NotFound();
+        if (data == null) return this.NotFound();
         return this.Ok(data);
+    }
+
+    [HttpPost]
+    public async Task<IHttpActionResult> Post(Product data)
+    {
+        if (!ModelState.IsValid) return this.BadRequest(ModelState);
+
+        await Task.Run(() => data.Dump("save in invisible database"));
+
+        return this.Created(data);
+    }
+
+    [HttpPut]
+    public async Task<IHttpActionResult> Put([FromODataUri] int key, Product data)
+    {
+        if (!ModelState.IsValid) return this.BadRequest(ModelState);
+        if ((data == null) || (key != data.Id)) return this.BadRequest();
+
+        await Task.Run(() => data.Dump("update in invisible database"));
+
+        return this.Updated(data);
+    }
+
+    [HttpDelete]
+    public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+    {
+        await Task.Run(() => "".Dump($"delete {key} in invisible database"));
+
+        return this.StatusCode(HttpStatusCode.NoContent);
     }
 
     protected override void Initialize(HttpControllerContext controllerContext)
@@ -148,9 +256,12 @@ public class Startup
 {
     public void Configuration(IAppBuilder appBuilder)
     {
-        var config = new HttpConfiguration();
+        var config = new HttpConfiguration
+        {
+            IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
+        };
 
-        config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+        config.Formatters.Dump("HttpConfiguration.Formatters");
         config.Services.Replace(typeof(IHttpControllerTypeResolver), new ControllerResolver());
 
         var builder = (new ODataConventionModelBuilder()).WithProductEntity();
@@ -188,8 +299,7 @@ static class ODataConventionModelBuilderExtensions
     {
         if (builder == null) return null;
 
-        builder.EntitySet<Product>(typeof(Product).Name)
-            .EntityType.DerivesFrom<IProduct>();
+        builder.EntitySet<Product>(typeof(Product).Name);
 
         return builder;
     }
