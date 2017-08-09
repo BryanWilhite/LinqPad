@@ -34,18 +34,24 @@ void Main()
         {
             HttpResponseMessage response;
 
-            Action<string> callOwin = path =>
+            Action<string> getOwin = path =>
             {
-                response = client.GetAsync(baseAddress + path).Result;
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(baseAddress + path)
+                };
+
+                response = client.SendAsync(request).Result;
                 response.Dump();
                 response.Content.ReadAsStringAsync().Result.Dump();
             };
 
-            callOwin("odata/Special01/$metadata"); //gets “Service Metadata Document”
-            callOwin("odata/Special02/Products?$count=true"); //maps to ProductsController.Get() or ProductController.GetProduct()
-            callOwin("odata/Special03/Products?$count=true&$skip=3");
-            callOwin("odata/Special04/Products(2)"); //maps to ProductsController.Get(key) or ProductController.GetProduct(key)
-            callOwin("odata/Special05/Products?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
+            getOwin("odata/Special01/$metadata"); //gets “Service Metadata Document”
+            getOwin("odata/Special02/Product?$count=true"); //maps to ProductController.Get()
+            getOwin("odata/Special03/Product?$count=true&$skip=3");
+            getOwin("odata/Special04/Product(2)"); //maps to ProductController.Get(key)
+            getOwin("odata/Special05/Product?$filter=Category+eq+'Bakery'+and+indexof(Name,'Tortillas')+ne+-1");
         }
     }
     finally
@@ -91,9 +97,9 @@ public class ProductRepository
     }
 }
 
-public class ProductsController : ODataController
+public class ProductController : ODataController
 {
-    public ProductsController()
+    public ProductController()
     {
         this._repository = new ProductRepository();
         this._repository.Dump("controller and repository loaded");
@@ -110,8 +116,9 @@ public class ProductsController : ODataController
     [HttpGet]
     public IHttpActionResult Get([FromODataUri] int key) //parameter must be named “key”
     {
-        IQueryable<IProduct> result = this._repository.LoadProducts().Where(p => p.Id == key);
-        return this.Ok(SingleResult.Create(result));
+        var data = this._repository.LoadProducts().SingleOrDefault(p => p.Id == key);
+        if(data == null) return this.NotFound();
+        return this.Ok(data);
     }
 
     protected override void Initialize(HttpControllerContext controllerContext)
