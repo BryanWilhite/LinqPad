@@ -100,12 +100,14 @@ public class ProductsController : ODataController
     }
 
     [EnableQuery(PageSize = 3, AllowedQueryOptions = AllowedQueryOptions.All)]
+    [HttpGet]
     public IHttpActionResult Get()
     {
         return this.Ok(this._repository.LoadProducts());
     }
 
     [EnableQuery]
+    [HttpGet]
     public IHttpActionResult Get([FromODataUri] int key) //parameter must be named “key”
     {
         IQueryable<IProduct> result = this._repository.LoadProducts().Where(p => p.Id == key);
