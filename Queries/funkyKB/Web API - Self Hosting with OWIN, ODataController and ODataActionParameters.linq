@@ -93,7 +93,6 @@ public class Product
     public string Category { get; set; }
 }
 
-//[ODataRoutePrefix(nameof(Product))]
 public class ProductController : ODataController
 {
     public ProductController()
@@ -102,13 +101,7 @@ public class ProductController : ODataController
     }
 
     [HttpPost]
-    public IHttpActionResult PostMany([FromBody] IEnumerable<Product> data)
-    {
-        return this.Ok(data);
-    }
-
-    [HttpPost]
-    [ODataRoute("ProductsPostMany")]
+    [ODataRoute(nameof(ProductController.ProductsPostMany))]
     public async Task<IHttpActionResult> ProductsPostMany(ODataActionParameters parameters)
     {
         if (parameters == null)
