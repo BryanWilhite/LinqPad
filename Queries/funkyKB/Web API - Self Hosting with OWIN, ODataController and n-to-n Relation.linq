@@ -43,8 +43,8 @@ void Main()
             };
 
             callOwin("odata/$metadata");
-            callOwin("odata/Clients/Edm.GetBoundFunctionValue");
-            callOwin("odata/Clients/Edm.GetAccount(clientId=100,accountId=7)");
+            callOwin("odata/Client/Edm.GetBoundFunctionValue");
+            callOwin("odata/Client/Edm.GetAccount(clientId=100,accountId=7)");
         }
     }
     finally
@@ -126,12 +126,12 @@ public class Repository
     static IEnumerable<Account> accounts;
 }
 
-public class ClientsController : ODataController
+public class ClientController : ODataController
 {
-    public ClientsController()
+    public ClientController()
     {
         this._repository = new Repository();
-        this._repository.Dump("controller and repository loaded");
+        this._repository.Dump("controller constructed and repository loaded");
     }
 
     public IHttpActionResult GetAccount(int clientId, int accountId)
@@ -175,7 +175,7 @@ public class Startup
 
         var builder = new ODataConventionModelBuilder { Namespace = "Edm" };
 
-        var entitySetName = nameof(ClientsController).Replace("Controller", string.Empty);
+        var entitySetName = nameof(Client);
 
         builder.EntitySet<Client>(entitySetName);
 
@@ -185,13 +185,13 @@ public class Startup
             .Filter(QueryOptionSetting.Allowed);
 
         var f1 = builder.EntityType<Client>().Collection
-            .Function("GetAccount")
+            .Function(nameof(ClientController.GetAccount))
             .ReturnsFromEntitySet<Account>($"{entitySetName}_1");
         f1.Parameter<int>("clientId");
         f1.Parameter<int>("accountId");
 
         builder.EntityType<Client>().Collection
-            .Function("GetBoundFunctionValue")
+            .Function(nameof(ClientController.GetBoundFunctionValue))
             .ReturnsFromEntitySet<Account>($"{entitySetName}_2"); //see https://stackoverflow.com/a/34881602/22944
 
         var model = builder.GetEdmModel();
