@@ -266,15 +266,6 @@ public class Startup
 
         var builder = (new ODataConventionModelBuilder()).WithProductEntity();
 
-        /*
-            The following is an optimizing, breaking change in OData 6.x.
-            For detail, see https://stackoverflow.com/a/39533417/22944.
-        */
-        builder
-            .EntityType<Product>()
-            .Count()
-            .Filter(QueryOptionSetting.Allowed);
-
         var model = builder.GetEdmModel();
 
         /*
@@ -300,6 +291,15 @@ static class ODataConventionModelBuilderExtensions
         if (builder == null) return null;
 
         builder.EntitySet<Product>(typeof(Product).Name);
+
+        /*
+            The following is an optimizing, breaking change in OData 6.x.
+            For detail, see https://stackoverflow.com/a/39533417/22944.
+        */
+        builder
+            .EntityType<Product>()
+            .Count()
+            .Filter(QueryOptionSetting.Allowed);
 
         return builder;
     }
