@@ -42,7 +42,7 @@ void Main()
             };
 
             callOwin("odata/$metadata");
-            callOwin("odata/Clients(102)/Account");
+            callOwin("odata/Client(102)/Account");
         }
     }
     finally
@@ -115,9 +115,9 @@ public class Repository
     static IEnumerable<Client> clients;
 }
 
-public class ClientsController : ODataController
+public class ClientController : ODataController
 {
-    public ClientsController()
+    public ClientController()
     {
         this._repository = new Repository();
         this._repository.Dump("controller and repository loaded");
@@ -156,11 +156,15 @@ public class Startup
         config.Services.Replace(typeof(IHttpControllerTypeResolver), new ControllerResolver());
 
         var builder = new ODataConventionModelBuilder();
-        builder.EntitySet<Client>(nameof(ClientsController).Replace("Controller", string.Empty));
+        builder.EntitySet<Client>(typeof(Client).Name);
 
         var model = builder.GetEdmModel();
 
-        config.MapODataServiceRoute(routeName: "ODataRoute", routePrefix: "odata", model: model);
+        config.MapODataServiceRoute(
+            routeName: "ODataRoute",
+            routePrefix: "odata",
+            model: model
+        );
 
         appBuilder.UseWebApi(config);
 

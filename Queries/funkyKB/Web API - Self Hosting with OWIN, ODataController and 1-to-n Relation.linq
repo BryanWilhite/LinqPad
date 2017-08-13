@@ -42,10 +42,10 @@ void Main()
             };
 
             callOwin("odata/$metadata");
-            callOwin("odata/Clients(101)/Accounts");
-            callOwin("odata/Clients(101)/Accounts?$filter=AccountId+eq+4");
-            callOwin("odata/Clients(101)/Accounts(4)"); //supported by ODataRoute
-            callOwin("odata/Clients(101)/Accounts(1004)"); //should return NotFound
+            callOwin("odata/Client(101)/Accounts");
+            callOwin("odata/Client(101)/Accounts?$filter=AccountId+eq+4");
+            callOwin("odata/Client(101)/Accounts(4)"); //supported by ODataRoute
+            callOwin("odata/Client(101)/Accounts(1004)"); //should return NotFound
         }
     }
     finally
@@ -120,9 +120,9 @@ public class Repository
     static IEnumerable<Client> clients;
 }
 
-public class ClientsController : ODataController
+public class ClientController : ODataController
 {
-    public ClientsController()
+    public ClientController()
     {
         this._repository = new Repository();
         this._repository.Dump("controller and repository loaded");
@@ -135,7 +135,7 @@ public class ClientsController : ODataController
     }
 
     [EnableQuery]
-    [ODataRoute("Clients({clientId})/Accounts({accountId})")]
+    [ODataRoute("Client({clientId})/Accounts({accountId})")]
     public IHttpActionResult GetAccount(int clientId, int accountId)
     {
         var result = this._repository
@@ -172,7 +172,7 @@ public class Startup
 
         var builder = new ODataConventionModelBuilder();
 
-        builder.EntitySet<Client>(nameof(ClientsController).Replace("Controller", string.Empty));
+        builder.EntitySet<Client>(typeof(Client).Name);
 
         builder
             .EntityType<Account>()
@@ -181,7 +181,11 @@ public class Startup
 
         var model = builder.GetEdmModel();
 
-        config.MapODataServiceRoute(routeName: "ODataRoute", routePrefix: "odata", model: model);
+        config.MapODataServiceRoute(
+            routeName: "ODataRoute",
+            routePrefix: "odata",
+            model: model
+        );
 
         appBuilder.UseWebApi(config);
 
