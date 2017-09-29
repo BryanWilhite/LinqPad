@@ -22,3 +22,7 @@ jO.ToObject<Dictionary<string, string[]>>().Dump("Dictionary<string, string[]>")
 json = @"{ ""set"": { ""one"":""uno"", ""two"":""dos"" } }";
 jO = JObject.Parse(json);
 jO["set"].ToObject<Dictionary<string, string>>().Dump("Dictionary<string, string[]>");
+
+json = @"{ 1:""uno"", 2:""dos"" }";
+var data3 = JsonConvert.DeserializeObject<Dictionary<int, string>>(json);
+data3.Dump("Dictionary<int, string>");
