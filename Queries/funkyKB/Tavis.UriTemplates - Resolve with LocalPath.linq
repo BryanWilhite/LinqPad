@@ -4,10 +4,11 @@
 </Query>
 
 var tableName = "MY_TABLE";
-var template = new UriTemplate(@"OracleTableMetadata\{tableName}.json")
+var template = new UriTemplate(@"OracleTableMetadata\{tableName}.json");
+var indicator = template
     .AddParameter(nameof(tableName), tableName)
     .Resolve();
-template.Dump();
+indicator.Dump();
 
 /*
 	According to this corefx issue, https://github.com/dotnet/corefx/issues/7983,
