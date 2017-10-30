@@ -1,6 +1,5 @@
 <Query Kind="Statements">
   <NuGetReference>System.Net.Http</NuGetReference>
-  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Net.Http.Headers</Namespace>
 </Query>
@@ -20,7 +19,10 @@ client.BaseAddress = new Uri(@base, UriKind.Absolute);
 // the creds from my .publishsettings file
 var byteArray = Encoding.ASCII.GetBytes(claim);
 
-client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+var base64String = Convert.ToBase64String(byteArray);
+base64String.Dump();
+
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
 
 // POST to the run action for my job
 var response = client.PostAsync(hook, null).Result;
