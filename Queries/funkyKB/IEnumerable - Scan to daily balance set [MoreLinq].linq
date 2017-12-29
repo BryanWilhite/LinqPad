@@ -19,7 +19,7 @@ void Main()
     var numbers = changes
         .Select(i => i.Value)
         .Scan((aggregation, current) => aggregation + current)
-        .Dump("scan");
+        .Dump("scan of changes");
 
     var dailyBalance = changes
         .Zip(numbers, (x, y) => new KeyValuePair<byte, double>(x.Key, y))
