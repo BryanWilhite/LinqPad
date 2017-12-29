@@ -30,6 +30,8 @@ void Main()
         .Select(i => new KeyValuePair<byte, double>(i.Key, i.Last().Value))
         .ToDictionary(i => i.Key, i => i.Value)
         .Dump("daily balance (EOD)");
+
+    dailyBalanceEOD.ForEach(i => $@"{{{i.Key}, {i.Value}}}".Dump());
 }
 
 string GetInput()
