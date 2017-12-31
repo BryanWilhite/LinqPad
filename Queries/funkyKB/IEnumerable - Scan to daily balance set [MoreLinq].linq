@@ -5,6 +5,7 @@
 
 void Main()
 {
+    var startingBalance = 129.04d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -18,7 +19,7 @@ void Main()
 
     var numbers = changes
         .Select(i => i.Value)
-        .Scan((aggregation, current) => aggregation + current)
+        .Scan(startingBalance, (aggregation, current) => aggregation + current)
         .Dump("scan of changes");
 
     var dailyBalance = changes
