@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 77.54d;
+    var startingBalance = 91.32d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,14 +38,14 @@ void Main()
 string GetInput()
 {
     return @"
-10/2/2017	KAW		Sprouts		Childcare:Furnishings		c	-1.99
-10/3/2017	KAW		Govindas		Childcare:Furnishings		c	-9
-10/3/2017	KAW		Govindas		Childcare:Furnishings		c	-2.5
-10/4/2017	KAW		Govindas		Childcare:Furnishings		c	-4.65
-10/12/2017	KAW		Greenlight		Childcare:Furnishings		c	-4.99
-10/13/2017	KAW		Transfer Money		BDW		c	50
-10/23/2017	KAW		Star Mini Mart		Childcare:Furnishings		c	-5.72
-10/25/2017	KAW		Chipotle		Childcare:Furnishings		c	-7.37
-10/26/2017	KAW		Shell Calabasas		Childcare:Furnishings		c	-4.33
+11/2/2017	KAW		Transfer Money		BDW		c	50
+11/2/2017	KAW		Juanita's Cafe		Childcare:Furnishings		c	-4.75
+11/3/2017	KAW		**VOID**ELF Cosmetics		Childcare:Leisure		c	0
+11/7/2017	KAW		Signature Burger		Childcare:Furnishings		c	-4.37
+11/8/2017	KAW		Signature Burger		Childcare:Furnishings		c	-4.37
+11/10/2017	KAW		Arclight Culver City		Childcare:Leisure		c	-16.5
+11/10/2017	KAW		Chipotle		Childcare:Furnishings		c	-9.72
+11/12/2017	KAW		Greenlight		Childcare:Furnishings		c	-4.99
+11/28/2017	KAW		Govindas		Childcare:Furnishings		c	-2.25
 ";
 }
