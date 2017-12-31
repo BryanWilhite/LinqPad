@@ -31,18 +31,22 @@ void Main()
         .ToDictionary(i => i.Key, i => i.Value)
         .Dump("daily balance (EOD)");
 
-    dailyBalanceEOD.ForEach(i => $@"{{{i.Key}, {i.Value}}}".Dump());
+    dailyBalanceEOD.ForEach(i => $@"{{{i.Key}, {i.Value}}},".Dump());
 }
 
 string GetInput()
 {
     return @"
-8/13/2017	KAW		Opening Balance		[KAW]		c	0
-8/13/2017	KAW		Transfer Money		[BDW]		c	100
-8/13/2017	KAW		Transfer Money		[BDW]		c	50
-8/24/2017	KAW		Shein.com	London GBR	Childcare:Furnishings		c	-12
-8/29/2017	KAW		Geeker.com		Childcare:Furnishings		c	-0.01
-8/29/2017	KAW		Geeker.com		Childcare:Furnishings		c	-7.95
-8/29/2017	KAW		Geeker.com		Childcare:Furnishings		c	-1
+9/5/2017	KAW		Sprouts		Childcare:Furnishings		c	-6.86
+9/5/2017	KAW		Menchies		Childcare:Furnishings		c	-4.73
+9/7/2017	KAW		Apple		Childcare:Leisure		c	-0.87
+9/7/2017	KAW		TST*Z Pastabar		Childcare:Furnishings		c	-6.43
+9/11/2017	KAW		Rave		Childcare:Leisure		c	-6.75
+9/12/2017	KAW		Greenlight		Childcare:Furnishings		c	-4.99
+9/14/2017	KAW		Apple		Childcare:Furnishings		c	-9.94
+9/14/2017	KAW		District Market		Childcare:Furnishings		c	-2.5
+9/18/2017	KAW		Sprouts		Childcare:Furnishings		c	-6.13
+9/20/2017	KAW		Pieology		Childcare:Leisure		c	-2.3
+9/27/2017	KAW		Grand Casino Bakery		Childcare:Furnishings		c	-4.4
 ";
 }
