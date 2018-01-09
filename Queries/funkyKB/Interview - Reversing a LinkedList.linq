@@ -13,7 +13,7 @@ also: http://stackoverflow.com/questions/15563043/when-is-doubly-linked-list-mor
 
 */
 
-var linkedList = new LinkedList<int>(new[]{1,2,3,4,5,6,7,8,9,10});
+var linkedList = new LinkedList<int>(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 linkedList.Dump("initial state");
 
 var head = linkedList.First;
