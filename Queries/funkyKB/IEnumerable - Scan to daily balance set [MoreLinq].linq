@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 91.32d;
+    var startingBalance = 100.86d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,14 +38,13 @@ void Main()
 string GetInput()
 {
     return @"
-11/2/2017	KAW		Transfer Money		BDW		c	50
-11/2/2017	KAW		Juanita's Cafe		Childcare:Furnishings		c	-4.75
-11/3/2017	KAW		**VOID**ELF Cosmetics		Childcare:Leisure		c	0
-11/7/2017	KAW		Signature Burger		Childcare:Furnishings		c	-4.37
-11/8/2017	KAW		Signature Burger		Childcare:Furnishings		c	-4.37
-11/10/2017	KAW		Arclight Culver City		Childcare:Leisure		c	-16.5
-11/10/2017	KAW		Chipotle		Childcare:Furnishings		c	-9.72
-11/12/2017	KAW		Greenlight		Childcare:Furnishings		c	-4.99
-11/28/2017	KAW		Govindas		Childcare:Furnishings		c	-2.25
+2/1/2018	(KAW)		Ulta		Childcare:Furnishings			-10.06
+2/3/2018	(KAW)		Spotify		Childcare:Furnishings			-9.99
+2/11/2018	(KAW)		CVS		Childcare:Furnishings			-9.84
+2/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
+2/15/2018	(KAW)		Alices Shop		Childcare:Furnishings			-12.02
+2/16/2018	(KAW)		Transfer Money		(BDW)			50.00
+2/28/2018	(KAW)		Spotify		Childcare:Furnishings			-9.99
+2/28/2018	(KAW)		Amazon.com		Childcare:Furnishings			-12.95
 ";
 }
