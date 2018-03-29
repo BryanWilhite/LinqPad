@@ -27,7 +27,7 @@ jO = (JObject)jO["LinqPadMeta"]["secrets"]["songhay-system-service"];
 
 var apiMetadata = jO["apiMetadata"].ToObject<RestApiMetadata>();
 
-var claimsSet = jO["claims"].ToObject<Dictionary<string, string>>();
+var claimsSet = apiMetadata.ClaimsSet;
 var headers = new Dictionary<string, string>
 {
     { claimsSet["headerKey"], apiMetadata.ApiKey }
