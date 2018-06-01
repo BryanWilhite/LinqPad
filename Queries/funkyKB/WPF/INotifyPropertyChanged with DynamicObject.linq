@@ -1,5 +1,17 @@
 <Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\System.ComponentModel.DataAnnotations.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationCore.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\System.Configuration.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\UIAutomationProvider.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\UIAutomationTypes.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\ReachFramework.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationUI.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\WPF\System.Printing.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\Accessibility.dll</Reference>
+  <Reference>&lt;RuntimeDirectory&gt;\System.Deployment.dll</Reference>
   <NuGetReference>Prism.WPF</NuGetReference>
   <Namespace>System.ComponentModel</Namespace>
   <Namespace>System.Globalization</Namespace>
