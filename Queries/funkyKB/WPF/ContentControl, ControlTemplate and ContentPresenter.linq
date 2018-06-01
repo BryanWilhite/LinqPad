@@ -3,11 +3,11 @@
   <Reference>&lt;RuntimeDirectory&gt;\WPF\PresentationFramework.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Xaml.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\WPF\WindowsBase.dll</Reference>
-  <NuGetReference>Prism</NuGetReference>
+  <NuGetReference>Prism.WPF</NuGetReference>
   <Namespace>System.Windows.Controls</Namespace>
   <Namespace>System.Windows.Markup</Namespace>
-  <Namespace>Microsoft.Practices.Prism.Mvvm</Namespace>
-  <Namespace>Microsoft.Practices.Prism.Commands</Namespace>
+  <Namespace>Prism.Mvvm</Namespace>
+  <Namespace>Prism.Commands</Namespace>
   <Namespace>System.Windows</Namespace>
   <Namespace>System.Windows.Input</Namespace>
 </Query>

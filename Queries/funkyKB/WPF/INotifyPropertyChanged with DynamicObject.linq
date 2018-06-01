@@ -1,11 +1,11 @@
 <Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\System.ComponentModel.DataAnnotations.dll</Reference>
-  <NuGetReference>Prism</NuGetReference>
+  <NuGetReference>Prism.WPF</NuGetReference>
   <Namespace>System.ComponentModel</Namespace>
   <Namespace>System.Globalization</Namespace>
   <Namespace>System.Windows.Controls</Namespace>
   <Namespace>System.Windows.Markup</Namespace>
-  <Namespace>Microsoft.Practices.Prism.Mvvm</Namespace>
+  <Namespace>Prism.Mvvm</Namespace>
   <Namespace>System.Windows.Data</Namespace>
   <Namespace>System.Dynamic</Namespace>
 </Query>

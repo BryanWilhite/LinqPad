@@ -12,12 +12,12 @@
   <Reference>&lt;RuntimeDirectory&gt;\WPF\System.Printing.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\Accessibility.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Deployment.dll</Reference>
-  <NuGetReference>Prism</NuGetReference>
+  <NuGetReference>Prism.WPF</NuGetReference>
   <Namespace>System.ComponentModel</Namespace>
   <Namespace>System.Globalization</Namespace>
   <Namespace>System.Windows.Controls</Namespace>
   <Namespace>System.Windows.Markup</Namespace>
-  <Namespace>Microsoft.Practices.Prism.Mvvm</Namespace>
+  <Namespace>Prism.Mvvm</Namespace>
   <Namespace>System.Windows.Data</Namespace>
 </Query>
 
