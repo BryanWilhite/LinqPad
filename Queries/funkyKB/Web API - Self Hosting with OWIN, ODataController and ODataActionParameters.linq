@@ -1,29 +1,25 @@
 <Query Kind="Program">
-  <NuGetReference>System.Net.Http</NuGetReference>
+  <NuGetReference Prerelease="true">morelinq</NuGetReference>
   <NuGetReference>EntityFramework</NuGetReference>
   <NuGetReference>Microsoft.AspNet.OData</NuGetReference>
-  <NuGetReference>Microsoft.AspNet.WebApi.Client</NuGetReference>
   <NuGetReference>Microsoft.AspNet.WebApi.Owin</NuGetReference>
   <NuGetReference>Microsoft.Net.Http</NuGetReference>
-  <NuGetReference>Microsoft.Owin</NuGetReference>
   <NuGetReference>Microsoft.Owin.SelfHost</NuGetReference>
-  <NuGetReference Prerelease="true">morelinq</NuGetReference>
+  <NuGetReference>Microsoft.Owin</NuGetReference>
   <NuGetReference>Owin</NuGetReference>
+  <NuGetReference>System.Net.Http</NuGetReference>
+  <Namespace>Microsoft.AspNet.OData.Builder</Namespace>
+  <Namespace>Microsoft.AspNet.OData.Extensions</Namespace>
+  <Namespace>Microsoft.AspNet.OData.Routing</Namespace>
+  <Namespace>Microsoft.AspNet.OData</Namespace>
   <Namespace>Microsoft.Owin.Hosting</Namespace>
-  <Namespace>MoreLinq</Namespace>
+  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>Owin</Namespace>
   <Namespace>System.Net.Http</Namespace>
-  <Namespace>System.Web.Http</Namespace>
-  <Namespace>System.Web.Http.Dispatcher</Namespace>
-  <Namespace>System.Web.OData</Namespace>
-  <Namespace>System.Web.OData.Builder</Namespace>
-  <Namespace>System.Web.OData.Extensions</Namespace>
-  <Namespace>System.Web.OData.Query</Namespace>
-  <Namespace>System.Web.OData.Routing</Namespace>
-  <Namespace>System.Web.Http.Controllers</Namespace>
-  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
-  <Namespace>System.Net</Namespace>
+  <Namespace>System.Web.Http.Controllers</Namespace>
+  <Namespace>System.Web.Http.Dispatcher</Namespace>
+  <Namespace>System.Web.Http</Namespace>
 </Query>
 
 void Main()
@@ -97,7 +93,7 @@ public class ProductController : ODataController
 {
     public ProductController()
     {
-        "".Dump("controller constructed");
+        string.Empty.Dump("controller constructed");
     }
 
     [HttpPost]
@@ -106,7 +102,7 @@ public class ProductController : ODataController
     {
         if (parameters == null)
         {
-            "".Dump($"{nameof(ODataActionParameters)} is null :(");
+            string.Empty.Dump($"{nameof(ODataActionParameters)} is null :(");
             return this.InternalServerError();
         }
 
