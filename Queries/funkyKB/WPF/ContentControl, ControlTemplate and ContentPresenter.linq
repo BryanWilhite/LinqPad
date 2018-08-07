@@ -43,21 +43,21 @@ void Main()
                 </StackPanel>
             </ControlTemplate>
         </UserControl.Resources>
-        <Grid Width=""512"">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <ContentControl Grid.Row=""0""
+        <Grid Width=""1024"">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ContentControl Grid.Column=""0""
                 Template=""{StaticResource ControlTemplateOne}"">
                 <TextBlock Text=""{Binding DisplayText}"" />
             </ContentControl>
-            <ContentControl Grid.Row=""1""
+            <ContentControl Grid.Column=""1""
                 Template=""{StaticResource ControlTemplateOne}"">
                 <TextBlock Text=""{Binding DisplayTextTwo}"" />
             </ContentControl>
-            <ContentControl Grid.Row=""2""
+            <ContentControl Grid.Column=""2""
                 Template=""{StaticResource ControlTemplateTwo}"">
                 <TextBlock Text=""{Binding DisplayText}"" />
             </ContentControl>
