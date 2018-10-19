@@ -25,7 +25,7 @@ int[] P = Enumerable.Range(1, 125).ToArray();
 
 var upperBound = P.Max();
 
-int[] GetSubArray(int[] c, int lowerBound)
+int[] SearchForSubArray(int[] c, int lowerBound)
 {
     IEnumerable<int> subArray = Enumerable.Empty<int>();
 
@@ -33,16 +33,10 @@ int[] GetSubArray(int[] c, int lowerBound)
     var i = 1;
     do
     {
-        i = 1;
-        do
-        {
-            subArray = c.Skip(lowerBound).Take(i);
-            sum = subArray.Sum();
-            ++i;
-        } while (sum < upperBound);
-
-        ++lowerBound;
-    } while (sum != upperBound);
+        subArray = c.Skip(lowerBound).Take(i);
+        sum = subArray.Sum();
+        ++i;
+    } while (sum < upperBound);
 
     return subArray.ToArray();
 }
@@ -52,13 +46,13 @@ bool reject(int[] data, int[] c)
 {
     if(c.Equals(data)) return false;
     var test = c.Sum() != upperBound;
-    test.Dump("reject?");
+    //test.Dump("reject?");
     return test;
 };
 bool accept(int[] data, int[] c) => c.Sum() == upperBound;
 void output(int[] data, int[] c) => c.Dump("output");
-int[] first(int[] data, int[] c) => GetSubArray(data, lowerBound: (c.First() - 1));
-int[] next(int[] data, int[] c) => GetSubArray(data, lowerBound: c.First());
+int[] first(int[] data, int[] c) => SearchForSubArray(data, lowerBound: (c.First() - 1));
+int[] next(int[] data, int[] c) => SearchForSubArray(data, lowerBound: c.First());
 
 void bt(int[] c)
 {
@@ -102,30 +96,32 @@ bt(root(P));
     There is another example that appears to use Candidate and Data objects:
     [https://kunuk.wordpress.com/2012/12/25/backtracking-subset-sum-with-c/]
 
-    Here is my first attempt unsing LINQ:
+    Here is my first attempt using IEnumerable<T>.Aggregate():
 
-var integer = 125;
-var solutions = new Dictionary<int, int>();
-
-void FindSolution(int lowerBound)
-{
-    Enumerable.Range(lowerBound, integer).Aggregate((a, n) =>
+    var P = Enumerable.Range(1, 21).ToList();
+    var upperBound = P.Max();
+    
+    var solutions = new Dictionary<int, int>();
+    void SearchForSubArray(int lowerBound)
     {
-        // (new { a, n }).Dump();
-        var upperBound = n - 1;
+        void output(int s) => solutions.Add(lowerBound, s);
+    
+        Enumerable.Range(lowerBound, upperBound).Aggregate((sum, n) =>
+        {
+            // (new { sum, n }).Dump();
+            var i = n - 1;
+    
+            var accept = (lowerBound != i) && (sum == upperBound);
+            if (accept) output(i);
+    
+            return sum + n; // next(n)
+        });
+    }
 
-        if ((lowerBound != upperBound) && (a == integer))
-            solutions.Add(lowerBound, upperBound);
+    P.ForEach(i => SearchForSubArray(lowerBound: i));
+    solutions.Dump(nameof(solutions));
 
-        return a + n;
-    });
-}
-
-Enumerable
-    .Range(1, integer)
-    .ToList()
-    .ForEach(i => FindSolution(lowerBound: i));
-
-solutions.Dump(nameof(solutions));
-
+    first(P,c) and next(P,c) are crammed in the Aggregate() block;
+    there is no explicit reject(P,c) in the ForEach() block
+    [http://bigocheatsheet.com/]
 */
