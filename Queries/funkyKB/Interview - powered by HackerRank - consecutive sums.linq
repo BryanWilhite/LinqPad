@@ -1,7 +1,3 @@
-<Query Kind="Statements">
-  <NuGetReference>NAudio</NuGetReference>
-</Query>
-
 /*
     find the number of ways to represent
     a long integer as a sum of two

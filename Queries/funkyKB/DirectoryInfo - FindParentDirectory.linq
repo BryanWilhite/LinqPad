@@ -1,7 +1,3 @@
-<Query Kind="Program">
-  <NuGetReference>NAudio</NuGetReference>
-</Query>
-
 void Main()
 {
     var path = Path.Combine(
