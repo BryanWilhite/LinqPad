@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 100.86d;
+    var startingBalance = 81.02d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,13 +38,18 @@ void Main()
 string GetInput()
 {
     return @"
-2/1/2018	(KAW)		Ulta		Childcare:Furnishings			-10.06
-2/3/2018	(KAW)		Spotify		Childcare:Furnishings			-9.99
-2/11/2018	(KAW)		CVS		Childcare:Furnishings			-9.84
-2/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
-2/15/2018	(KAW)		Alices Shop		Childcare:Furnishings			-12.02
-2/16/2018	(KAW)		Transfer Money		(BDW)			50.00
-2/28/2018	(KAW)		Spotify		Childcare:Furnishings			-9.99
-2/28/2018	(KAW)		Amazon.com		Childcare:Furnishings			-12.95
+3/1/2018	(KAW)		Dylan's Candy Bar-12		Childcare:Furnishings			-1.99
+3/1/2018	(KAW)		The Salad Bar		Childcare:Furnishings			-5.75
+3/3/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+3/7/2018	(KAW)		Govindas		Childcare:Furnishings		c	-3.15
+3/9/2018	(KAW)		CVS				c	-8.65
+3/12/2018	(KAW)		Greenlight		Childcare:Furnishings		c	-4.99
+3/19/2018	(KAW)		Star Mini Mart		Childcare:Furnishings		c	-2.10
+3/19/2018	(KAW)		Govindas		Childcare:Furnishings		c	-5.85
+3/22/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+3/27/2018	(KAW)		Buffalo Wild Wings		Childcare:Furnishings		c	-7.65
+3/28/2018	(KAW)		ArcLight		Childcare:Leisure		c	-12.00
+3/28/2018	(KAW)		Metro Downtown Santa Monica		Childcare:Furnishings		c	-3.50
+3/31/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
 ";
 }
