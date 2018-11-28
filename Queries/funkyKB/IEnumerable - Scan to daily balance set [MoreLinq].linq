@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 81.02d;
+    var startingBalance = 115.40d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,18 +38,14 @@ void Main()
 string GetInput()
 {
     return @"
-3/1/2018	(KAW)		Dylan's Candy Bar-12		Childcare:Furnishings			-1.99
-3/1/2018	(KAW)		The Salad Bar		Childcare:Furnishings			-5.75
-3/3/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-3/7/2018	(KAW)		Govindas		Childcare:Furnishings		c	-3.15
-3/9/2018	(KAW)		CVS				c	-8.65
-3/12/2018	(KAW)		Greenlight		Childcare:Furnishings		c	-4.99
-3/19/2018	(KAW)		Star Mini Mart		Childcare:Furnishings		c	-2.10
-3/19/2018	(KAW)		Govindas		Childcare:Furnishings		c	-5.85
-3/22/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-3/27/2018	(KAW)		Buffalo Wild Wings		Childcare:Furnishings		c	-7.65
-3/28/2018	(KAW)		ArcLight		Childcare:Leisure		c	-12.00
-3/28/2018	(KAW)		Metro Downtown Santa Monica		Childcare:Furnishings		c	-3.50
-3/31/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
+4/3/2018	(KAW)		Etsy		Childcare:Furnishings		c	-13.66
+4/3/2018	(KAW)		Amazon.com		Childcare:Furnishings		c	-10.00
+4/8/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+4/8/2018	(KAW)		Amazon.com		Childcare:Furnishings		c	-7.99
+4/12/2018	(KAW)		Greenlight		Childcare:Furnishings		c	-4.99
+4/21/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+4/26/2018	(KAW)		Sprouts		Childcare:Furnishings		c	-5.49
+4/27/2018	(KAW)		The Vegan Joint		Childcare:Furnishings		c	-4.33
+4/30/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
 ";
 }
