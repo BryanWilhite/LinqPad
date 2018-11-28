@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 121.23d;
+    var startingBalance = 165.47d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,12 +38,14 @@ void Main()
 string GetInput()
 {
     return @"
-6/3/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-6/9/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
-6/11/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-7.98
-6/12/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-6/12/2018	(KAW)		Greenlight		Childcare:Furnishings		c	-4.99
-6/15/2018	(KAW)		IN-N-OUT BURGER		Childcare:Furnishings		c	-6.82
-6/16/2018	(KAW)		Sephora		Childcare:Furnishings		c	-11.00
+8/2/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
+8/2/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
+8/9/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+8/12/2018	(KAW)		Rite Aid		Childcare:Furnishings		c	-7.07
+8/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
+8/13/2018	(KAW)		The Green Store		Childcare:Furnishings		c	-11.49
+8/21/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
+8/22/2018	(KAW)		Govindas		Childcare:Furnishings		c	-7.20
+8/31/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
 ";
 }
