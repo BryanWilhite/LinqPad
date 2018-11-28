@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 165.47d;
+    var startingBalance = 152.76d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,14 +38,17 @@ void Main()
 string GetInput()
 {
     return @"
-8/2/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
-8/2/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
-8/9/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-8/12/2018	(KAW)		Rite Aid		Childcare:Furnishings		c	-7.07
-8/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
-8/13/2018	(KAW)		The Green Store		Childcare:Furnishings		c	-11.49
-8/21/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
-8/22/2018	(KAW)		Govindas		Childcare:Furnishings		c	-7.20
-8/31/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
+9/4/2018	(KAW)		Star Mini Mart		Childcare:Furnishings		c	-8.55
+9/5/2018	(KAW)		Star Mini Mart		Childcare:Furnishings		c	-7.07
+9/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
+9/13/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+9/20/2018	(KAW)		India Sweets & Spices		Childcare:Furnishings		c	-7.89
+9/21/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
+9/21/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
+9/25/2018	(KAW)		Govindas		Childcare:Furnishings		c	-4.05
+9/28/2018	(KAW)		Idyllwild Camp		Other Income:Reversal of Charges		c	25.00
+9/30/2018	(KAW)		India Sweets & Spices		Childcare:Furnishings		c	-2.73
+9/30/2018	(KAW)		India Sweets & Spices		Childcare:Furnishings		c	-22.50
+9/30/2018	(KAW)		Spotify		Childcare:Leisure		c	-9.99
 ";
 }
