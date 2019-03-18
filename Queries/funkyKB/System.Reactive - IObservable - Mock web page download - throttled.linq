@@ -2,15 +2,9 @@
   <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Threading.Tasks.dll</Reference>
   <NuGetReference>System.Reactive</NuGetReference>
-  <Namespace>System.Net</Namespace>
-  <Namespace>System.Reactive</Namespace>
-  <Namespace>System.Reactive.Concurrency</Namespace>
-  <Namespace>System.Reactive.Disposables</Namespace>
-  <Namespace>System.Reactive.Joins</Namespace>
-  <Namespace>System.Reactive.Linq</Namespace>
-  <Namespace>System.Reactive.Subjects</Namespace>
-  <Namespace>System.Reactive.Threading.Tasks</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
+  <Namespace>System.Reactive.Linq</Namespace>
+  <Namespace>System.Reactive.Disposables</Namespace>
 </Query>
 
 void Main()
