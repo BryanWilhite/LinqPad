@@ -3,8 +3,8 @@
 void Main()
 {
     var type = typeof(Singleton);
-    MethodInfo method = type.GetMethod("AddNumbers");
-    PropertyInfo prop = type.GetProperty("Instance",
+    MethodInfo method = type.GetMethod(nameof(Singleton.AddNumbers));
+    PropertyInfo prop = type.GetProperty(nameof(Singleton.Instance),
         BindingFlags.Static | BindingFlags.Public);
 
     var instance = prop.GetValue(prop, Type.EmptyTypes);
