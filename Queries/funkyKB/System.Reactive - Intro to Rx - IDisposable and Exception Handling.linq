@@ -22,20 +22,36 @@ class MyWrapper
 {
     public void DoIt()
     {
-        _subject = new Subject<int>();
-        Action<int> defaultNext = i => i.Dump();
-        Action completedAction = () => "completed".Dump();
+        string.Empty.Dump(">>>The verbose way:");
+        var _subject = new Subject<int>();
+        try
+        {
+            _subject.Subscribe(value => $"1st subscription received: {value}".Dump());
+            _subject.HasObservers.Dump("Subject has observers?");
+            _subject.IsDisposed.Dump("Subject is disposed?");
 
-        _subject.Subscribe(defaultNext, completedAction);
+            _subject.OnNext(999);
+            _subject.OnError(new Exception("Dummy exception [verbose]"));
+        }
+        catch (Exception ex)
+        {
+            _subject.HasObservers.Dump("Subject has observers?");
+            ex.Dump("exception [verbose]");
+        }
+
+        string.Empty.Dump(">>>The correct way:");
+        _subject = new Subject<int>();
+
+        Action<int> defaultNext = value => $"1st subscription received: {value}".Dump();
+        Action<Exception> defaultError = ex => ex.Dump("exception [correct]");
+
+        _subject.Subscribe(defaultNext, defaultError);
         _subject.HasObservers.Dump("Subject has observers?");
         _subject.IsDisposed.Dump("Subject is disposed?");
 
-        _subject.OnNext(1);
-        _subject.OnCompleted();
+        _subject.OnNext(999);
+        _subject.OnError(new Exception("Dummy exception"));
         _subject.HasObservers.Dump("Subject has observers?");
-
-        _subject.OnNext(2);
-        string.Empty.Dump("completed subject does not move next");
     }
 
     ~MyWrapper()
