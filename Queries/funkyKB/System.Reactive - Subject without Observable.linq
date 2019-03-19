@@ -10,10 +10,11 @@
 // calling Subject.OnNext() explicitly implies there is no stream to observe:
 var loneSubject = new Subject<int>();
 loneSubject.Subscribe(i => i.Dump("kind of useless, mostly"));
+
 Enumerable.Range(0, 5).ForEach(i => loneSubject.OnNext(i));
 
 var usefulSubject = new Subject<int>();
-var observable = Observable.Range(0, 5);
 usefulSubject.Subscribe(i => i.Dump("slightly better"));
 
-observable.Subscribe(usefulSubject);
+var observable = Observable.Range(0, 5);
+observable.Subscribe(usefulSubject); // “cold” observable starts with sub

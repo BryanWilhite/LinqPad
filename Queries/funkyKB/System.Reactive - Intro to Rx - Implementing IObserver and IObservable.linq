@@ -8,6 +8,7 @@ void Main()
 {
     var numbers = new MySequenceOfNumbers();
     var observer = new MyConsoleObserver<int>();
+
     numbers.Subscribe(observer);
 }
 
