@@ -1,7 +1,13 @@
 <Query Kind="Statements" />
 
-var s = "../../my/path/to/my.thing";
+var s1 = "../../my/path/to/my.thing";
+var s2 = @"..\..\my\path\to\my.thing";
 
-var matches = Regex.Matches(s, @"\.\./");
+MatchCollection GetMatches(string s)
+{
+    var matches = Regex.Matches(s, @"\.\./|\.\.\\");
+    return matches;
+}
 
-matches.Dump();
+GetMatches(s1).Dump();
+GetMatches(s2).Dump();
