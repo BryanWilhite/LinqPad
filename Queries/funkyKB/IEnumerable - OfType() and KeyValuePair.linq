@@ -1,4 +1,8 @@
-<Query Kind="Statements" />
+<Query Kind="Statements">
+  <NuGetReference>xunit</NuGetReference>
+  <Namespace>Xunit</Namespace>
+</Query>
+
 
 var set = new[]
 {
@@ -13,5 +17,5 @@ var set = new[]
 
 var iterator = set.OfType<double>();
 
-Assert.IsTrue(iterator is IEnumerable<double>, "The expected interface type is not here.");
-Assert.IsFalse(iterator.Any(), "No results were expected.");
+Assert.True(iterator is IEnumerable<double>, "The expected interface type is not here.");
+Assert.False(iterator.Any(), "No results were expected.");
