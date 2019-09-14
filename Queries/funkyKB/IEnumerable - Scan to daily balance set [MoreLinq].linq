@@ -6,17 +6,19 @@
 string GetInput()
 {
 	return @"
-6/1/2019	Greenlight Card ()		Demtrius Harmon	youtube “influencer”	Childcare:Furnishings		c	-19.99
-6/2/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
-6/3/2019	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
-6/7/2019	Greenlight Card ()		Star Mini Mart		Childcare:Furnishings		c	-5.93
-6/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+7/1/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
+7/1/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-19.99
+7/3/2019	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+7/7/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+7/12/2019	Greenlight Card ()		Star Mini Mart		Childcare:Furnishings		c	-4.04
+7/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+7/20/2019	Greenlight Card ()		CVS		Childcare:Leisure		c	-2.62
 ";
 }
 
 void Main()
 {
-	var startingBalance = 349.64d;
+	var startingBalance = 358.74d;
 	var changes = GetInput()
 		.Trim()
 		.Split('\n')
