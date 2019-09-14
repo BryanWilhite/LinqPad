@@ -5,7 +5,7 @@
 
 void Main()
 {
-	var startingBalance = 297.23d;
+	var startingBalance = 311.87d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,11 +38,11 @@ void Main()
 string GetInput()
 {
     return @"
-1/3/2019	Greenlight Card ()		Cinemark Theaters		Childcare:Leisure		c	-11.00
-1/3/2019	Greenlight Card ()		Cinemark Theaters		Childcare:Leisure		c	-9.00
-1/4/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
-1/7/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
-1/9/2019	Greenlight Card ()		Wendy's		Childcare:Furnishings		c	-4.38
-1/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+2/1/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+2/3/2019	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+2/12/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
+2/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+2/15/2019	Greenlight Card ()		Mod Pizza		Childcare:Furnishings		c	-11.76
+2/21/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-15.97
 ";
 }
