@@ -38,15 +38,13 @@ void Main()
 string GetInput()
 {
     return @"
-11/1/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-8.91
-11/3/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
-11/9/2018	Greenlight Card ()		CVS		Childcare:Furnishings		c	-3.25
-11/12/2018	Greenlight Card ()		City of Santa Monica	beach parking	Childcare:Furnishings		c	-2.00
-11/12/2018	Greenlight Card ()		Greenlight		Childcare:Furnishings			-4.99
-11/13/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
-11/18/2018	Greenlight Card ()		Transfer Money		[]			50.00
-11/28/2018	Greenlight Card ()		Transfer Money		[]		c	150.00
-11/30/2018	Greenlight Card ()		National/Robertson Car		Childcare:Furnishings		c	-4.97
-11/30/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+12/3/2018	Greenlight Card ()		Google (YouTube)		Childcare:Leisure		c	-3.99
+12/4/2018	Greenlight Card ()		Trader Joes		Childcare:Furnishings		c	-7.98
+12/5/2018	Greenlight Card ()		**VOID**Amazon.com	appears to be a marketplace credit?	Childcare:Cash Support		c	0.00
+12/6/2018	Greenlight Card ()		Starbucks		Childcare:Furnishings		c	-2.50
+12/6/2018	Greenlight Card ()		Noah's Bagels		Childcare:Furnishings		c	-7.99
+12/12/2018	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+12/12/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-10.98
+12/31/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
 ";
 }

@@ -1,17 +1,15 @@
 <Query Kind="Statements" />
 
 var year = 2018;
-var month = 11;
+var month = 12;
 var register = new Dictionary<byte, double>
 {
 {1, 195.74},
-{3, 186.83},
-{9, 176.84},
-{12, 171.59},
-{13, 166.6},
-{18, 160.61},
-{28, 210.61},
-{30, 355.64},
+{4, 191.75},
+{5, 183.77},
+{6, 181.27},
+{12, 168.29},
+{31, 157.31},
 };
 
 var registerDays = register.Keys.Select(i => i).ToArray();
