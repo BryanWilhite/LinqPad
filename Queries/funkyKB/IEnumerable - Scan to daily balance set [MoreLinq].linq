@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 204.00d;
+    var startingBalance = 195.74d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,15 +38,15 @@ void Main()
 string GetInput()
 {
     return @"
-10/3/2018	(KAW)		National/Robertson Car		Childcare:Furnishings		c	-3.08
-10/5/2018	(KAW)		Ulta		Childcare:Furnishings		c	-19.21
-10/5/2018	(KAW)		Govindas		Childcare:Furnishings		c	-6.30
-10/7/2018	(KAW)		Transfer Money		[Schwab High Yield Checking (3810)]		c	50.00
-10/9/2018	(KAW)		Govindas		Childcare:Leisure		c	-3.15
-10/12/2018	(KAW)		National/Robertson Car		Childcare:Furnishings		c	-2.88
-10/12/2018	(KAW)		Greenlight		Childcare:Furnishings			-4.99
-10/16/2018	(KAW)		Google *YouTube		Childcare:Leisure		c	-6.99
-10/18/2018	(KAW)		National/Robertson Car		Childcare:Furnishings		c	-5.67
-10/21/2018	(KAW)		Apple	ITUNES	Childcare:Leisure		c	-5.99
+11/1/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-8.91
+11/3/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+11/9/2018	Greenlight Card ()		CVS		Childcare:Furnishings		c	-3.25
+11/12/2018	Greenlight Card ()		City of Santa Monica	beach parking	Childcare:Furnishings		c	-2.00
+11/12/2018	Greenlight Card ()		Greenlight		Childcare:Furnishings			-4.99
+11/13/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+11/18/2018	Greenlight Card ()		Transfer Money		[]			50.00
+11/28/2018	Greenlight Card ()		Transfer Money		[]		c	150.00
+11/30/2018	Greenlight Card ()		National/Robertson Car		Childcare:Furnishings		c	-4.97
+11/30/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
 ";
 }
