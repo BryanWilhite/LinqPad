@@ -6,17 +6,20 @@
 string GetInput()
 {
 	return @"
-4/1/2019	Greenlight Card ()		ArcLight, Culver City		Childcare:Leisure		c	-25.50
-4/3/2019	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
-4/4/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
-4/6/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
-4/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+5/1/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+5/2/2019	Greenlight Card ()		Star Mini Mart		Childcare:Furnishings		c	-5.17
+5/3/2019	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+5/7/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
+5/11/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+5/11/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-9.99
+5/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
+5/22/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-0.99
 ";
 }
 
 void Main()
 {
-	var startingBalance = 339.22d;
+	var startingBalance = 342.75d;
 	var changes = GetInput()
 		.Trim()
 		.Split('\n')
