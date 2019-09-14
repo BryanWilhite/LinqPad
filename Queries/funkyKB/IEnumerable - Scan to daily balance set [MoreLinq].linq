@@ -5,7 +5,7 @@
 
 void Main()
 {
-    var startingBalance = 195.74d;
+	var startingBalance = 297.23d;
     var changes = GetInput()
         .Trim()
         .Split('\n')
@@ -38,13 +38,11 @@ void Main()
 string GetInput()
 {
     return @"
-12/3/2018	Greenlight Card ()		Google (YouTube)		Childcare:Leisure		c	-3.99
-12/4/2018	Greenlight Card ()		Trader Joes		Childcare:Furnishings		c	-7.98
-12/5/2018	Greenlight Card ()		**VOID**Amazon.com	appears to be a marketplace credit?	Childcare:Cash Support		c	0.00
-12/6/2018	Greenlight Card ()		Starbucks		Childcare:Furnishings		c	-2.50
-12/6/2018	Greenlight Card ()		Noah's Bagels		Childcare:Furnishings		c	-7.99
-12/12/2018	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
-12/12/2018	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-10.98
-12/31/2018	Greenlight Card ()		Spotify		Childcare:Leisure		c	-9.99
+1/3/2019	Greenlight Card ()		Cinemark Theaters		Childcare:Leisure		c	-11.00
+1/3/2019	Greenlight Card ()		Cinemark Theaters		Childcare:Leisure		c	-9.00
+1/4/2019	Greenlight Card ()		Transfer Money		[]		c	50.00
+1/7/2019	Greenlight Card ()		Apple	ITUNES	Childcare:Leisure		c	-5.99
+1/9/2019	Greenlight Card ()		Wendy's		Childcare:Furnishings		c	-4.38
+1/12/2019	Greenlight Card ()		Greenlight		Childcare:Furnishings		c	-4.99
 ";
 }
