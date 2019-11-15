@@ -3,7 +3,6 @@
   <Namespace>Xunit</Namespace>
 </Query>
 
-
 var set = new[]
 {
     new KeyValuePair<int, string>(1, "one"),
@@ -15,7 +14,9 @@ var set = new[]
     new KeyValuePair<int, string>(7, "seven"),
 };
 
-var iterator = set.OfType<double>();
+var subset = set.OfType<double>();
 
-Assert.True(iterator is IEnumerable<double>, "The expected interface type is not here.");
-Assert.False(iterator.Any(), "No results were expected.");
+Assert.True(subset is IEnumerable<double>, "The expected interface type is not here.");
+Assert.Empty(subset);
+
+subset.Dump(nameof(subset));
