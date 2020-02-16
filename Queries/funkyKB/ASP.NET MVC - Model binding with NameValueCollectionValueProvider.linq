@@ -9,16 +9,22 @@ void Main()
 {
     var formCollection = new NameValueCollection
     {
-        { "Name", "My Product" },
+        { "Name", "My Product" }, // the name here has an “empty prefix” (instead of "Product.Name")
         { "Category", "My Category" },
         { "Price", "11.99" },
     };
 
+    /*
+        “ValueProviders are created from the HttpContext Request Form, Route, QueryString, etc. properties.
+        You can also provide your own value providers…”
+        [ https://stackoverflow.com/a/3541185/22944 ]
+    */
     var valueProvider = new NameValueCollectionValueProvider(formCollection, null);
     var metadata = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(Product));
 
     var bindingContext = new ModelBindingContext
     {
+        FallbackToEmptyPrefix = true,
         ModelName = nameof(Product),
         ValueProvider = valueProvider,
         ModelMetadata = metadata
@@ -39,7 +45,7 @@ public class Product
     public decimal Price { get; set; }
 }
 
-public class FormToProductBinder : ObjectModelBinder
+public class FormToProductBinder : ClassModelBinder
 {
     protected override void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
@@ -54,7 +60,7 @@ public class FormToProductBinder : ObjectModelBinder
     }
 }
 
-public class ObjectModelBinder : DefaultModelBinder
+public class ClassModelBinder : DefaultModelBinder
 {
     public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
     {
@@ -65,7 +71,12 @@ public class ObjectModelBinder : DefaultModelBinder
                 $"The expected {nameof(ModelBindingContext)} is not here.");
         }
 
-        var instance = Activator.CreateInstance(bindingContext.ModelType);
+        /*
+            Without `ModelBindingContext.FallbackToEmptyPrefix = true`
+            `instance` will be null because `NameValueCollection` names
+            have no `Product.*` prefix:
+        */
+        var instance = base.BindModel(controllerContext, bindingContext);
 
         var properties = bindingContext.ModelType.GetProperties().Where(a => a.CanWrite);
         foreach (var propertyInfo in properties)

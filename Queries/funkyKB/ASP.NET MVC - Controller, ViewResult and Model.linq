@@ -5,11 +5,18 @@
 </Query>
 
 /*
-    [https://docs.microsoft.com/en-us/dotnet/api/system.web.mvc?view=aspnet-mvc-5.2]
-    [https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/unit-testing/creating-unit-tests-for-asp-net-mvc-applications-cs]
+    ASP.NET 5.x Source => [ https://archive.codeplex.com/?p=aspnetwebstack ]
+    ASP.NET 5.x Docs => [ https://docs.microsoft.com/en-us/dotnet/api/system.web.mvc?view=aspnet-mvc-5.2 ]
 */
 void Main()
 {
+    /*
+        This block introduces the Controller, its methods that produce View results from a specific Model.
+
+        This block is based on “Creating Unit Tests for ASP.NET MVC Applications (C#)”
+        by Stephen Walther
+        [ https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/unit-testing/creating-unit-tests-for-asp-net-mvc-applications-cs ]
+    */
     var controller = new ProductsController();
     var indexResult = controller.Index() as ViewResult;
     Debug.Assert(indexResult.ViewName.Equals(nameof(ProductsController.Index)));
