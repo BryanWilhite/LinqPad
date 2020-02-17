@@ -9,7 +9,7 @@ void Main()
 {
     var formCollection = new NameValueCollection
     {
-        { "Name", "My Product" }, // the name here has an “empty prefix” (instead of "Product.Name")
+        { "Name", "My Product" }, // the Name (in `NameValueCollection`) has an “empty prefix” (instead of "Product.Name")
         { "Category", "My Category" },
         { "Price", "11.99" },
     };
@@ -92,7 +92,6 @@ public class ClassModelBinder : DefaultModelBinder
             */
 
             var providerResult = bindingContext.ValueProvider.GetValue(propertyInfo.Name);
-            if (providerResult == null) continue;
             this.SetValue(instance, propertyInfo, providerResult);
         }
 
@@ -101,6 +100,7 @@ public class ClassModelBinder : DefaultModelBinder
 
     protected virtual void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
+        if (providerResult == null) return;
         propertyInfo.SetValue(instance, providerResult.AttemptedValue, null);
     }
 }
