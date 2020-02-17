@@ -29,6 +29,15 @@ void Main()
         ValueProvider = valueProvider,
         ModelMetadata = metadata
     };
+    /*
+        ⚠ instead of setting this up manually,
+        mocking `ControllerContext.HttpContext`
+        and/or `ControllerContext.RequestContext`
+        should allow MVC auto-magically generate `ModelBindingContext`.
+
+        [ http://blog.devdave.com/2012/05/moq-mocking-httpcontext-in-your-mvc3.html ]
+        [ https://stackoverflow.com/a/1454823/22944 ]
+    */
 
     var controllerContext = new ControllerContext();
     var binder = new FormToProductBinder();
