@@ -13,29 +13,12 @@
 
 void Main()
 {
-    var httpContextWrapper = GetEmptyHttpContextWrapper();
+    var httpContextWrapper = this.GetEmptyHttpContextWrapper();
     var routeData = new RouteData();
     var controller = new ProductController();
 
     var controllerContextMock = new Mock<ControllerContext>(httpContextWrapper, routeData, controller);
-    controllerContextMock
-        .Setup(mock => mock.HttpContext.Request.InputStream)
-        .Returns(() =>
-        {
-            var ms = new MemoryStream();
-            var sw = new StreamWriter(ms);
-            
-            var jO = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
-            
-            sw.Write(jO.ToString());
-            sw.Flush();
-            
-            ms.Position = 0;
-            return ms;
-        });
-    controllerContextMock
-        .Setup(mock => mock.HttpContext.Request.ContentType)
-        .Returns (() => "application/json");
+    this.SetupMock(controllerContextMock);
 
     var valueProvider = new JsonValueProviderFactory().GetValueProvider(controllerContextMock.Object);
     valueProvider.Dump();
@@ -85,6 +68,28 @@ HttpContextWrapper GetEmptyHttpContextWrapper()
         [ https://stackoverflow.com/a/5464628/22944 ]
         [ http://www.splinter.com.au/httpcontext-vs-httpcontextbase-vs-httpcontext/ ]
     */
+}
+
+void SetupMock(Mock<ControllerContext> controllerContextMock)
+{
+    controllerContextMock
+        .Setup(mock => mock.HttpContext.Request.InputStream)
+        .Returns(() =>
+        {
+            var ms = new MemoryStream();
+            var sw = new StreamWriter(ms);
+            
+            var jO = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            
+            sw.Write(jO.ToString());
+            sw.Flush();
+            
+            ms.Position = 0;
+            return ms;
+        });
+    controllerContextMock
+        .Setup(mock => mock.HttpContext.Request.ContentType)
+        .Returns (() => "application/json");
 }
 
 public class Product
