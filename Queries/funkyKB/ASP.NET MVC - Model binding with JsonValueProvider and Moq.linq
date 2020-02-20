@@ -3,6 +3,7 @@
   <Reference>&lt;RuntimeDirectory&gt;\System.Web.dll</Reference>
   <NuGetReference>Microsoft.AspNet.Mvc</NuGetReference>
   <NuGetReference>Moq</NuGetReference>
+  <NuGetReference>Newtonsoft.Json</NuGetReference>
   <Namespace>System.Web.Mvc</Namespace>
   <Namespace>System.Collections.Specialized</Namespace>
   <Namespace>System.Web</Namespace>
@@ -33,7 +34,7 @@ void Main()
         ModelMetadata = metadata
     };
 
-    var binder = new FormToProductBinder();
+    var binder = new ValueProviderResultToProductBinder();
 
     var instance = binder.BindModel(controllerContextMock.Object, bindingContext) as Product;
     instance.Dump();
@@ -100,7 +101,7 @@ public class Product
     public decimal Price { get; set; }
 }
 
-public class FormToProductBinder : ClassModelBinder
+public class ValueProviderResultToProductBinder : WriteablePropertiesModelBinder
 {
     protected override void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
@@ -115,7 +116,7 @@ public class FormToProductBinder : ClassModelBinder
     }
 }
 
-public class ClassModelBinder : DefaultModelBinder
+public class WriteablePropertiesModelBinder : DefaultModelBinder
 {
     public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
     {
