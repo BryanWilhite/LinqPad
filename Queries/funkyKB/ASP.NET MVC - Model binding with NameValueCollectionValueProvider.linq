@@ -54,7 +54,7 @@ public class Product
     public decimal Price { get; set; }
 }
 
-public class FormToProductBinder : ClassModelBinder
+public class FormToProductBinder : WriteablePropertiesModelBinder
 {
     protected override void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
@@ -69,7 +69,7 @@ public class FormToProductBinder : ClassModelBinder
     }
 }
 
-public class ClassModelBinder : DefaultModelBinder
+public class WriteablePropertiesModelBinder : DefaultModelBinder
 {
     public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
     {
