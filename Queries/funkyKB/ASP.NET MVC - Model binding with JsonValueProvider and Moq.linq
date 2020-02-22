@@ -19,10 +19,8 @@ void Main()
     var controller = new ProductController();
 
     var controllerContextMock = new Mock<ControllerContext>(httpContextWrapper, routeData, controller);
-
-    var jInput = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
-
-    this.SetupMock(controllerContextMock, () => jInput);
+	var input = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+    this.SetupMock(controllerContextMock, ()=> input);
 
     var valueProvider = new JsonValueProviderFactory().GetValueProvider(controllerContextMock.Object);
     valueProvider.Dump();
@@ -132,15 +130,23 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
 
         var instance = base.BindModel(controllerContext, bindingContext);
 
-        var properties = bindingContext.ModelType.GetProperties().Where(a => a.CanWrite);
+        var properties = this.GetProperties(bindingContext);
         foreach (var propertyInfo in properties)
         {
             var providerResult = bindingContext.ValueProvider.GetValue(propertyInfo.Name);
             this.SetValue(instance, propertyInfo, providerResult);
         }
 
-        return instance;
+        return this.GetInstance(instance);
     }
+	
+	protected virtual object GetInstance(object instance) => instance;
+	
+	protected virtual IEnumerable<PropertyInfo> GetProperties(ModelBindingContext bindingContext)
+	{
+		var properties = bindingContext.ModelType.GetProperties().Where(a => a.CanWrite);
+		return properties;
+	}
 
     protected virtual void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
