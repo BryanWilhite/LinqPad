@@ -130,6 +130,9 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
 
         var instance = base.BindModel(controllerContext, bindingContext);
 
+		bindingContext = this.ChangeBindingContext(bindingContext);
+		instance = this.GetInstance(instance);
+
         var properties = this.GetProperties(bindingContext);
         foreach (var propertyInfo in properties)
         {
@@ -137,9 +140,11 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
             this.SetValue(instance, propertyInfo, providerResult);
         }
 
-        return this.GetInstance(instance);
+        return instance;
     }
 	
+	protected virtual ModelBindingContext ChangeBindingContext(ModelBindingContext bindingContext) => bindingContext;
+
 	protected virtual object GetInstance(object instance) => instance;
 	
 	protected virtual IEnumerable<PropertyInfo> GetProperties(ModelBindingContext bindingContext)
