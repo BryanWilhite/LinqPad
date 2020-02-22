@@ -19,7 +19,10 @@ void Main()
     var controller = new ProductController();
 
     var controllerContextMock = new Mock<ControllerContext>(httpContextWrapper, routeData, controller);
-    this.SetupMock(controllerContextMock);
+
+    var jInput = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+
+    this.SetupMock(controllerContextMock, () => jInput);
 
     var valueProvider = new JsonValueProviderFactory().GetValueProvider(controllerContextMock.Object);
     valueProvider.Dump();
@@ -71,7 +74,7 @@ HttpContextWrapper GetEmptyHttpContextWrapper()
     */
 }
 
-void SetupMock(Mock<ControllerContext> controllerContextMock)
+void SetupMock(Mock<ControllerContext> controllerContextMock, Func<JObject> inputGetter)
 {
     controllerContextMock
         .Setup(mock => mock.HttpContext.Request.InputStream)
@@ -80,9 +83,9 @@ void SetupMock(Mock<ControllerContext> controllerContextMock)
             var ms = new MemoryStream();
             var sw = new StreamWriter(ms);
             
-            var jO = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            var jO = inputGetter?.Invoke();
             
-            sw.Write(jO.ToString());
+            sw.Write(jO?.ToString());
             sw.Flush();
             
             ms.Position = 0;
