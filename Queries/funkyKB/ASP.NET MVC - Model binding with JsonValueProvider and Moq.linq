@@ -164,8 +164,10 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
         there are at least three `IModelBinder` interfaces:
         
         - `System.Web.Mvc.IModelBinder` (the one used here)
-        - `System.Web.ModelBinding.IModelBinder`
-        - `System.Web.Http.ModelBinding.IModelBinder`
+        - `System.Web.ModelBinding.IModelBinder` (full-framework Windows?)
+        - `System.Web.Http.ModelBinding.IModelBinder` (mostly ASP.NET Web API?)
+        
+        📖 [ https://stackoverflow.com/questions/21667319/why-is-there-both-a-system-net-http-and-system-web-http-namespace ]
     */
 }
 
