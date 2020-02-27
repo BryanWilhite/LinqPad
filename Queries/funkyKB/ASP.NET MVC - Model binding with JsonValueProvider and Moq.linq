@@ -158,6 +158,15 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
         if (providerResult == null) return;
         propertyInfo.SetValue(instance, providerResult.AttemptedValue, null);
     }
+    
+    /*
+        Fun, depressing fact: as of the year 2020
+        there are at least three `IModelBinder` interfaces:
+        
+        - `System.Web.Mvc.IModelBinder` (the one used here)
+        - `System.Web.ModelBinding.IModelBinder`
+        - `System.Web.Http.ModelBinding.IModelBinder`
+    */
 }
 
 public class ProductController : Controller
