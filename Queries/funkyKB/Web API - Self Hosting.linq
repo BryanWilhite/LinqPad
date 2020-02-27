@@ -1,10 +1,9 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <NuGetReference>Microsoft.AspNet.WebApi.SelfHost</NuGetReference>
-  <Namespace>System.Net</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Web.Http</Namespace>
   <Namespace>System.Web.Http.SelfHost</Namespace>
+  <Namespace>System.Net</Namespace>
 </Query>
 
 /*
