@@ -1,10 +1,8 @@
 <Query Kind="Program">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Web.dll</Reference>
   <NuGetReference>Microsoft.AspNet.Mvc</NuGetReference>
   <NuGetReference>Moq</NuGetReference>
   <Namespace>Moq</Namespace>
-  <Namespace>Newtonsoft.Json.Linq</Namespace>
   <Namespace>System.Web</Namespace>
   <Namespace>System.Web.Mvc</Namespace>
   <Namespace>System.Web.Routing</Namespace>
@@ -12,8 +10,6 @@
 
 void Main()
 {
-    var httpContextWrapper = this.GetEmptyHttpContextWrapper();
-
     var controller = new ProductController();
     
     var routes = new RouteCollection();
@@ -33,37 +29,6 @@ void Main()
     
     var routeData = routes.GetRouteData(httpContextBaseMock.Object);
     routeData.Dump();
-}
-
-HttpContextWrapper GetEmptyHttpContextWrapper()
-{
-    // [ https://stackoverflow.com/a/9512095/22944 ]
-    var httpRequest = new HttpRequest(string.Empty, "http://mySomething", string.Empty);
-    var responseWriter = new StringWriter();
-    var httpResponse = new HttpResponse(responseWriter);
-    var httpContext = new HttpContext(httpRequest, httpResponse);
-    var httpContextWrapper = new HttpContextWrapper(httpContext);
-    
-    return httpContextWrapper;
-    
-    /*
-        “The HttpRequestWrapper class derives from the HttpRequestBase class
-        and serves as a wrapper for the HttpRequest class.
-        This class exposes the functionality of the HttpRequest class
-        and exposes the HttpRequestBase type.
-        The HttpRequestBase class enables you to replace the original implementation
-        of the HttpRequest class in your application with a custom implementation,
-        such as when you perform unit testing outside the ASP.NET pipeline.”
-
-        [ https://docs.microsoft.com/en-us/dotnet/api/system.web.httprequestwrapper?view=netframework-4.8#remarks ]
-        
-        “The point is that ‘vintage’ `HttpContext` does not implement `HttpContextBase`,
-        and isn’t virtual, and therefore cannot be Mocked.
-        `HttpContextBase` was introduced in 3.5 as a mockable alternative.
-        But there’s still the problem that vintage `HttpContext` doesn't implement `HttpContextBase`.”
-        [ https://stackoverflow.com/a/5464628/22944 ]
-        [ http://www.splinter.com.au/httpcontext-vs-httpcontextbase-vs-httpcontext/ ]
-    */
 }
 
 void SetupMock(Mock<HttpContextBase> httpContextBaseMock)
