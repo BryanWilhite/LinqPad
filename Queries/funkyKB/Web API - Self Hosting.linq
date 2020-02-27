@@ -13,10 +13,12 @@
     WARNING: “By default, listening at a particular HTTP address requires administrator privileges.”
     
     and “Writing tests for an ASP.NET Web API service”
-    [http://blogs.msdn.com/b/youssefm/archive/2013/01/28/writing-tests-for-an-asp-net-webapi-service.aspx]
+    📖 [ http://blogs.msdn.com/b/youssefm/archive/2013/01/28/writing-tests-for-an-asp-net-webapi-service.aspx ]
     
     and “In memory client, host and integration testing of your Web API service”
-    [http://blogs.msdn.com/b/kiranchalla/archive/2012/05/06/in-memory-client-amp-host-and-integration-testing-of-your-web-api-service.aspx]
+    📖 [ http://blogs.msdn.com/b/kiranchalla/archive/2012/05/06/in-memory-client-amp-host-and-integration-testing-of-your-web-api-service.aspx ]
+    
+    📖 [ https://www.strathweb.com/2013/04/hosting-asp-net-web-api-in-linqpad/ ]
 */
 void Main()
 {
