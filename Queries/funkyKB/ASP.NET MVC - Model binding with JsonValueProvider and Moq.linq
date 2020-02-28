@@ -19,7 +19,7 @@ void Main()
     var controller = new ProductController();
 
     var controllerContextMock = new Mock<ControllerContext>(httpContextWrapper, routeData, controller);
-	var input = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+    var input = JObject.FromObject(new { Name = "Hammer", Category = "Hardware", Price = 16.99M });
     this.SetupMock(controllerContextMock, ()=> input);
 
     var valueProvider = new JsonValueProviderFactory().GetValueProvider(controllerContextMock.Object);
@@ -130,8 +130,8 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
 
         var instance = base.BindModel(controllerContext, bindingContext);
 
-		bindingContext = this.ChangeBindingContext(bindingContext);
-		instance = this.GetInstance(instance);
+        bindingContext = this.ChangeBindingContext(bindingContext);
+        instance = this.GetInstance(instance);
 
         var properties = this.GetProperties(bindingContext);
         foreach (var propertyInfo in properties)
@@ -143,15 +143,15 @@ public class WriteablePropertiesModelBinder : DefaultModelBinder
         return instance;
     }
 
-	protected virtual ModelBindingContext ChangeBindingContext(ModelBindingContext bindingContext) => bindingContext;
+    protected virtual ModelBindingContext ChangeBindingContext(ModelBindingContext bindingContext) => bindingContext;
 
-	protected virtual object GetInstance(object instance) => instance;
-	
-	protected virtual IEnumerable<PropertyInfo> GetProperties(ModelBindingContext bindingContext)
-	{
-		var properties = bindingContext.ModelType.GetProperties().Where(a => a.CanWrite);
-		return properties;
-	}
+    protected virtual object GetInstance(object instance) => instance;
+    
+    protected virtual IEnumerable<PropertyInfo> GetProperties(ModelBindingContext bindingContext)
+    {
+        var properties = bindingContext.ModelType.GetProperties().Where(a => a.CanWrite);
+        return properties;
+    }
 
     protected virtual void SetValue(object instance, PropertyInfo propertyInfo, ValueProviderResult providerResult)
     {
