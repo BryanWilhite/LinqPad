@@ -8,6 +8,10 @@
 </Query>
 
 /*
+    [ https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api#model-binders ]
+    [ https://blog.learningtree.com/creating-a-custom-web-api-model-binder/ ]
+    [ https://blogs.msdn.microsoft.com/jmstall/2012/04/18/mvc-style-parameter-binding-for-webapi/ ]
+    [ https://stackoverflow.com/questions/11875912/asp-net-web-api-model-binding ]
 */
 void Main()
 {
