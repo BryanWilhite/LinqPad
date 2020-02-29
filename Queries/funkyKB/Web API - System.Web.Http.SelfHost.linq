@@ -74,7 +74,6 @@ public class Product
     public decimal Price { get; set; }
 }
 
-[RoutePrefix("api/{controller}")]
 public class ProductsController : ApiController
 {
     Product[] products = new Product[]  
