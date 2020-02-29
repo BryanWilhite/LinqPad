@@ -99,8 +99,13 @@ public class ProductsController : ApiController
     [Route("products/categories/{category}")]
     public IHttpActionResult GetProductsByCategory(string category)
     {
+        if(string.IsNullOrEmpty(category)) return this.BadRequest();
+
         var result = products.Where(p => string.Equals(p.Category, category,
                 StringComparison.OrdinalIgnoreCase));
+
+        if (!result.Any()) return this.NotFound();
+
         return this.Ok(result);
     }
 }
