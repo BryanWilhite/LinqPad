@@ -5,9 +5,15 @@
   <Namespace>System.Net</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Web.Http</Namespace>
+  <Namespace>System.Web.Http.ValueProviders</Namespace>
+  <Namespace>System.Web.Http.ModelBinding</Namespace>
+  <Namespace>System.Web.Http.Controllers</Namespace>
 </Query>
 
 /*
+    “Model binding is used to read from the query string, while formatters are used to read from the request body.”
+    [ https://www.infoworld.com/article/3133728/understand-parameter-binding-in-aspnet-web-api.html ]
+
     [ https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api#model-binders ]
     [ https://blog.learningtree.com/creating-a-custom-web-api-model-binder/ ]
     [ https://blogs.msdn.microsoft.com/jmstall/2012/04/18/mvc-style-parameter-binding-for-webapi/ ]
@@ -15,6 +21,15 @@
 */
 void Main()
 {
+    var actionContext = new HttpActionContext();
+
+    var bindingContext = new ModelBindingContext
+    {
+        FallbackToEmptyPrefix = true,
+        ModelName = nameof(Product),
+        //ValueProvider = valueProvider,
+        //ModelMetadata = metadata
+    };
 }
 
 public class Product
