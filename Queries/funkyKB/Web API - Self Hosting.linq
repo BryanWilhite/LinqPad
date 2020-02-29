@@ -24,14 +24,37 @@ void Main()
 {
     var config = new HttpSelfHostConfiguration("http://localhost/");
     config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-    config.Routes.MapHttpRoute("API Default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
-    
+    config.Routes.MapHttpRoute(
+        "API Default",
+        "api/{controller}/{id}", new { id = RouteParameter.Optional }
+    );
+    config.Routes.MapHttpRoute(
+        $"API {nameof(Product)} Categories",
+        "api/{controller}/categories/{category}"
+    );
+
     using (HttpSelfHostServer server = new HttpSelfHostServer(config))
     using (HttpClient client = new HttpClient())
     {
         server.OpenAsync().Wait();
 
         var location = "http://localhost/api/products";
+        using (HttpResponseMessage response = client.GetAsync(location).Result)
+        {
+            response.EnsureSuccessStatusCode();
+            var products = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
+            products.Dump();
+        }
+
+        location = "http://localhost/api/products/2";
+        using (HttpResponseMessage response = client.GetAsync(location).Result)
+        {
+            response.EnsureSuccessStatusCode();
+            var product = response.Content.ReadAsAsync<Product>().Result;
+            product.Dump();
+        }
+
+        location = "http://localhost/api/products/categories/hardware";
         using (HttpResponseMessage response = client.GetAsync(location).Result)
         {
             response.EnsureSuccessStatusCode();
@@ -51,13 +74,15 @@ public class Product
     public decimal Price { get; set; }
 }
 
+[RoutePrefix("api/{controller}")]
 public class ProductsController : ApiController
 {
     Product[] products = new Product[]  
     {  
-        new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 },  
-        new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M },  
-        new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M }  
+        new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 },
+        new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M },
+        new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M },
+        new Product { Id = 4, Name = "Jackhammer", Category = "Hardware", Price = 149.99M },
     };
 
     public IEnumerable<Product> GetAllProducts()
