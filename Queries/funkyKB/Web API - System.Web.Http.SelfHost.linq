@@ -38,31 +38,36 @@ void Main()
     {
         server.OpenAsync().Wait();
 
-        var location = "http://localhost/api/products";
-        using (HttpResponseMessage response = client.GetAsync(location).Result)
+        try
         {
-            response.EnsureSuccessStatusCode();
-            var products = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
-            products.Dump();
-        }
+            var location = "http://localhost/api/products";
+            using (HttpResponseMessage response = client.GetAsync(location).Result)
+            {
+                response.EnsureSuccessStatusCode();
+                var products = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
+                products.Dump();
+            }
 
-        location = "http://localhost/api/products/2";
-        using (HttpResponseMessage response = client.GetAsync(location).Result)
+            location = "http://localhost/api/products/2";
+            using (HttpResponseMessage response = client.GetAsync(location).Result)
+            {
+                response.EnsureSuccessStatusCode();
+                var product = response.Content.ReadAsAsync<Product>().Result;
+                product.Dump();
+            }
+
+            location = "http://localhost/api/products/categories/hardware";
+            using (HttpResponseMessage response = client.GetAsync(location).Result)
+            {
+                response.EnsureSuccessStatusCode();
+                var products = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
+                products.Dump();
+            }
+        }
+        finally
         {
-            response.EnsureSuccessStatusCode();
-            var product = response.Content.ReadAsAsync<Product>().Result;
-            product.Dump();
+            server.CloseAsync().Wait();
         }
-
-        location = "http://localhost/api/products/categories/hardware";
-        using (HttpResponseMessage response = client.GetAsync(location).Result)
-        {
-            response.EnsureSuccessStatusCode();
-            var products = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
-            products.Dump();
-        }
-
-        server.CloseAsync().Wait();
     }
 }
 
