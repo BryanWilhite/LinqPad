@@ -2,7 +2,7 @@
 
 void Main()
 {
-    var instance = Activator.CreateInstance(typeof(MyBigClass));
+    object instance = Activator.CreateInstance(typeof(MyBigClass));
 
     instance
         .GetType()
