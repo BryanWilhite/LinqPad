@@ -32,6 +32,8 @@ static IEnumerable<KeyValuePair<string, Type>> MembersProjection(MemberInfo info
             .Select(i => new KeyValuePair<string, Type>(fieldInfo.Name, i));
 
     var propertyInfo = info as PropertyInfo;
+    if (propertyInfo == null) throw new NullReferenceException($"The expected {nameof(PropertyInfo)} is not here.");
+
     return propertyInfo
         .PropertyType
         .GenericTypeArguments
