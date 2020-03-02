@@ -9,6 +9,7 @@ void Main()
         .GetMembers()
         .Where(MembersPredicate)
         .SelectMany(MembersProjection)
+        .ToDictionary(i => i.Key, j => j.Value)
         .Dump();
 }
 
