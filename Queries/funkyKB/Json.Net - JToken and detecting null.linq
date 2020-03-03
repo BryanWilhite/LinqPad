@@ -14,3 +14,4 @@ jT.Type.Dump(jT.Parent.Path);
 
 jT = (JToken)jO["three"];
 jT.Type.Dump(jT.Parent.Path); // detect null
+(jT.Type == JTokenType.Null).Dump();
