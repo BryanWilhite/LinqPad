@@ -4,9 +4,10 @@
   <Namespace>Newtonsoft.Json.Linq</Namespace>
 </Query>
 
-var jO = JObject.Parse(@"{ ""one"": """", ""two"": 1.0, ""three"": null }");
+var jO = JObject.Parse(@"{ ""one"": ""hi!"", ""two"": 1.0, ""three"": null }");
 
 var jT = (JToken)jO["one"];
+jO["one"].Value<object>().Dump(jT.Parent.Path);
 jT.Type.Dump(jT.Parent.Path);
 
 jT = (JToken)jO["two"];
