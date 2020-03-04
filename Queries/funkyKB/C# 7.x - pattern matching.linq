@@ -2,7 +2,7 @@
 
 void Main()
 {
-
+    // 📖 https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching
 }
 
 private static bool IsWritable(MemberInfo info)
