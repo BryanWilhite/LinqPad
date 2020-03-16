@@ -6,6 +6,8 @@
 /*
     This stupid delegate trick uses *two* public members in `MyClass`
     to hide *one* member in `MyBaseClass`.
+    
+    This is what one can do to avoid making a method `public`. 👀
 */
 async Task Main()
 {
