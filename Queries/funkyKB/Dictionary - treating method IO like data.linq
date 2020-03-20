@@ -5,6 +5,26 @@
   <Namespace>Songhay.Extensions</Namespace>
 </Query>
 
+/*
+    Serverless computing “encourages” breaking up a group of `internal` methods
+    and running them ‘through’ the cloud.
+
+    Azure Functions, for example, uses `Newtonsoft.Json` to serialize I/O.
+
+    Two sets of `IDictionary<T,V>` are used to track I/O:
+
+    (i) `InputPairsForOrchestration` tracks the transformation
+        of anonymous object input into `JObject` output.
+
+        The output of `InputPairsForOrchestration` is the conventional input
+        into the `StartAsync(JObject input)` façade.
+
+    (ii) The `StartAsync(JObject input)` façade searches `indicesMethodsWithOutput`
+        for an `internal` method hidden behind the façade.
+
+        This `internal` method is usually an overload supporting `JObject`
+        that calls the real `internal` method.
+*/
 async Task Main()
 {
     var activity = new MyBusinessLogic();
@@ -82,38 +102,17 @@ class MyBusinessLogic
         return JObject.FromObject(new { procedureName, input });
     }
 
-    internal static readonly Dictionary<string, Func<JObject, JObject>> InputPairsForActivity =
-        new Dictionary<string, Func<JObject, JObject>>
-        {
-            {
-                MyBusinessLogic.ProcedureNameGetBusinessValueOneAsync,
-                input => input.GetInput()
-            },
-            {
-                MyBusinessLogic.ProcedureNameGetBusinessValueTwoAsync,
-                input => input.GetInput()
-            }
-        };
-
     public MyBusinessLogic()
     {
         this.indicesMethodsWithOutput = new Dictionary<string, Func<JObject, Task<JObject>>>
         {
             {
                 ProcedureNameGetBusinessValueOneAsync,
-                input => this.GetBusinessValueOneAsync(
-                    InputPairsForActivity.TryGetValueWithKey(
-                        ProcedureNameGetBusinessValueOneAsync,
-                            throwException: true).Invoke(input)
-                    )
+                input => this.GetBusinessValueOneAsync(input)
             },
             {
                 ProcedureNameGetBusinessValueTwoAsync,
-                input => this.GetBusinessValueTwoAsync(
-                    InputPairsForActivity.TryGetValueWithKey(
-                        ProcedureNameGetBusinessValueTwoAsync,
-                            throwException: true).Invoke(input)
-                    )
+                input => this.GetBusinessValueTwoAsync(input)
             }
         };
     }
@@ -132,16 +131,18 @@ class MyBusinessLogic
 
     internal async Task<JObject> GetBusinessValueOneAsync(JObject input)
     {
+        JObject conventionalInput = input.GetInput();
+
         int output;
 
-        if (input.HasBusinessValueOneTrioArgs())
+        if (conventionalInput.HasBusinessValueOneTrioArgs())
         {
-            var args = input.GetBusinessValueOneTrioArgs();
+            var args = conventionalInput.GetBusinessValueOneTrioArgs();
             output = await GetBusinessValueOneAsync(args.x, args.y, args.z);
         }
         else
         {
-            var args = input.GetBusinessValueOneDuoArgs();
+            var args = conventionalInput.GetBusinessValueOneDuoArgs();
             output = await GetBusinessValueOneAsync(args.x, args.y);
         }
 
@@ -154,7 +155,9 @@ class MyBusinessLogic
 
     internal async Task<JObject> GetBusinessValueTwoAsync(JObject input)
     {
-        var output = await GetBusinessValueTwoAsync(input.GetBusinessValueTwoArg());
+        JObject conventionalInput = input.GetInput();
+
+        var output = await GetBusinessValueTwoAsync(conventionalInput.GetBusinessValueTwoArg());
 
         return JObject.FromObject(new { output });
     }
@@ -210,3 +213,8 @@ public static partial class JObjectExtensions
 
     public static bool HasBusinessValueOneTrioArgs(this JObject jObject) => jObject.HasProperty("z");
 }
+
+/*
+    For those of us that remember the days of SOAP services having one XML endpoint
+    as a façade for a bajillion internal routines may cringe at this design. 😬
+*/
