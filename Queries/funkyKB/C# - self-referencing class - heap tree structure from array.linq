@@ -2,17 +2,22 @@
 
 void Main()
 {
-    var array = new[] { 4, 10, 3, 5, 1, 2 };
+    var array = new[] { 4, 10, 3, 5, 1, 2 }; // 💡 derive a max/min heap by just sorting `array`
 
     var node = new TreeNode();
 
-    node.Set(array, 0);
+    node.Set(array);
 
     node?.ToDisplayText(s => s.Dump());
 }
 
 public static class TreeNodeExtensions
 {
+    public static void Set<TArray>(this TreeNode node, TArray[] array)
+    {
+        node.Set(array, 0);
+    }
+
     public static void Set<TArray>(this TreeNode node, TArray[] array, int arrayIndex)
     {
         var indexOfParent = (arrayIndex - 1) / 2;
