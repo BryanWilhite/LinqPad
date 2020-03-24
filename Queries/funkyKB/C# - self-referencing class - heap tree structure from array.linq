@@ -2,7 +2,7 @@
 
 void Main()
 {
-    var array = new[] { 4, 10, 3, 5, 1 };
+    var array = new[] { 4, 10, 3, 5, 1, 2 };
 
     var node = new TreeNode();
 
@@ -13,23 +13,27 @@ void Main()
 
 public static class TreeNodeExtensions
 {
-    public static void Set<TArray>(this TreeNode node, TArray[] array, int treeNodeLevel)
+    public static void Set<TArray>(this TreeNode node, TArray[] array, int arrayIndex)
     {
-        var indexOfParent = (treeNodeLevel - 1) / 2;
-        var indexLeftChild = (2 * treeNodeLevel + 1);
-        var indexRightChild = (2 * treeNodeLevel + 2);
+        var indexOfParent = (arrayIndex - 1) / 2;
+        var indexLeftChild = (2 * arrayIndex + 1);
+        var indexRightChild = (2 * arrayIndex + 2);
 
-        var msg = $"{nameof(treeNodeLevel)}: {treeNodeLevel}; {nameof(indexOfParent)}: {indexOfParent}; {nameof(indexLeftChild)}: {indexLeftChild}; {nameof(indexRightChild)}: {indexRightChild}";
+        var msg = $"n: {arrayIndex} => p:{indexOfParent}, l:{indexLeftChild}, r:{indexRightChild}";
 
-        node.Name = $"node {array[indexOfParent]} [{msg}]";
+        if (string.IsNullOrWhiteSpace(node.Name))
+            node.Name = $"node {array[indexOfParent]} [{msg}]";
 
-        if (treeNodeLevel < Convert.ToInt32(Math.Ceiling(array.Length/3M)))
+        if (indexLeftChild < array.Length)
         {
             node.Children.Add(new TreeNode { Name = $"node {array[indexLeftChild]} [{msg}]" });
-            //node.Children[0].Set(array, ++treeNodeLevel);
-
+            node.Children[0].Set(array, ++arrayIndex);
+        }
+        
+        if (indexRightChild < array.Length)
+        {
             node.Children.Add(new TreeNode { Name = $"node {array[indexRightChild]} [{msg}]" });
-            //node.Children[1].Set(array, ++treeNodeLevel);
+            node.Children[1].Set(array, ++arrayIndex);
         }
     }
 
