@@ -13,21 +13,23 @@ void Main()
 
 public static class TreeNodeExtensions
 {
-    public static void Set<TArray>(this TreeNode node, TArray[] array, int startIndex)
+    public static void Set<TArray>(this TreeNode node, TArray[] array, int treeNodeLevel)
     {
-        var indexLeftChild = (2 * startIndex + 1);
-        var indexRightChild = (2 * startIndex + 2);
-        $"{startIndex}: {nameof(indexLeftChild)}: {indexLeftChild}; {nameof(indexRightChild)}: {indexRightChild}".Dump();
+        var indexOfParent = (treeNodeLevel - 1) / 2;
+        var indexLeftChild = (2 * treeNodeLevel + 1);
+        var indexRightChild = (2 * treeNodeLevel + 2);
 
-        node.Name = $"node {array[startIndex]}";
+        var msg = $"{nameof(treeNodeLevel)}: {treeNodeLevel}; {nameof(indexOfParent)}: {indexOfParent}; {nameof(indexLeftChild)}: {indexLeftChild}; {nameof(indexRightChild)}: {indexRightChild}";
 
-        if (indexRightChild < array.Length)
+        node.Name = $"node {array[indexOfParent]} [{msg}]";
+
+        if (treeNodeLevel < Convert.ToInt32(Math.Ceiling(array.Length/3M)))
         {
-            node.Children.Add(new TreeNode { Name = $"node {array[indexLeftChild]}" });
-            node.Children[0].Set(array, ++startIndex);
+            node.Children.Add(new TreeNode { Name = $"node {array[indexLeftChild]} [{msg}]" });
+            //node.Children[0].Set(array, ++treeNodeLevel);
 
-            node.Children.Add(new TreeNode { Name = $"node {array[indexRightChild]}" });
-            node.Children[1].Set(array, ++startIndex);
+            node.Children.Add(new TreeNode { Name = $"node {array[indexRightChild]} [{msg}]" });
+            //node.Children[1].Set(array, ++treeNodeLevel);
         }
     }
 
@@ -57,3 +59,4 @@ public class TreeNode
 
 // 📖 https://stackoverflow.com/a/8567550/22944
 // 📖 https://www.geeksforgeeks.org/building-heap-from-array/
+// 📖 https://evelynn.gitbooks.io/amazon-interview/serialize-and-deserialize-binary-tree.html
