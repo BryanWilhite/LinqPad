@@ -11,4 +11,6 @@ int GenerateFibonacciSeries(int n)
 
 Enumerable.Range(0, 16).Select(GenerateFibonacciSeries).ToArray().Dump();
 
+// ⚠ the time complexity here is expoential!
+
 // 📖 https://www.csharpstar.com/fibonacci-series-in-csharp/
