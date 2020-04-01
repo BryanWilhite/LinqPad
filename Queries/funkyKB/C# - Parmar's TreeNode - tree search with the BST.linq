@@ -26,17 +26,17 @@ void Main()
 
 public static class TreeNodeExtensions
 {
-    public static IEnumerable<TreeNode<T>> GetChildren<T>(this TreeNode<T> node) where T : IComparable
+    public static IEnumerable<TreeNode<T>> GetChildren<T>(this TreeNode<T> node) where T : struct, IComparable
     {
         return (new[] { node.Left, node.Right }).Where(n => n != null);
     }
 
-    public static void ToDisplayText<T>(this TreeNode<T> node, Action<string> displayAction) where T : IComparable
+    public static void ToDisplayText<T>(this TreeNode<T> node, Action<string> displayAction) where T : struct, IComparable
     {
         node.ToDisplayText("  ", false, displayAction);
     }
 
-    public static void ToDisplayText<T>(this TreeNode<T> node, string indent, bool isLast, Action<string> displayAction) where T : IComparable
+    public static void ToDisplayText<T>(this TreeNode<T> node, string indent, bool isLast, Action<string> displayAction) where T : struct, IComparable
     {
         const string indentLine = "|  ";
         const string indentLastLine = "   ";
@@ -57,7 +57,7 @@ public static class TreeNodeExtensions
         }
     }
 
-    public static T Search<T>(this TreeNode<T> node, T data) where T : IComparable
+    public static T Search<T>(this TreeNode<T> node, T data) where T : struct, IComparable
     {
         if (node == null) return default;
 
