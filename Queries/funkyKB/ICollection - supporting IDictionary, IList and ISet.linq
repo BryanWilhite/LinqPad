@@ -2,13 +2,16 @@
 
 void Main()
 {
-    IList<string> flexibleOne = new MyThings().Things.ToList();
+    var myThings = new MyThings();
+    myThings.Things.Add("thing three");
+
+    IList<string> flexibleOne = myThings.Things.ToList();
     flexibleOne.Dump(nameof(flexibleOne));
 
     IDictionary<int, string> flexibleOtherOne = new MyOtherThings().Things.ToDictionary(pair => pair.Key, pair => pair.Value);
     flexibleOtherOne.Dump(nameof(flexibleOtherOne));
 
-    ISet<string> flexibleSet = new MyThings().Things.ToHashSet();
+    ISet<string> flexibleSet = myThings.Things.ToHashSet();
     flexibleSet.Dump(nameof(flexibleSet));
 }
 
@@ -21,7 +24,7 @@ class MyThings : IFlexible<string>
 {
     public MyThings()
     {
-        this.Things = new[] { "thing one", "thing two", "thing two" };
+        this.Things = new List<string> { "thing one", "thing two", "thing two" };
     }
 
     public ICollection<string> Things { get; }
