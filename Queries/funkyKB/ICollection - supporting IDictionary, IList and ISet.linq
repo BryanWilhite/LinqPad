@@ -55,6 +55,9 @@ class MyOtherThings : IFlexible<KeyValuePair<int, string>>
 
     📖 [ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.icollection-1?view=netstandard-2.1 ]
 
+    💡 `ICollection<T>` is *actually* the “base interface” for `IList<T>` and `ISet<T>`.
+    `IEnumerable<T>` is the base interface in the System.Collections.Generic namespace.
+
     “A HashSet<T> collection is not sorted and cannot contain duplicate elements.”
     📖 [ https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=netstandard-2.1 ]
 */
