@@ -63,9 +63,9 @@ public static class TreeNodeExtensions
 
         node.Data.Dump("searching...");
 
-        if (data.CompareTo(node.Data) == 0) return node.Data;
-        if (data.CompareTo(node.Data) < 0) return node.Left.Search(data);
-        if (data.CompareTo(node.Data) > 0) return node.Right.Search(data);
+        if (node.Data.CompareTo(data) == 0) return node.Data;
+        if (node.Data.CompareTo(data) < 0) return node.Right.Search(data);
+        if (node.Data.CompareTo(data) > 0) return node.Left.Search(data);
 
         throw new InvalidOperationException();
     }
