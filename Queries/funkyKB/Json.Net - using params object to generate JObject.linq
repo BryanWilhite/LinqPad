@@ -7,6 +7,7 @@ void Main()
     GetInput("MyProcedure", "uno").ToString().Dump();
     GetInput("MyProcedure", new JObject { { "one", "uno" } }).ToString().Dump();
     GetInput("MyProcedure", new { one = "uno" }).ToString().Dump();
+    GetInput("MyProcedure", new object[] { new { one = new { two = "two" } }, new[] { new { i = "three" }, new { i = "four" } } }).ToString().Dump();
     GetInput("MyProcedure", (new Dictionary<string, object> { { "one", new { three = 3.0 } } })).ToString().Dump();
     GetInput("MyProcedure", new KeyValuePair<string, string>("one", "uno")).ToString().Dump();
 }
