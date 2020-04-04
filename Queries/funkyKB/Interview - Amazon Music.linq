@@ -36,3 +36,15 @@ IEnumerable<int> reduction = reduce(mCollection);
 
 int numberOfClusters = reduction.Sum();
 numberOfClusters.Dump(nameof(numberOfClusters));
+
+/*
+    The actual question from Amazon is really about knowing graph theory,
+    specifically the adjaceny matrix.
+
+    📖 https://en.wikipedia.org/wiki/Adjacency_matrix
+
+    “Selecting the right graph data structure can have an enormous impact
+    on performance. Your two basic choices are adjacency matrices and adjacency lists…”
+
+    — Steven S. Skiena, The Algorithm Design Manual [Second Edition], p. 151
+*/
