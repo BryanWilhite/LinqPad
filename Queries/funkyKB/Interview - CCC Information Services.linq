@@ -103,6 +103,8 @@ var joinDriveAssist = carCollection
         lkp => lkp.driveAssistId,
         (join, lkp) => new { join.carId, join.carName, lkp.name });
 
+// 📖 https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join?view=netstandard-2.1
+
 var joinDriveTrain = carCollection
     .Join(
         carDriveTrain,
