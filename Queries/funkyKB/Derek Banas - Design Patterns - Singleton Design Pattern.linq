@@ -24,7 +24,7 @@ void Main()
     ScrabbleSingleton instanceTwo = ScrabbleSingleton.GetInstance();
 
     // Get unique id for the new instance object
-    Debug.Print($"2nd Instance ID: {instanceTwo.GetHashCode()}");
+    Debug.Print($"{Environment.NewLine}2nd Instance ID: {instanceTwo.GetHashCode()}");
 
     // This returns the value of the first instance created
     Debug.Print(instanceTwo.LetterList.Aggregate((a, i) => $"{a}, {i}"));
