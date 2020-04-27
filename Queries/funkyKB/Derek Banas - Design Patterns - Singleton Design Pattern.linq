@@ -42,6 +42,7 @@ void Main()
     [ 📖 http://www.newthinktank.com/2012/09/singleton-design-pattern-tutorial/ ]
     [ 📖 https://stackoverflow.com/questions/541194/c-sharp-version-of-javas-synchronized-keyword ]
     [ 📖 https://stackoverflow.com/a/4010615/22944 ]
+    [ 📖 https://en.wikipedia.org/wiki/Double-checked_locking ]
     [ 📽 https://www.youtube.com/watch?v=NZaXM67fxbs ]
 */
 
@@ -101,7 +102,7 @@ public class ScrabbleSingleton
             // is created
             lock (syncLock)
             {
-                if (firstInstance == null)
+                if (firstInstance == null) // same test: “Double-checked locking”
                 {
                     // If the instance isn't needed it isn't created
                     // This is known as lazy instantiation
@@ -135,6 +136,12 @@ public class ScrabbleSingleton
         return tilesToSend;
     }
 }
+
+/*
+    This example translated from Java does not address why C# singletons need
+    to be marked `sealed`.
+    [ 📖 https://dotnettutorials.net/lesson/singleton-class-sealed/ ]
+*/
 
 public static class IListExtensions
 {
