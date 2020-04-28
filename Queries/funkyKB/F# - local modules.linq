@@ -17,6 +17,5 @@ module MyModule2 =
     let module2Value = 121
     let module2Function x = x * (MyModule1.module1Function module2Value)
 
-
 let result = MyModule2.module2Function 42
 printf "%i" result
