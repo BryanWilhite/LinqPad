@@ -24,5 +24,9 @@ foreach (char c in characters)
 
 /*
     This question is answered with the knowledge of the hash table, how it is implmented.
+
     It is a quick and merciful method to test for this knowledge.
+
+    The use of a dedicated data structure to execute a combinatorial search
+    appears to be preferred over a time-complex sequential scan.
 */
