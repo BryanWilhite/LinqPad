@@ -100,3 +100,16 @@ class HashTable
     int _size;
     IEnumerable<ICollection<KeyValuePair<string, string>>> _buckets;
 }
+
+/*
+    This rendition of the HashTable is based on my translation from Typescript
+    (https://stackblitz.com/edit/data-structures-hash-table)
+    which is based on a lecture by Beiatrix Pedrasa
+    [ 🚜 https://github.com/beiatrix/ ]
+    [ 📽 https://www.youtube.com/watch?v=QuFPIZj55hU ]
+
+    The ongoing challenge here is finding a better hash function.
+    [ 📖 https://en.wikipedia.org/wiki/Hash_table#Choosing_a_hash_function ]
+
+    BTW: the real .NET Hash Table is the `Dictionary<T, V>`.
+*/
