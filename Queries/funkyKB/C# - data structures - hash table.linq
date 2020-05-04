@@ -105,6 +105,7 @@ class HashTable
     This rendition of the HashTable is based on my translation from Typescript
     (https://stackblitz.com/edit/data-structures-hash-table)
     which is based on a lecture by Beiatrix Pedrasa
+    [ 🕸 http://www.beiatrix.com/ ]
     [ 🚜 https://github.com/beiatrix/ ]
     [ 📽 https://www.youtube.com/watch?v=QuFPIZj55hU ]
 
