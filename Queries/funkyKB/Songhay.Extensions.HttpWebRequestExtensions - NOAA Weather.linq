@@ -1,6 +1,5 @@
 <Query Kind="Program">
   <NuGetReference>Newtonsoft.Json</NuGetReference>
-  <NuGetReference>Songhay.Net.HttpWebRequest</NuGetReference>
   <NuGetReference>SonghayCore</NuGetReference>
   <NuGetReference>System.ServiceModel.Primitives</NuGetReference>
   <Namespace>Newtonsoft.Json</Namespace>
