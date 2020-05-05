@@ -2,7 +2,11 @@
 
 void Main()
 {
-    
+    var items = new List<string> { "armed", "armed", "jazz", "jaws" };
+    var trie = new Trie();
+    trie.InsertRange(items);
+
+    trie.GetRootNode().Dump();
 }
 
 public class Trie
@@ -72,6 +76,7 @@ public class Trie
         }
     }
 
+    internal Node GetRootNode() => this._root;
 }
 
 public class Node
