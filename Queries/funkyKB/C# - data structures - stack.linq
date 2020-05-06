@@ -18,19 +18,23 @@ class MyStack
 {
     public MyStack()
     {
-        this._storage = new List<KeyValuePair<int, string>>();
+        this._storage = new KeyValuePair<int, string>[] { };
     }
 
     public void Push(string element)
     {
         this._size++;
-        this._storage.Add(new KeyValuePair<int, string>(this._size, element));
+        this._storage = this._storage
+            .Union(new[] { new KeyValuePair<int, string>(this._size, element) })
+            .ToArray();
     }
 
     public string Pop()
     {
         var data = this._storage.Last();
-        this._storage.Remove(data);
+        this._storage = this._storage
+            .Where(i => i.Key != data.Key)
+            .ToArray();
         this._size--;
         return data.Value;
     }
@@ -51,7 +55,7 @@ class MyStack
         get { return this._storage.Reverse(); }
     }
 
-    private ICollection<KeyValuePair<int, string>> _storage;
+    private KeyValuePair<int, string>[] _storage;
     private int _size;
 }
 
