@@ -60,6 +60,7 @@ class MyStack
     [ 🕸 http://www.beiatrix.com/ ]
     [ 🚜 https://github.com/beiatrix/ ]
     [ 📽 https://www.youtube.com/watch?v=1AJ4ldcH2t4 ]
+    [ 📖 https://en.wikipedia.org/wiki/Stack_(abstract_data_type) ]
 
     BTW: the real .NET Stack is the `Stack<T>`.
     [📖 https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.stack-1?view=netstandard-2.1 ]
