@@ -10,6 +10,10 @@ void Main()
 {
     /*
         implement the cumulative sum function from the R programming language
+        
+        cumulative_sum({a,b,c,d}) => {a, a+b, a+b+c, a+b+c+d}
+        
+        unlike `cumulative_sum`, `cumsum` ‘wraps around’
 
         //cumsum(int[] array, int startPos, int count);
         var set = new[] { 4, 1, 0, 3, 2 };
