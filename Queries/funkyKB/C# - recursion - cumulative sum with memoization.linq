@@ -9,14 +9,21 @@ int cumulativeSum(int n)
 {
     int value;
 
-    if (cache.Keys.Contains(n))
-        return cache[n];
-    else
+    $"before: {nameof(n)}: {n}".Dump();
+
+    if (cache.Keys.Contains(n)) // base case
+    {
+        value = cache[n];
+    }
+    else // recursive case
     {
         value = n + cumulativeSum(n - 1);
         cache.Add(n, value);
-        return value;
     }
+
+    $"after: {nameof(n)}: {n}".Dump();
+
+    return value;
 }
 
 cumulativeSum(90).Dump();

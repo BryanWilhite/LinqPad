@@ -9,14 +9,23 @@ var cache = new Dictionary<double, double>
 
 double GenerateFibonacciSeries(double n)
 {
-    if(cache.Keys.Contains(n))
-        return cache[n];
-    else
+    double value;
+
+    $"before: {nameof(n)}: {n}".Dump();
+
+    if (cache.Keys.Contains(n)) // base case
     {
-        var value = GenerateFibonacciSeries(n - 1) + GenerateFibonacciSeries(n - 2);
-        cache.Add(n, value);
-        return value;
+        value = cache[n];
     }
+    else // recursive case: this tail-call is augementing
+    {
+        value = GenerateFibonacciSeries(n - 1) + GenerateFibonacciSeries(n - 2);
+        cache.Add(n, value);
+    }
+
+    $"after: {nameof(n)}: {n}".Dump();
+
+    return value;
 }
 
 Enumerable
