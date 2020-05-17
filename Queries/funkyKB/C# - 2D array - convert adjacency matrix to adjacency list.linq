@@ -1,8 +1,13 @@
 <Query Kind="Statements" />
 
 /*
-    BTW: there *are* matrices and vectors in .NET
-    📖 https://docs.microsoft.com/en-us/dotnet/api/system.numerics?view=netstandard-2.1
+    This tree structure can be translated to an adjacency matrix:
+
+      A
+     / \
+    B   C
+         \
+          D
 */
 
 int[,] adjacencyMatrix = new int[,]
@@ -64,3 +69,8 @@ foreach (var element in adjacencyMatrix)
 
 sb.ToString().Dump($"report: {nameof(adjacencyMatrix)}");
 adjacencyList.Dump(nameof(adjacencyList));
+
+/*
+    BTW: there *are* matrices and vectors in .NET
+    📖 https://docs.microsoft.com/en-us/dotnet/api/system.numerics?view=netstandard-2.1
+*/
