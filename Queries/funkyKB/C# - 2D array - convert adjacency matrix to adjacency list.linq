@@ -23,28 +23,25 @@ var columnUpperBound = adjacencyMatrix.GetUpperBound(1);
 var columnIndex = 0;
 var rowIndex = 0;
 
-//report header;
+//report header:
 var sb = new StringBuilder("  ");
 sb.AppendLine(matrixLabels.Aggregate((a, i) => $"{a} {i}"));
 
 foreach (var element in adjacencyMatrix)
 {
+    if (adjacencyMatrix[rowIndex, columnIndex] == 1)
+    {
+        var label = matrixLabels[columnIndex];
+        var appended = adjacencyList[rowIndex].Value.Union(new[] { label });
+        adjacencyList[rowIndex] = new KeyValuePair<string, string[]>(
+                adjacencyList[rowIndex].Key,
+                appended.ToArray()
+            );
+    }
+
+    //report body:
     var isAtBeginningOfColumn = (columnIndex == 0);
     var isAtEndOfColumn = (columnIndex > 0) && (columnIndex % columnUpperBound == 0);
-
-    if (rowIndex <= columnUpperBound)
-    {
-        // $"[{rowIndex}, {columnIndex}]".Dump();
-        if (adjacencyMatrix[rowIndex, columnIndex] == 1)
-        {
-            var label = matrixLabels[columnIndex];
-            var appended = adjacencyList[rowIndex].Value.Union(new[] { label });
-            adjacencyList[rowIndex] = new KeyValuePair<string, string[]>(
-                    adjacencyList[rowIndex].Key,
-                    appended.ToArray()
-                );
-        }
-    }
 
     if (isAtBeginningOfColumn)
     {
