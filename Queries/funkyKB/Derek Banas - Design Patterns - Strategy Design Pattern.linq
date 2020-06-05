@@ -20,6 +20,7 @@ void Main()
     Strategy Design Pattern
     [ 📖 http://www.newthinktank.com/2012/08/strategy-design-pattern-tutorial/ ]
     [ 📽 https://www.youtube.com/watch?v=-NCgRD9-C6o ]
+    [ 📖 https://stackoverflow.com/questions/8665295/what-is-the-difference-between-strategy-pattern-and-visitor-pattern ]
 */
 
 public class Animal
