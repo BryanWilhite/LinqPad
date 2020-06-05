@@ -20,6 +20,11 @@ void Main()
     Strategy Design Pattern
     [ 📖 http://www.newthinktank.com/2012/08/strategy-design-pattern-tutorial/ ]
     [ 📽 https://www.youtube.com/watch?v=-NCgRD9-C6o ]
+    
+    What is the difference between Strategy pattern and Visitor Pattern?
+
+    One Strategy for many classes; many visitors for many classes…
+
     [ 📖 https://stackoverflow.com/questions/8665295/what-is-the-difference-between-strategy-pattern-and-visitor-pattern ]
 */
 
