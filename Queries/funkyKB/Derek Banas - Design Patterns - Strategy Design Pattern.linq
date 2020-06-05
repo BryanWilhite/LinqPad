@@ -47,6 +47,7 @@ public class Animal
     // objects at run time!
     public Flys flyingType;
 
+    // yes, kid: in C# these `get*`/`set*` pairs can be properties
     public void setName(String newName) { name = newName; }
     public String getName() { return name; }
 
