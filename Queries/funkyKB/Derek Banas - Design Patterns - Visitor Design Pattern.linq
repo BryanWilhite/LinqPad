@@ -22,7 +22,7 @@ void Main()
 
 /*
     Derek Banas: Design Patterns
-    Visitor Pattern
+    Visitor Design Pattern
     [ 📽 https://www.youtube.com/watch?v=pL4mOUDi54o ]
     C# version: http://www.newthinktank.com/2012/11/visitor-design-pattern-tutorial/
 */
