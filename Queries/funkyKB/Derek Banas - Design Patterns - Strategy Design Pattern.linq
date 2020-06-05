@@ -19,7 +19,7 @@ void Main()
     Derek Banas: Design Patterns
     Strategy Design Pattern
     [ 📖 http://www.newthinktank.com/2012/08/strategy-design-pattern-tutorial/ ]
-    [ 📽 https://www.youtube.com/watch?v=pL4mOUDi54o ]
+    [ 📽 https://www.youtube.com/watch?v=-NCgRD9-C6o ]
 */
 
 public class Animal
