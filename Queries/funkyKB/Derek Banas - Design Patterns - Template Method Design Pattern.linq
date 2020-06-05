@@ -14,6 +14,7 @@ void Main()
 /*
     Derek Banas: Design Patterns
     Template Method Design Pattern
+    [ 📖 http://www.newthinktank.com/2012/10/template-method-design-pattern-tutorial/ ]
     [ 📽 https://www.youtube.com/watch?v=aR1B8MlwbRI ]
     C# version: https://github.com/marwie/Design-Patterns-in-Unity-Example/blob/master/UnityDesignPatternsExampleProject/Assets/_PATTERNS/Behavioral%20Patterns/Template%20Method%20Design%20Pattern/TemplateMethodDesignPattern.cs
 */
@@ -117,4 +118,3 @@ public class VeggieHoagie : Hoagie
     protected override bool CustomerWantsCheese() { return false; }
 
 }
-
