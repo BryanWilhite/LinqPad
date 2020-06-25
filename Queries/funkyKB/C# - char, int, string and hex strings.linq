@@ -11,3 +11,5 @@ hex.Dump("hex");
 Convert.ToInt32(hex, 16).Dump("hex to int");
 Char.ConvertFromUtf32(i).Dump("int to string");
 Char.ConvertToUtf32(c.ToString(), 0).Dump("alternate char to int");
+
+// 📖 [ https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/how-to-convert-between-hexadecimal-strings-and-numeric-types ]
