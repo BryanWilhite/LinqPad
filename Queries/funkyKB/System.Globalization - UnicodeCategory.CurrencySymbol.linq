@@ -11,4 +11,12 @@ unicodePoints
     .Where(i => CharUnicodeInfo.GetUnicodeCategory(i) == unicodeCategory)
     .Dump("currency symbols");
 
-// [ https://docs.microsoft.com/en-us/dotnet/api/system.globalization.unicodecategory?view=netcore-3.1 ]
+// [ 📖 https://docs.microsoft.com/en-us/dotnet/api/system.globalization.unicodecategory?view=netcore-3.1 ]
+
+/*
+    What is apparently not .NET Framework (only in .NET Core)
+    is the `System.Text.Unicode.UnicodeRange` class
+    which would eliminate the need to scan up to `ushort.MaxValue`.
+
+    [ 📖 https://docs.microsoft.com/en-us/dotnet/api/system.text.unicode.unicoderange?view=netcore-3.1]
+*/
