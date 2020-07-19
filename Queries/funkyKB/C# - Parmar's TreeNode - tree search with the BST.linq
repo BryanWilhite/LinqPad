@@ -42,7 +42,7 @@ public static class TreeNodeExtensions
         const string indentLastLine = "   ";
         const string nodePrefix = "+- ";
 
-        var displayLine = string.Concat(indent, nodePrefix, node.Data?.ToString());
+        var displayLine = string.Concat(indent, nodePrefix, Convert.ToString(node.Data));
 
         displayAction?.Invoke(displayLine);
         indent += isLast ? indentLastLine : indentLine;
