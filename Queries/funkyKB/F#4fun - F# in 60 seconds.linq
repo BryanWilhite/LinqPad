@@ -62,16 +62,16 @@ let simplePatternMatch x =
 
 simplePatternMatch "a"
 simplePatternMatch "b"
-simplePatternMatch "g"
+"g (piped in)" |> simplePatternMatch
 
-let simplePatternMatchShort = function
+let simplePatternMatchShorter = function
     | "a" -> printfn "x is a (shorter)"
     | "b" -> printfn "x is b (shorter)"
     | _ -> printfn "x is something else (shorter)"
 
-simplePatternMatchShort "a"
-simplePatternMatchShort "b"
-simplePatternMatchShort "g"
+simplePatternMatchShorter "a"
+simplePatternMatchShorter "b"
+simplePatternMatchShorter "g"
 
 (*
     `function`is used as “a match expression in a lambda expression that
@@ -106,8 +106,13 @@ type Temp =
     | DegreesC of float
     | DegreesF of float
 
-let temp = DegreesF 98.6
-temp.Dump("discriminated union (union type) output")
+let temp1 =  98.6 |> DegreesF // looks like units with pipe syntax?
+temp1.Dump("discriminated union (union type) output")
+
+let temp2 =  DegreesF 98.6
+
+let areEqual = temp1 = temp2
+areEqual.Dump("equality test")
 
 type Employee = 
     | Worker of Person
@@ -125,7 +130,7 @@ printfn "A string %s, and something generic %A" "hello" [1;2;3;4]
 
 // all complex types have pretty printing built in
 printfn "twoTuple=%A,\nPerson=%A,\nTemp=%A,\nEmployee=%A" 
-         twoTuple person1 temp worker
+         twoTuple person1 temp1 worker
 
 // There are also sprintf/sprintfn functions for formatting data
 // into a string, similar to String.Format.
