@@ -64,6 +64,21 @@ simplePatternMatch "a"
 simplePatternMatch "b"
 simplePatternMatch "g"
 
+let simplePatternMatchShort = function
+    | "a" -> printfn "x is a (shorter)"
+    | "b" -> printfn "x is b (shorter)"
+    | _ -> printfn "x is something else (shorter)"
+
+simplePatternMatchShort "a"
+simplePatternMatchShort "b"
+simplePatternMatchShort "g"
+
+(*
+    `function`is used as “a match expression in a lambda expression that
+    has pattern matching on a single argument.”
+    [ 📖 https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/keyword-reference ]
+*)
+
 // Some(..) and None are roughly analogous to Nullable wrappers
 let validValue = Some(99)
 let invalidValue = None
