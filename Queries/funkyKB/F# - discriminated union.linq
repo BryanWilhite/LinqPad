@@ -1,20 +1,20 @@
 <Query Kind="FSharpProgram" />
 
-type Card = Card of int64
-type Key = Key of string
-
 type PaymentMethod =
-    | Mastercard of Card
-    | Visa of Card
-    | Bitcoin of Key
-
-let payment = Visa (Card 90210959696L)
+    | Mastercard of int64
+    | Visa of int64
+    | Bitcoin of string
 
 let handler = function
-    | Mastercard number       -> printf "%A" number
-    | Visa       number       -> printf "%A" number
-    | Bitcoin    bitcoinValue -> printf "%A" bitcoinValue
+    | Mastercard number       -> printf "Mastercard %A\n" number
+    | Visa       number       -> printf "Visa %A\n" number
+    | Bitcoin    bitcoinValue -> printf "Bitcoin %A\n" bitcoinValue
 
-let result = payment |> handler
+let payment1 = Mastercard 90210959696L
+payment1 |> handler
 
-Dump result
+let payment2 = Visa 32000L
+payment2 |> handler
+
+let payment3 = Bitcoin "dollahs"
+payment3 |> handler
