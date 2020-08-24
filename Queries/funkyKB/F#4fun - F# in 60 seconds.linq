@@ -58,7 +58,7 @@ let simplePatternMatch x =
    match x with
     | "a" -> printfn "x is a"
     | "b" -> printfn "x is b"
-    | _ -> printfn "x is something else" // underscore matches anything
+    | _ -> printfn "x is something else\n" // underscore matches anything
 
 simplePatternMatch "a"
 simplePatternMatch "b"
@@ -67,14 +67,14 @@ simplePatternMatch "b"
 let simplePatternMatchShorter = function
     | "a" -> printfn "x is a (shorter)"
     | "b" -> printfn "x is b (shorter)"
-    | _ -> printfn "x is something else (shorter)"
+    | _ -> printfn "x is something else (shorter)\n"
 
 simplePatternMatchShorter "a"
 simplePatternMatchShorter "b"
 simplePatternMatchShorter "g"
 
 (*
-    `function`is used as “a match expression in a lambda expression that
+    `function` is used as “a match expression in a lambda expression that
     has pattern matching on a single argument.”
     [ 📖 https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/keyword-reference ]
 *)
@@ -114,6 +114,9 @@ let temp2 =  DegreesF 98.6
 let areEqual = temp1 = temp2
 areEqual.Dump("equality test")
 
+let areNotEqual = temp1 <> temp2
+areNotEqual.Dump("inequality test")
+
 type Employee = 
     | Worker of Person
     | Manager of Employee list
@@ -125,8 +128,8 @@ worker.Dump("recursive discriminated union")
 let manager = Manager [ Worker{First="Bloke";Last="One"}; Worker{First="Bloke";Last="Two"} ]
 manager.Dump("recursive discriminated union")
 
-printfn "Printing an int %i, a float %f, a bool %b" 1 2.0 true
-printfn "A string %s, and something generic %A" "hello" [1;2;3;4]
+printfn "Printing an int %i, a float %f, a bool %b\n" 1 2.0 true
+printfn "A string %s, and something generic %A\n" "hello" [1;2;3;4]
 
 // all complex types have pretty printing built in
 printfn "twoTuple=%A,\nPerson=%A,\nTemp=%A,\nEmployee=%A" 
