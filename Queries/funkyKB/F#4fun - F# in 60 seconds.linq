@@ -114,7 +114,7 @@ let temp2 =  DegreesF 98.6
 let areEqual = temp1 = temp2
 areEqual.Dump("equality test")
 
-let areNotEqual = temp1 <> temp2
+let areNotEqual = not (temp1 <> temp2)
 areNotEqual.Dump("inequality test")
 
 type Employee = 
