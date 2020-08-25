@@ -11,7 +11,7 @@
     // => {0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20}
 *)
 
-let integers= [0..10]
+let integers = [0..10]
 let evens = integers |> List.map(fun(x) -> x * 2)
 evens.Dump("Projections")
 
