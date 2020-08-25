@@ -63,4 +63,3 @@ let sumWithPlusOperator =
     |> List.fold(+) 0
 
 sum.Dump("Aggregation with plus operator")
-
