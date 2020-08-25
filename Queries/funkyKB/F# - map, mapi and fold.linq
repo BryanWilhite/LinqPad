@@ -21,8 +21,8 @@ evens.Dump("Projections")
         .ToList();
 *)
 
-type Pair = {Number : int; Product : int;}
-let productPairs = integers |> List.map(fun e -> {Number = e; Product = e*2})
+type Pair = { Number : int; Product : int; }
+let productPairs = integers |> List.map(fun e -> { Number = e; Product = e*2 })
 productPairs.Dump("Adding Anonymous Classes to the Projection")
 
 (*
@@ -31,15 +31,36 @@ productPairs.Dump("Adding Anonymous Classes to the Projection")
         .Where(o => o.Product % 2 == 1).ToArray();
 *)
 
-let odds = integers |> List.mapi(fun index x -> {Number = index; Product = x*3})
+let odds =
+    integers
+    |> List.mapi(fun index x -> { Number = index; Product = x*3 })
+    |> List.filter(fun pair -> pair.Product % 2 = 1)
+
 odds.Dump("Getting Indexes from the Array")
 
 (*
     “The F# List library has equivalent functionality
-    with a function called mapi. …I like the way F# broke
+    with a function called `mapi`. …I like the way F# broke
     out the index functionality into a new method,
     because it adheres closer to the single responsibility principle
     than LINQ does for this function.”
 *)
 
+(*
+    var sum = integers
+        .Aggregate((runningSum, nextValue) => runningSum + nextValue);
+    // => 55
+*)
+
+let sum =
+    integers
+    |> List.fold(fun runningSum nextVal -> runningSum + nextVal) 0
+
+sum.Dump("Aggregation")
+
+let sumWithPlusOperator =
+    integers
+    |> List.fold(+) 0
+
+sum.Dump("Aggregation with plus operator")
 
