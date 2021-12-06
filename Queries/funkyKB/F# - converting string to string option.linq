@@ -8,6 +8,14 @@ let convertToSomeOption = function
 
 let s: string = null
 
-let sOption = convertToSomeOption s
+s
+|> convertToSomeOption
+|> Option.isNone
+|> printf "convertToSomeOption: %A\n"
 
-(sOption = None).Dump("sOption = None")
+// alternative with `Option.ofObj`:
+
+s
+|> Option.ofObj
+|> Option.isNone
+|> printf "Option.ofObj: %A\n"
