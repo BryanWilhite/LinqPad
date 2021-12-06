@@ -5,6 +5,8 @@ type PaymentMethod =
     | Visa of int64
     | Bitcoin of string
 
+// `PaymentMethod` is a “union” of three types
+
 let handler = function
     | Mastercard number       -> printf "Mastercard %A\n" number
     | Visa       number       -> printf "Visa %A\n" number
